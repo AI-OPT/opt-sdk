@@ -1,0 +1,222 @@
+group 'com.ai.opt.sdk'
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.7
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+ext {
+    optBaseVersion="1.0"
+
+    appName="opt-sdk"
+    moduleVersion='1.0-SNAPSHOT'
+    builtBy="gradle 2.2"
+    publishUserName = "runnerdev"
+    publishUserPassword = "runnerdev"
+    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+    //publishURL = "http://10.1.228.199:18081/nexus/content/repositories/releases/"
+}
+
+repositories { maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" } }
+
+dependencies {
+    compile 'com.alibaba:fastjson:1.2.6'
+    compile 'com.google.code.gson:gson:2.3.1'
+
+    compile "org.springframework:spring-context:4.1.7.RELEASE"
+    compile "org.aspectj:aspectjrt:1.8.5"
+    compile "org.aspectj:aspectjweaver:1.8.5"
+
+    compile 'org.elasticsearch:elasticsearch:1.7.1'
+
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-io:commons-io:2.4'
+    compile 'commons-beanutils:commons-beanutils:1.9.2'
+    compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    compile 'org.quartz-scheduler:quartz:2.2.1'
+    compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.3'
+
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1'
+
+    compile ("com.alibaba:dubbox:2.8.3") {
+        exclude group: 'org.springframework', module: 'spring'
+    }
+    compile 'org.jboss.netty:netty:3.2.10.Final'
+    compile "org.javassist:javassist:3.15.0-GA"
+    compile ("com.101tec:zkclient:0.5") {
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+    }
+
+
+    compile "com.ai.opt:opt-base:${optBaseVersion}"
+    compile 'junit:junit:4.12'
+    compile 'log4j:log4j:1.2.17'
+
+    //compile 'commons-dbcp:commons-dbcp:1.4'
+    compile 'com.zaxxer:HikariCP:2.4.0'
+    compile 'org.apache.curator:curator-framework:2.9.0'
+
+    compile 'com.ai:paas-sdk-ccs-exclude-auth:0.1-SNAPSHOT'
+
+    compile 'com.ai:paas-sdk-mcs-exclude-auth:0.1-SNAPSHOT'
+
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+}
+
+jar {
+    baseName appName
+    version moduleVersion
+//    include "com/ai/opt/sdk/*/**"
+    manifest {
+        attributes 'packageName': baseName, 'Built-By': builtBy,'create-date': new Date().format('yyyy-MM-dd HH:mm:ss'), 'Manifest-Version': version
+    }
+}
+
+publishing {
+    publications {
+        publishing.publications.create("${appName}", MavenPublication) {
+            groupId group
+            artifactId appName
+            version moduleVersion
+            artifact jar
+            pom.withXml {
+                asNode().children().last() + {
+                    delegate.dependencies {
+                        delegate.dependency {
+                            delegate.groupId("com.zaxxer")
+                            delegate.artifactId("HikariCP")
+                            delegate.version("2.4.0")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("paas-sdk-ccs-exclude-auth")
+                            delegate.version("0.1-SNAPSHOT")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("paas-sdk-ccs-exclude-auth")
+                            delegate.version("0.1-SNAPSHOT")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.springframework")
+                            delegate.artifactId("spring-context")
+                            delegate.version("4.1.7.RELEASE")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("javax.ws.rs")
+                            delegate.artifactId("javax.ws.rs-api")
+                            delegate.version("2.0.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.alibaba")
+                            delegate.artifactId("fastjson")
+                            delegate.version("1.2.6")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.google.code.gson")
+                            delegate.artifactId("gson")
+                            delegate.version("2.3.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.aspectj")
+                            delegate.artifactId("aspectjrt")
+                            delegate.version("1.8.5")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("commons-lang")
+                            delegate.artifactId("commons-lang")
+                            delegate.version("2.6")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("commons-io")
+                            delegate.artifactId("commons-io")
+                            delegate.version("2.4")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("commons-beanutils")
+                            delegate.artifactId("commons-beanutils")
+                            delegate.version("1.9.2")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-api")
+                            delegate.version("2.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-core")
+                            delegate.version("2.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-jcl")
+                            delegate.version("2.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.commons")
+                            delegate.artifactId("commons-dbcp2")
+                            delegate.version("2.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.alibaba")
+                            delegate.artifactId("dubbox")
+                            delegate.version("2.8.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.jboss.netty")
+                            delegate.artifactId("netty")
+                            delegate.version("3.2.10.Final")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.javassist")
+                            delegate.artifactId("javassist")
+                            delegate.version("3.15.0-GA")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.101tec")
+                            delegate.artifactId("zkclient")
+                            delegate.version("0.5")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.quartz-scheduler")
+                            delegate.artifactId("quartz")
+                            delegate.version("2.2.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.postgresql")
+                            delegate.artifactId("postgresql")
+                            delegate.version("9.4-1201-jdbc41")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-slf4j-impl")
+                            delegate.version("2.4")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("net.sf.json-lib")
+                            delegate.artifactId("json-lib")
+                            delegate.version("2.4")
+                            delegate.classifier("jdk15")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url publishURL
+            credentials {
+                username = publishUserName
+                password = publishUserPassword
+            }
+        }
+    }
+}
