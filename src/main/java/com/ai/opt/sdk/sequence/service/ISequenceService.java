@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.service;
+package com.ai.opt.sdk.sequence.service;
 
 public interface ISequenceService {
 

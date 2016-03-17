@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.dao.impl;
+package com.ai.opt.sdk.sequence.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,9 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.opt.sdk.exception.OptSDKException;
-import com.ai.opt.sdk.sequence.normal.dao.ISequenceDao;
-import com.ai.opt.sdk.sequence.normal.model.Sequence;
-import com.ai.opt.sdk.sequence.normal.model.SequenceCache;
+import com.ai.opt.sdk.sequence.dao.ISequenceDao;
+import com.ai.opt.sdk.sequence.model.Sequence;
+import com.ai.opt.sdk.sequence.model.SequenceCache;
 
 public class SequenceDaoImpl implements ISequenceDao {
 

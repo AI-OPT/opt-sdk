@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.datasource;
+package com.ai.opt.sdk.sequence.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
 

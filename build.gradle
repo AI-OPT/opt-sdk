@@ -63,9 +63,8 @@ dependencies {
     compile 'com.zaxxer:HikariCP:2.4.0'
     compile 'org.apache.curator:curator-framework:2.9.0'
 
-    compile 'com.ai:paas-sdk-ccs-exclude-auth:0.1-SNAPSHOT'
-
-    compile 'com.ai:paas-sdk-mcs-exclude-auth:0.1-SNAPSHOT'
+    compile 'com.ai:ipaas-zookeeper-utility:0.2.2-SNAPSHOT'
+    compile 'com.ai:paas-sdk-mcs-exclude-auth:1.0-SNAPSHOT'
 
     compile 'net.sf.json-lib:json-lib:2.4:jdk15'
 }
@@ -96,13 +95,13 @@ publishing {
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
-                            delegate.artifactId("paas-sdk-ccs-exclude-auth")
-                            delegate.version("0.1-SNAPSHOT")
+                            delegate.artifactId("ipaas-zookeeper-utility")
+                            delegate.version("0.2.2-SNAPSHOT")
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
                             delegate.artifactId("paas-sdk-ccs-exclude-auth")
-                            delegate.version("0.1-SNAPSHOT")
+                            delegate.version("1.0-SNAPSHOT")
                         }
                         delegate.dependency {
                             delegate.groupId("org.springframework")

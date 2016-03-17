@@ -1,8 +1,8 @@
 package com.ai.opt.sdk.sequence.client.impl;
 
 import com.ai.opt.sdk.sequence.client.ISeqClient;
-import com.ai.opt.sdk.sequence.normal.service.ISequenceService;
-import com.ai.opt.sdk.sequence.normal.service.impl.SequenceServiceImpl;
+import com.ai.opt.sdk.sequence.service.ISequenceService;
+import com.ai.opt.sdk.sequence.service.impl.SequenceServiceImpl;
 
 public class NormalSeqClientImpl implements ISeqClient {
 

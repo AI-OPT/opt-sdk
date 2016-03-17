@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.service.impl;
+package com.ai.opt.sdk.sequence.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -14,12 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.ai.opt.sdk.exception.OptSDKException;
-import com.ai.opt.sdk.sequence.normal.dao.ISequenceDao;
-import com.ai.opt.sdk.sequence.normal.dao.impl.SequenceDaoImpl;
-import com.ai.opt.sdk.sequence.normal.datasource.SeqDataSourceLoaderFactory;
-import com.ai.opt.sdk.sequence.normal.model.Sequence;
-import com.ai.opt.sdk.sequence.normal.model.SequenceCache;
-import com.ai.opt.sdk.sequence.normal.service.ISequenceService;
+import com.ai.opt.sdk.sequence.dao.ISequenceDao;
+import com.ai.opt.sdk.sequence.dao.impl.SequenceDaoImpl;
+import com.ai.opt.sdk.sequence.datasource.SeqDataSourceLoaderFactory;
+import com.ai.opt.sdk.sequence.model.Sequence;
+import com.ai.opt.sdk.sequence.model.SequenceCache;
+import com.ai.opt.sdk.sequence.service.ISequenceService;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 

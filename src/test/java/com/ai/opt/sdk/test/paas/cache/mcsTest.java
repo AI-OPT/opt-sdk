@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ai.opt.sdk.cache.client.ICacheClient;
-import com.ai.opt.sdk.cache.factory.CacheClientBuilderFactory;
+import com.ai.opt.sdk.cache.factory.CacheClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 
 public class mcsTest {
     private ICacheClient cacheClient;
@@ -15,7 +15,7 @@ public class mcsTest {
 
     @Before
     public void initData() {
-        this.cacheClient = CacheClientBuilderFactory.getCacheClientBuilder().getCacheClient(
+        this.cacheClient = CacheClientFactory.getCacheClient(
                 namespace);
     }
 

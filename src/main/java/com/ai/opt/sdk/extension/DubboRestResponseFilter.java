@@ -6,10 +6,10 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 
-import net.sf.json.JSONObject;
-
+import com.ai.opt.base.exception.RPCSystemException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
-import com.ai.runner.base.exception.CallerException;
+
+import net.sf.json.JSONObject;
 
 public class DubboRestResponseFilter implements ContainerResponseFilter {
 
@@ -32,7 +32,8 @@ public class DubboRestResponseFilter implements ContainerResponseFilter {
             responseContext.setEntity(data);
         } else if (status == 204) {
             //DUBBOX转REST协议，HTTP.204表示接口返回类型是void的情况，此处必须以正确的异常信息抛出，交给DubboRestExceptionMapper进行包装处理 
-            throw new CallerException(ExceptCodeConstants.Special.SUCCESS, "请求成功,服务端没有返回信息");
+            //throw new RPCSystemException(ExceptCodeConstants.Special.SUCCESS, "请求成功,服务端没有返回信息");
+        	//TODO
         }
 
     }

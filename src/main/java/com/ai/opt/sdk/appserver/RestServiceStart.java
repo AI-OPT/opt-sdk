@@ -1,14 +1,14 @@
 package com.ai.opt.sdk.appserver;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ai.opt.sdk.helper.DubboPropUtil;
 
 public final class RestServiceStart {
 
-    private static final Logger LOG = LogManager.getLogger(RestServiceStart.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(RestServiceStart.class.getName());
 
     private static final String REST_CONTEXT = "classpath:dubbo/provider/rest-provider.xml";
 
@@ -29,7 +29,6 @@ public final class RestServiceStart {
         context.start();
         LOG.info(" REST 服务启动完毕---------------------------");
         synchronized (RestServiceStart.class) {
-
             while (true) {
                 try {
                     RestServiceStart.class.wait();

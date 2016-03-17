@@ -10,9 +10,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.RPCSystemException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
-import com.ai.runner.base.exception.CallerException;
 import com.alibaba.fastjson.JSON;
 
 public class DubboRestExceptionMapper implements ExceptionMapper<Exception> {
@@ -22,8 +22,8 @@ public class DubboRestExceptionMapper implements ExceptionMapper<Exception> {
     @Override
     public Response toResponse(Exception ex) {
         DubboRestResponse error = null;
-        if (ex instanceof CallerException) {
-            CallerException e = (CallerException) ex;
+        if (ex instanceof RPCSystemException) {
+            RPCSystemException e = (RPCSystemException) ex;
             error = new DubboRestResponse(e.getErrorCode(), e.getMessage());
             return Response.status(Response.Status.OK).entity(error).type("text/plain").build();
         } else if (ex instanceof BusinessException) {

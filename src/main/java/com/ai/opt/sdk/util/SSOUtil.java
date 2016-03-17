@@ -6,8 +6,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ai.opt.base.exception.SystemException;
-
 /**
  * SSO配置文件工具类
  *
