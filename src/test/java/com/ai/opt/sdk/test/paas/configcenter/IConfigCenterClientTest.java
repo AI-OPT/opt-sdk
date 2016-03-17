@@ -29,9 +29,10 @@ public class IConfigCenterClientTest {
     public void addMcsConfig() {
         // 缓存服务主机
         String mcsHost = "127.0.0.1:6379";
+        String mcsHost2 = "128.0.0.1:6379";
         // 缓存空间
         String cachesnsConfig = "{\"com.ai.opt.test.mcs\":\"" + mcsHost
-                + "\",\"com.ai.runner.center.common.cache.gncfgproperties\":\"" + mcsHost
+                + "\",\"com.ai.runner.center.common.cache.gncfgproperties\":\"" + mcsHost2
                 + "\",\"com.ai.runner.center.common.cache.gnservicerouteconfig\":\"" + mcsHost
                 + "\",\"com.ai.runner.center.common.cache.gndepart\":\"" + mcsHost
                 + "\",\"com.ai.runner.center.common.cache.gnsubject\":\"" + mcsHost

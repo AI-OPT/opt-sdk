@@ -11,7 +11,7 @@ import com.ai.opt.sdk.configcenter.client.impl.PaasCCSClientImpl;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.OptSDKException;
 import com.ai.opt.sdk.helper.OptConfHelper;
-import com.ai.opt.sdk.model.PaasAuthInfo;
+import com.ai.opt.sdk.model.PaasConfInfo;
 import com.ai.paas.ipaas.ccs.ConfigFactory;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 
@@ -23,7 +23,7 @@ public class PaaSConfigCenterBuilder implements IConfigCenterBuilder {
     private static final Logger LOG = LogManager.getLogger(PaaSConfigCenterBuilder.class);
 
     public IConfigCenterClient getConfigCenterClient() {
-        PaasAuthInfo authInfo = OptConfHelper.getInstance().getPaasAuthInfo();
+        PaasConfInfo authInfo = OptConfHelper.getInstance().getPaasAuthInfo();
         Properties config = OptConfHelper.getInstance().assembleCcsProperties(authInfo);
         IConfigClient client = null;
         try {

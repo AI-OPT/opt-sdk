@@ -13,7 +13,7 @@ import com.ai.opt.sdk.configcenter.factory.ConfigCenterBuilderFactory;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.OptSDKException;
 import com.ai.opt.sdk.helper.OptConfHelper;
-import com.ai.opt.sdk.model.PaasAuthInfo;
+import com.ai.opt.sdk.model.PaasConfInfo;
 import com.ai.opt.sdk.tools.PaaSServiceTool;
 import com.ai.paas.ipaas.ccs.constants.ConfigException;
 import com.ai.paas.ipaas.ccs.zookeeper.ConfigWatcher;
@@ -68,7 +68,7 @@ public class PaaSCacheClientBuilder implements ICacheClientBuilder {
         }
         String serviceId = serviceIdElement.getAsString();
         String password = PaaSServiceTool.getMCSPwd(serviceId);
-        PaasAuthInfo authInfo = OptConfHelper.getInstance().getPaasAuthInfo();
+        PaasConfInfo authInfo = OptConfHelper.getInstance().getPaasAuthInfo();
         Properties mcsProperties = OptConfHelper.getInstance().assembleMcsProperties(authInfo,
                 serviceId, password);
         com.ai.paas.ipaas.mcs.interfaces.ICacheClient client = null;

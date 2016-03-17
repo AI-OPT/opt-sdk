@@ -2,7 +2,7 @@ package com.ai.opt.sdk.sequence.client.impl;
 
 import com.ai.opt.sdk.exception.OptSDKException;
 import com.ai.opt.sdk.helper.OptConfHelper;
-import com.ai.opt.sdk.model.PaasAuthInfo;
+import com.ai.opt.sdk.model.PaasConfInfo;
 import com.ai.opt.sdk.sequence.client.ISeqClient;
 import com.ai.opt.sdk.tools.PaaSServiceTool;
 import com.ai.paas.ipaas.util.StringUtil;

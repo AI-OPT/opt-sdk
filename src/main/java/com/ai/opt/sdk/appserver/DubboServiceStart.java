@@ -6,7 +6,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ai.opt.sdk.helper.DubboPropUtil;
 
-
 public final class DubboServiceStart {
 
     private static final Logger LOG = LogManager.getLogger(DubboServiceStart.class.getName());
@@ -20,23 +19,25 @@ public final class DubboServiceStart {
     private static void startDubbo() {
         LOG.info("开始启动 Dubbo 服务---------------------------");
         // 从配置中心加载DUBBO的核心配置
-        try{
-            DubboPropUtil.setDubboProviderProperties(); 
-        }catch(Exception ex){
-            LOG.error("从配置中心加载DUBBO配置出现异常,尝试读取本地配置",ex);
+        try {
+            DubboPropUtil.setDubboProviderProperties();
+        } catch (Exception ex) {
+            LOG.error("从配置中心加载DUBBO配置出现异常,尝试读取本地配置", ex);
         }
-        
+
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 new String[] { DUBBO_CONTEXT });
         context.registerShutdownHook();
         context.start();
         LOG.info(" Dubbo 服务启动完毕---------------------------");
-        while (true) {
-            try {
-                Thread.currentThread();
-                Thread.sleep(10000L);
-            } catch (Exception e) {
-                LOG.error("Dubbo 系统错误，具体信息为：" + e.getMessage(), e);
+        synchronized (DubboServiceStart.class) {
+            while (true) {
+                try {
+                    DubboServiceStart.class.wait();
+
+                } catch (Exception e) {
+                    LOG.error("Dubbo 系统错误，具体信息为：" + e.getMessage(), e);
+                }
             }
         }
     }

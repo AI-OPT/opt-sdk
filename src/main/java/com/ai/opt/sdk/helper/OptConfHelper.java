@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.OptSDKException;
-import com.ai.opt.sdk.model.PaasAuthInfo;
+import com.ai.opt.sdk.model.PaasConfInfo;
 import com.ai.opt.sdk.util.StringUtil;
 
 public final class OptConfHelper {
@@ -37,7 +37,7 @@ public final class OptConfHelper {
         }
     }
 
-    public PaasAuthInfo getPaasAuthInfo() {
+    public PaasConfInfo getPaasAuthInfo() {
         String ccsZkAddress = prop.getProperty("ccs.zk_address");
         String ccsUserName = prop.getProperty("ccs.userName");
         String ccsPassword = prop.getProperty("ccs.password");
@@ -69,7 +69,7 @@ public final class OptConfHelper {
             throw new OptSDKException("paas mcs testOnBorrow is null");
         }
         
-        PaasAuthInfo paasAuthInfo = new PaasAuthInfo();
+        PaasConfInfo paasAuthInfo = new PaasConfInfo();
         paasAuthInfo.setCcsZkAddress(ccsZkAddress);
         paasAuthInfo.setCcsUserName(ccsUserName);
         paasAuthInfo.setCcsPassword(ccsPassword);
@@ -161,7 +161,7 @@ public final class OptConfHelper {
         return prop.containsKey(key) ? prop.getProperty(key) : null;
     }
 
-    public Properties assembleCcsProperties(PaasAuthInfo authInfo) {
+    public Properties assembleCcsProperties(PaasConfInfo authInfo) {
         Properties ccsProperties = new Properties();
         ccsProperties.put("ccs.zk_address", authInfo.getCcsZkAddress());
         ccsProperties.put("ccs.userName", authInfo.getCcsUserName());
@@ -169,7 +169,7 @@ public final class OptConfHelper {
         return ccsProperties;
     }
 
-    public Properties assembleMcsProperties(PaasAuthInfo authInfo, String mcsHost,
+    public Properties assembleMcsProperties(PaasConfInfo authInfo, String mcsHost,
             String mcsPassword) {
         Properties mcsProperties = new Properties();
         mcsProperties.put("mcs.maxtotal", authInfo.getMcsMaxtotal());
