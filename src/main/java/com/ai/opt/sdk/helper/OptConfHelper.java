@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.ai.opt.sdk.configcenter.client.IConfigCenterClient;
+import com.ai.opt.sdk.configcenter.factory.ConfigCenterFactory;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.OptSDKException;
+import com.ai.opt.sdk.model.McsConnectInfo;
 import com.ai.opt.sdk.model.PaasConfInfo;
 import com.ai.opt.sdk.util.StringUtil;
+import com.zaxxer.hikari.HikariConfig;
+
+import net.sf.json.JSONObject;
 
 public final class OptConfHelper {
 
@@ -37,122 +43,24 @@ public final class OptConfHelper {
         }
     }
 
-    public PaasConfInfo getPaasAuthInfo() {
+    public PaasConfInfo getPaasConfInfo() {
+    	String ccsAppName = prop.getProperty("ccs.appname");
         String ccsZkAddress = prop.getProperty("ccs.zk_address");
-        String ccsUserName = prop.getProperty("ccs.userName");
-        String ccsPassword = prop.getProperty("ccs.password");
 
-        String mcsMaxtotal = prop.getProperty("mcs.maxtotal");
-        String mcsMaxIdle = prop.getProperty("mcs.maxIdle");
-        String mcsMinIdle = prop.getProperty("mcs.minIdle");
-        String mcsTestOnBorrow = prop.getProperty("mcs.testOnBorrow");
-
+        if (StringUtil.isBlank(ccsAppName)) {
+            throw new OptSDKException("paas ccs appname is null");
+        }
         if (StringUtil.isBlank(ccsZkAddress)) {
             throw new OptSDKException("paas ccs zk_address is null");
         }
-        if (StringUtil.isBlank(ccsUserName)) {
-            throw new OptSDKException("paas ccs userName is null");
-        }
-        if (StringUtil.isBlank(ccsPassword)) {
-            throw new OptSDKException("paas ccs password is null");
-        }
-        if (StringUtil.isBlank(mcsMaxtotal)) {
-            throw new OptSDKException("paas mcs maxtotal is null");
-        }
-        if (StringUtil.isBlank(mcsMaxIdle)) {
-            throw new OptSDKException("paas mcs maxIdle is null");
-        }
-        if (StringUtil.isBlank(mcsMinIdle)) {
-            throw new OptSDKException("paas mcs minIdle is null");
-        }
-        if (StringUtil.isBlank(mcsTestOnBorrow)) {
-            throw new OptSDKException("paas mcs testOnBorrow is null");
-        }
         
-        PaasConfInfo paasAuthInfo = new PaasConfInfo();
-        paasAuthInfo.setCcsZkAddress(ccsZkAddress);
-        paasAuthInfo.setCcsUserName(ccsUserName);
-        paasAuthInfo.setCcsPassword(ccsPassword);
+        PaasConfInfo paasConf = new PaasConfInfo();
+        paasConf.setCcsAppName(ccsAppName);
+        paasConf.setCcsZkAddress(ccsZkAddress);
 
-        paasAuthInfo.setMcsMaxIdle((mcsMaxIdle));
-        paasAuthInfo.setMcsMaxtotal((mcsMaxtotal));
-        paasAuthInfo.setMcsMinIdle((mcsMinIdle));
-        paasAuthInfo.setMcsTestOnBorrow(mcsTestOnBorrow);
-
-        return paasAuthInfo;
+        return paasConf;
     }
 
-    public String getCacheType() {
-        String type = prop.getProperty("opt.cache.type");
-        if (StringUtil.isBlank(type)) {
-            throw new OptSDKException("cache type is null");
-        }
-        return type;
-    }
-
-    public String getConfigCenterType() {
-        String type = prop.getProperty("opt.configcenter.type");
-        if (StringUtil.isBlank(type)) {
-            throw new OptSDKException("config center type is null");
-        }
-        return type;
-    }
-
-    public String getSequenceType() {
-        String type = prop.getProperty("opt.sequence.type");
-        if (StringUtil.isBlank(type)) {
-            throw new OptSDKException("sequence type is null");
-        }
-        return type;
-    }
-
-    public String getDocStorageType() {
-        String type = prop.getProperty("opt.doc.storage.type");
-        if (StringUtil.isBlank(type)) {
-            throw new OptSDKException("doc storage type is null");
-        }
-        return type;
-    }
-
-    public String getOwnerZKHost() {
-        String host = prop.getProperty("opt.owner.zkHost");
-        if (StringUtil.isBlank(host)) {
-            throw new OptSDKException("opt.owner.zkHost is null");
-        }
-        return host;
-    }
-
-    public String getOwnerZKAuthSchema() {
-        String zkAuthSchema = prop.getProperty("opt.owner.zkAuthSchema");
-        if (StringUtil.isBlank(zkAuthSchema)) {
-            throw new OptSDKException("opt.owner.zkAuthSchema is null");
-        }
-        return zkAuthSchema;
-    }
-
-    public String getOwnerZKUser() {
-        String zkUser = prop.getProperty("opt.owner.zkUser");
-        if (StringUtil.isBlank(zkUser)) {
-            throw new OptSDKException("opt.owner.zkUser is null");
-        }
-        return zkUser;
-    }
-
-    public String getOwnerZKPassword() {
-        String zkPassword = prop.getProperty("opt.owner.zkPassword");
-        if (StringUtil.isBlank(zkPassword)) {
-            throw new OptSDKException("opt.owner.zkPassword is null");
-        }
-        return zkPassword;
-    }
-
-    public int getOwnerZKTimeout() {
-        String zkTimeout = prop.getProperty("opt.owner.zkTimeout");
-        if (StringUtil.isBlank(zkTimeout)) {
-            throw new OptSDKException("opt.owner.zkTimeout is null");
-        }
-        return Integer.parseInt(zkTimeout);
-    }
 
     public String getPropValue(String key) {
         if (StringUtil.isBlank(key)) {
@@ -161,24 +69,142 @@ public final class OptConfHelper {
         return prop.containsKey(key) ? prop.getProperty(key) : null;
     }
 
-    public Properties assembleCcsProperties(PaasConfInfo authInfo) {
-        Properties ccsProperties = new Properties();
-        ccsProperties.put("ccs.zk_address", authInfo.getCcsZkAddress());
-        ccsProperties.put("ccs.userName", authInfo.getCcsUserName());
-        ccsProperties.put("ccs.password", authInfo.getCcsPassword());
-        return ccsProperties;
+	public Properties assembleMcsProperties(String namespace) {
+		Properties mcsProperties=new Properties();
+		IConfigCenterClient configCenterClient = ConfigCenterFactory.getConfigCenterClient();
+        if (configCenterClient == null) {
+            throw new OptSDKException("cann't get mcs conf because IConfigCenterClient is null");
+        }
+        // 获取mcs namespace映射信息
+        String cacheNSConfStr = configCenterClient.get(
+                SDKConstants.PAAS_CACHENS_MCS_MAPPED_PATH);
+        if (StringUtil.isBlank(cacheNSConfStr)) {
+            throw new OptSDKException("cann't get mcs conf from path["
+                    + SDKConstants.PAAS_CACHENS_MCS_MAPPED_PATH + "]");
+        }
+        // 转换为JSON对象
+        JSONObject cacheNSJson = JSONObject.fromObject(cacheNSConfStr);
+        //namespace对应的redis集群标识
+		String redisClusterId=cacheNSJson.getString(namespace);
+		if(StringUtil.isBlank(redisClusterId)){
+			throw new OptSDKException("cann't get mcs rediscluster id of namespace["
+                    + namespace + "]");
+		}
+		// 获取redis集群配置信息
+		String redisConfStr=configCenterClient.get(SDKConstants.PAAS_CACHE_REDIS_CLUSTER_MAPPED_PATH);
+		
+		if(StringUtil.isBlank(redisConfStr)){
+			throw new OptSDKException("cann't get mcs redis conf of namespace["
+                    + namespace + "],redisClusterId["+redisClusterId+"]");
+		}
+		
+		JSONObject redisConfJson = JSONObject.fromObject(redisConfStr);
+		JSONObject redisJson=(JSONObject) redisConfJson.get(redisClusterId);
+		McsConnectInfo mcsInfo = (McsConnectInfo) JSONObject.toBean(redisJson, McsConnectInfo.class);
+		mcsProperties.put("mcs.maxtotal", mcsInfo.getMcsMaxtotal());
+        mcsProperties.put("mcs.maxIdle", mcsInfo.getMcsMaxIdle());
+        mcsProperties.put("mcs.minIdle", mcsInfo.getMcsMinIdle());
+        mcsProperties.put("mcs.testOnBorrow", mcsInfo.isMcsTestOnBorrow());
+        mcsProperties.put("mcs.host", mcsInfo.getMcsHost());
+        mcsProperties.put("mcs.password", mcsInfo.getMcsPassword());
+		
+		return mcsProperties;
+	}
+
+	
+	/**
+     * 获取DUBBO-REST的提供者信息
+     * 
+     * @return
+     * @author gucl
+     * @ApiDocMethod
+     */
+    public JSONObject getDubboRestProviderConf() {
+        IConfigCenterClient configCenterBuilder = ConfigCenterFactory
+                .getConfigCenterClient();
+        if (configCenterBuilder == null) {
+            throw new OptSDKException(
+                    "cann't get dubbo rest provider conf because IConfigCenterClient is null");
+        }
+        String conf = configCenterBuilder.get(
+                SDKConstants.DUBBO_REST_PROVIDER_CONF_PATH);
+        if (StringUtil.isBlank(conf)) {
+            return null;
+        }
+        JSONObject data = JSONObject.fromObject(conf);
+        return data;
     }
 
-    public Properties assembleMcsProperties(PaasConfInfo authInfo, String mcsHost,
-            String mcsPassword) {
-        Properties mcsProperties = new Properties();
-        mcsProperties.put("mcs.maxtotal", authInfo.getMcsMaxtotal());
-        mcsProperties.put("mcs.maxIdle", authInfo.getMcsMaxIdle());
-        mcsProperties.put("mcs.minIdle", authInfo.getMcsMinIdle());
-        mcsProperties.put("mcs.testOnBorrow", authInfo.getMcsTestOnBorrow());
-        mcsProperties.put("mcs.host", mcsHost);
-        mcsProperties.put("mcs.password", mcsPassword);
-        return mcsProperties;
+    /**
+     * 获取DUBBO提供者配置信息
+     * 
+     * @return
+     * @author gucl
+     */
+    public JSONObject getDubboProviderConf() {
+        IConfigCenterClient configCenterBuilder = ConfigCenterFactory
+                .getConfigCenterClient();
+        if (configCenterBuilder == null) {
+            throw new OptSDKException(
+                    "cann't get dubbo provider conf because IConfigCenterClient is null");
+        }
+        String conf = configCenterBuilder.get(
+                SDKConstants.DUBBO_PROVIDER_CONF_PATH);
+        if (StringUtil.isBlank(conf)) {
+            return null;
+        }
+        JSONObject data = JSONObject.fromObject(conf);
+        return data;
     }
 
+    /**
+     * 获取DUBBO消费者配置信息
+     * 
+     * @return
+     * @author gucl
+     */
+    public JSONObject getDubboConsumerConf() {
+        IConfigCenterClient configCenterBuilder = ConfigCenterFactory
+                .getConfigCenterClient();
+        if (configCenterBuilder == null) {
+            throw new OptSDKException(
+                    "cann't get dubbo consumer conf because IConfigCenterClient is null");
+        }
+        String conf = configCenterBuilder.get(
+                SDKConstants.DUBBO_CONSUMER_CONF_PATH);
+        if (StringUtil.isBlank(conf)) {
+            return null;
+        }
+        JSONObject data = JSONObject.fromObject(conf);
+        return data;
+    }
+    
+    public HikariConfig getDBConf(String dataSourceName) {
+        HikariConfig dbconf = null;
+        IConfigCenterClient configCenterBuilder = ConfigCenterFactory
+                .getConfigCenterClient();
+        if (configCenterBuilder == null) {
+            throw new OptSDKException(
+                    "cann't get database conf because IConfigCenterBuilder is null");
+        }
+        // 获取配置信息字符串
+        String dbConfStr = configCenterBuilder.get(
+                SDKConstants.DB_CONF_PATH);
+        if (StringUtil.isBlank(dbConfStr)) {
+            throw new OptSDKException("cann't get database conf from path["
+                    + SDKConstants.DB_CONF_PATH + "]");
+        }
+        // 转换为JSON对象
+        JSONObject dbConfJson = JSONObject.fromObject(dbConfStr);
+
+        // 获取指定dataSourceName对应的配置信息
+        JSONObject confObject = (JSONObject) dbConfJson.get(dataSourceName);
+        if (confObject == null) {
+            throw new OptSDKException("cann't get database config info of dataSourceName["
+                    + dataSourceName + "]");
+        }
+        dbconf = (HikariConfig) JSONObject.toBean(confObject, HikariConfig.class);
+
+        return dbconf;
+    }
 }

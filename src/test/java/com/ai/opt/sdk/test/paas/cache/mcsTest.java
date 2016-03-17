@@ -5,22 +5,24 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ai.opt.sdk.cache.client.ICacheClient;
-import com.ai.opt.sdk.cache.factory.CacheClientBuilderFactory;
+import com.ai.opt.sdk.cache.factory.CacheClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 
 public class mcsTest {
     private ICacheClient cacheClient;
 
     private String namespace = "com.ai.opt.test.mcs";
 
-    @Before
+   /* @Before
     public void initData() {
-        this.cacheClient = CacheClientBuilderFactory.getCacheClientBuilder().getCacheClient(
+        this.cacheClient = CacheClientFactory.getCacheClient(
                 namespace);
-    }
+    }*/
 
     @Test
     public void addCache() {
+    	this.cacheClient = CacheClientFactory.getCacheClient(
+                namespace);
         cacheClient.set("testKey", "testValue");
         assertEquals("testValue", cacheClient.get("testKey"));
     }

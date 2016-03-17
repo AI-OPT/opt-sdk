@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.model;
+package com.ai.opt.sdk.sequence.model;
 
 public class Sequence {
 

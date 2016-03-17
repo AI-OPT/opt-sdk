@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.datasource;
+package com.ai.opt.sdk.sequence.datasource;
 
 import com.ai.opt.sdk.exception.OptSDKException;
 

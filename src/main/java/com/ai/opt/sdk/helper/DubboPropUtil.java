@@ -2,15 +2,14 @@ package com.ai.opt.sdk.helper;
 
 import java.util.Iterator;
 
-import net.sf.json.JSONObject;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.OptSDKException;
-import com.ai.opt.sdk.tools.PaaSServiceTool;
 import com.ai.paas.ipaas.util.StringUtil;
+
+import net.sf.json.JSONObject;
 
 public class DubboPropUtil {
 
@@ -29,7 +28,7 @@ public class DubboPropUtil {
         if (LOCAL_CONFIG.equals(local)) {
             return;
         }
-        JSONObject props = PaaSServiceTool.getDubboRestProviderConf();
+        JSONObject props = OptConfHelper.getInstance().getDubboRestProviderConf();
         if (props == null) {
             return;
         }
@@ -60,7 +59,7 @@ public class DubboPropUtil {
         if (LOCAL_CONFIG.equals(local)) {
             return;
         }
-        JSONObject props = PaaSServiceTool.getDubboProviderConf();
+        JSONObject props = OptConfHelper.getInstance().getDubboProviderConf();
         if (props == null) {
             return;
         }
@@ -91,7 +90,7 @@ public class DubboPropUtil {
         if (LOCAL_CONFIG.equals(local)) {
             return;
         }
-        JSONObject props = PaaSServiceTool.getDubboConsumerConf();
+        JSONObject props = OptConfHelper.getInstance().getDubboConsumerConf();
         if (props == null) {
             return;
         }

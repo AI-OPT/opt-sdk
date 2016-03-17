@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.sequence.normal.model;
+package com.ai.opt.sdk.sequence.model;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
