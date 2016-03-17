@@ -13,16 +13,14 @@ public class mcsTest {
 
     private String namespace = "com.ai.opt.test.mcs";
 
-   /* @Before
+    @Before
     public void initData() {
         this.cacheClient = CacheClientFactory.getCacheClient(
                 namespace);
-    }*/
+    }
 
     @Test
     public void addCache() {
-    	this.cacheClient = CacheClientFactory.getCacheClient(
-                namespace);
         cacheClient.set("testKey", "testValue");
         assertEquals("testValue", cacheClient.get("testKey"));
     }
