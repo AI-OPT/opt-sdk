@@ -14,7 +14,7 @@ public final class SDKConstants {
     /**
      * db-conf的配置信息 /com/ai/opt/db-conf 
      * { 
-     *   "common-center-db": 
+     *   "opt-uac-db": 
      *   {
      * 		"driverClassName":"com.mysql.jdbc.Driver", "jdbcUrl":
      * 		"jdbc:mysql://10.1.228.222:39306/devibssgndb1?useUnicode=true&characterEncoding=UTF-8",
@@ -22,7 +22,7 @@ public final class SDKConstants {
      * 		"connectionTimeout":"30000", "idleTimeout":"600000", "maxLifetime":"1800000",
      * 		"maximumPoolSize":"10" 
      *   }, 
-     *  "customer-center-db": 
+     *  "opt-sys-db": 
      *  { 
      *  	"driverClassName":"com.mysql.jdbc.Driver",
      * 		"jdbcUrl":"jdbc:mysql://10.1.228.222:39306/devibsscmdb1?useUnicode=true&characterEncoding=UTF-8",

@@ -89,6 +89,11 @@ publishing {
                 asNode().children().last() + {
                     delegate.dependencies {
                         delegate.dependency {
+                            delegate.groupId("com.ai.opt")
+                            delegate.artifactId("opt-base")
+                            delegate.version("${optBaseVersion}")
+                        }
+                        delegate.dependency {
                             delegate.groupId("com.zaxxer")
                             delegate.artifactId("HikariCP")
                             delegate.version("2.4.0")
@@ -100,7 +105,7 @@ publishing {
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
-                            delegate.artifactId("paas-sdk-ccs-exclude-auth")
+                            delegate.artifactId("paas-sdk-mcs-exclude-auth")
                             delegate.version("1.0-SNAPSHOT")
                         }
                         delegate.dependency {
