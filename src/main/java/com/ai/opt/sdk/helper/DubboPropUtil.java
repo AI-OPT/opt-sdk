@@ -2,8 +2,8 @@ package com.ai.opt.sdk.helper;
 
 import java.util.Iterator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.OptSDKException;
@@ -13,7 +13,7 @@ import net.sf.json.JSONObject;
 
 public class DubboPropUtil {
 
-    private static final Logger LOG = LogManager.getLogger(DubboPropUtil.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DubboPropUtil.class);
 
     // 是否启用本地配置文件
     private static final String LOCAL_CONFIG = "true";

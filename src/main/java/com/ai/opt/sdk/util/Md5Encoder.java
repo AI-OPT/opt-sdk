@@ -3,11 +3,12 @@ package com.ai.opt.sdk.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public final class Md5Encoder {
-	private static final Logger LOG = LogManager.getLogger(Md5Encoder.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Md5Encoder.class);
     private Md5Encoder() {
     }
 

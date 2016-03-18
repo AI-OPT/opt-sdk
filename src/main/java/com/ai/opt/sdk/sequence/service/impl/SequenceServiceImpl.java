@@ -8,10 +8,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.json.JSONObject;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.ai.opt.sdk.exception.OptSDKException;
 import com.ai.opt.sdk.sequence.dao.ISequenceDao;
@@ -24,7 +25,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 
 public class SequenceServiceImpl implements ISequenceService {
-    public static final Logger LOG = LogManager.getLogger(SequenceServiceImpl.class);
+    public static final Logger LOG = LoggerFactory.getLogger(SequenceServiceImpl.class);
 
     private final Lock lock = new ReentrantLock();
 

@@ -5,9 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.ai.opt.sdk.configcenter.client.IConfigCenterClient;
 import com.ai.opt.sdk.configcenter.client.impl.ConfigCenterClient;
-import com.ai.opt.sdk.exception.OptSDKException;
 import com.ai.opt.sdk.helper.OptConfHelper;
-import com.ai.paas.ipaas.ccs.constants.ConfigException;
 
 public final class ConfigCenterFactory {
 

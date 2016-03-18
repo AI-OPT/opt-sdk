@@ -9,20 +9,20 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.opt.sdk.exception.OptSDKException;
 import com.ai.opt.sdk.sequence.dao.ISequenceDao;
 import com.ai.opt.sdk.sequence.model.Sequence;
 import com.ai.opt.sdk.sequence.model.SequenceCache;
+import com.ai.paas.ipaas.util.StringUtil;
+
+import net.sf.json.JSONObject;
 
 public class SequenceDaoImpl implements ISequenceDao {
 
-    private static final Logger LOG = LogManager.getLogger(SequenceDaoImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SequenceDaoImpl.class);
 
     private static final String sqlUpdate = "update sys_sequences set LAST_NUMBER=? where SEQUENCE_NAME = ?";
 

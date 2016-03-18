@@ -1,11 +1,12 @@
 package com.ai.opt.sdk.util;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class Pinyin {
     
-    private static final Logger LOGGER = Logger.getLogger(Pinyin.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Pinyin.class);
     
     private Pinyin(){}
     

@@ -1,7 +1,7 @@
 package com.ai.opt.sdk.filter;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.RPCSystemException;
@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
 
 public class DubboRequestTrackFilter implements Filter {
 
-    private static final Logger LOG = LogManager.getLogger(DubboRequestTrackFilter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DubboRequestTrackFilter.class);
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) {
