@@ -42,7 +42,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'commons-beanutils:commons-beanutils:1.9.2'
     compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
-    compile 'org.quartz-scheduler:quartz:2.2.1'
+    //compile 'org.quartz-scheduler:quartz:2.2.1'
     compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
 
@@ -191,12 +191,7 @@ publishing {
                             delegate.groupId("com.101tec")
                             delegate.artifactId("zkclient")
                             delegate.version("0.5")
-                        }
-                        delegate.dependency {
-                            delegate.groupId("org.quartz-scheduler")
-                            delegate.artifactId("quartz")
-                            delegate.version("2.2.1")
-                        }
+                        }                        
                         delegate.dependency {
                             delegate.groupId("org.postgresql")
                             delegate.artifactId("postgresql")
