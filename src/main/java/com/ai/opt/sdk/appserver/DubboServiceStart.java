@@ -18,7 +18,7 @@ public final class DubboServiceStart {
 
 	@SuppressWarnings("resource")
 	private static void startDubbo() {
-		LOG.info("开始启动 Dubbo 服务---------------------------");
+		LOG.error("开始启动 Dubbo 服务---------------------------");
 		// 从配置中心加载DUBBO的核心配置
 		try {
 			DubboPropUtil.setDubboProviderProperties();
