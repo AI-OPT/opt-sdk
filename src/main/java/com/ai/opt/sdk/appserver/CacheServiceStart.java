@@ -15,7 +15,7 @@ public final class CacheServiceStart {
     private static final String PATH = "classpath:context/core-context.xml";
     private CacheServiceStart(){}
     public static void main(String[] args) {
-        LOG.info("开始刷新缓存......");
+        LOG.error("开始刷新缓存......");
         @SuppressWarnings("resource")
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 new String[] { PATH });
@@ -31,6 +31,6 @@ public final class CacheServiceStart {
 
         }
         // 刷新缓存结束，需要提示
-        LOG.info("缓存刷新结束,请通过日志查看是否刷新成功.....");
+        LOG.error("缓存刷新结束,请通过日志查看是否刷新成功.....");
     }
 }
