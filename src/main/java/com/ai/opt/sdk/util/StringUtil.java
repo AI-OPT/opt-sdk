@@ -160,5 +160,20 @@ public final class StringUtil {
             dest = m.replaceAll("");
         }
         return dest;
-    }
+    }    
+    /**
+     * 获取字符串对应的字节长度，英文占一个字节，中文3个字节（UTF-8编码）
+     * @param str
+     * @return
+     * @author gucl
+     */
+	public static int getByteLength(String str) {
+		try {
+			byte[] b = str.getBytes("UTF-8");
+			return b.length;
+		} catch (Exception ex) {
+			return 0;
+		}
+	}
+    
 }
