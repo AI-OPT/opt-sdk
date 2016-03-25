@@ -1,16 +1,20 @@
 package com.ai.opt.sdk.filter;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.base.exception.BusinessException;
-import com.ai.opt.base.exception.RPCSystemException;
-import com.ai.opt.base.vo.BaseInfo;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.CollectionUtil;
-import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.util.UUIDUtil;
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.Filter;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
@@ -18,6 +22,7 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.fastjson.JSON;
 
+@Activate(group = { Constants.PROVIDER })
 public class DubboRequestTrackFilter implements Filter {
 
     private static final Logger LOG = LoggerFactory.getLogger(DubboRequestTrackFilter.class);
@@ -34,7 +39,6 @@ public class DubboRequestTrackFilter implements Filter {
             if (LOG.isInfoEnabled()) {
                 LOG.info("TRADE_SEQ:{},请求接口:{},请求方法:{},请求参数:{}", tradeSeq, reqSV, reqMethod, "");
             }
-
         } else {
             if (LOG.isInfoEnabled()) {
                 LOG.info("TRADE_SEQ:{},请求接口:{},请求方法:{},请求参数:{}", tradeSeq, reqSV, reqMethod,
@@ -47,11 +51,14 @@ public class DubboRequestTrackFilter implements Filter {
             if (LOG.isInfoEnabled()) {
                 LOG.info("TRADE_SEQ:{},执行调用服务{}类中的{}方法", tradeSeq, reqSV, reqMethod);
             }
-
             result = invoker.invoke(invocation);
-
             if (result.hasException()) {
                 Throwable e = result.getException();
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("TRADE_SEQ:{},调用服务{}类中的{}方法发生异常，原因:{}", tradeSeq, reqSV,
+                            reqMethod, result.getException().getMessage(),
+                            result.getException());
+                }
                 if (e instanceof BusinessException) {
                     BaseResponse response = new BaseResponse();
                     response.setResponseHeader(new ResponseHeader(false, ((BusinessException) e)
@@ -59,13 +66,6 @@ public class DubboRequestTrackFilter implements Filter {
                     RpcResult r = new RpcResult();
                     r.setValue(response);
                     return r;
-                } else {
-                    if (LOG.isErrorEnabled()) {
-                        LOG.error("TRADE_SEQ:{},调用服务{}类中的{}方法发生异常，原因:{}", tradeSeq, reqSV,
-                                reqMethod, result.getException().getMessage(),
-                                result.getException());
-                    }
-                    throw new RPCSystemException(e);
                 }
             }
             if (LOG.isInfoEnabled()) {
@@ -78,33 +78,28 @@ public class DubboRequestTrackFilter implements Filter {
                 LOG.error("TRADE_SEQ:{},执行{}类中的{}方法发生异常:{}", tradeSeq, reqSV, reqMethod, ex);
             }
             RpcResult r = new RpcResult();
-            r.setException(new RPCSystemException(ex));
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("TRADE_SEQ:{},执行{}类中的{}方法发生参数约束性校验异常:{},将被转换成业务异常输出", tradeSeq, reqSV, reqMethod, ex);
+                }
+                ConstraintViolationException ve = (ConstraintViolationException) ex.getCause();
+                Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+                if (violations != null && violations.size() > 0) {
+                    String error = null;
+                    for (ConstraintViolation<?> cv : violations) {
+                        error = cv.getMessage();
+                        break;
+                    }
+                    BaseResponse response = new BaseResponse();
+                    response.setResponseHeader(new ResponseHeader(false, "888888", error));
+                    r.setValue(response);
+                }
+            } else {
+                r.setException(ex);
+            }
             return r;
         }
 
-    }
-
-    /**
-     * 校验租户ID是否为空
-     * 
-     * @param requestParams
-     * @return
-     * @author gucl
-     */
-    private boolean validateTenantId(Object[] requestParams) {
-        boolean isOK = true;
-        if (requestParams != null) {
-            for (Object param : requestParams) {
-                if (param instanceof BaseInfo) {
-                    BaseInfo tmpBaseInfo = (BaseInfo) param;
-                    if (StringUtil.isBlank(tmpBaseInfo.getTenantId())) {
-                        isOK = false;
-                        break;
-                    }
-                }
-            }
-        }
-        return isOK;
     }
 
 }

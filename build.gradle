@@ -28,7 +28,8 @@ dependencies {
     compile "com.ai.opt:opt-base:${optBaseVersion}"
     compile "com.ai:ipaas-zookeeper-utility:${optPaaSZookeeperVersion}"
     compile "com.ai:paas-sdk-mcs-exclude-auth:${optPaaSMCSVersion}"
-    
+    compile "javax.validation:validation-api:1.0.0.GA"
+	compile "org.hibernate:hibernate-validator:4.2.0.Final"
     compile 'com.alibaba:fastjson:1.2.6'
     compile 'com.google.code.gson:gson:2.3.1'
 
@@ -221,6 +222,16 @@ publishing {
                             delegate.groupId("org.dom4j")
                             delegate.artifactId("dom4j")
                             delegate.version("1.6.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("javax.validation")
+                            delegate.artifactId("validation-api")
+                            delegate.version("1.0.0.GA")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.hibernate")
+                            delegate.artifactId("hibernate-validator")
+                            delegate.version("4.2.0.Final")
                         }
                     }
                 }
