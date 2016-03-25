@@ -14,7 +14,7 @@ public class MailTest {
 		String[] tomails = new String[] { "gucl@asiainfo.com" };
 		String[] ccmails = new String[] { "guchuanlong@126.com" };
 		String subject = "亚信云计费邮件测试";
-		String[] data = new String[] { "云計費nickname", "587434" ,"30"};
+		String[] data = new String[] { "云计费nickname", "587434" ,"30"};
 		String htmlcontext = EmailTemplateUtil.buildHtmlTextFromTemplate(BIND_EMAIL, data);
 		
 		try {
