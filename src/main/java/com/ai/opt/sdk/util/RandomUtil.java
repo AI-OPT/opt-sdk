@@ -17,4 +17,21 @@ public class RandomUtil {
 		return str;
 	}
 	
+	
+	public static final String randomString(int length) {
+		char[] charArry = new char[length];
+		int i = 0;
+		while (i < length) {
+			int f = (int) (Math.random() * 3);
+			if (f == 0)
+				charArry[i] = (char) ('A' + Math.random() * 26);
+			else if (f == 1)
+				charArry[i] = (char) ('a' + Math.random() * 26);
+			else
+				charArry[i] = (char) ('0' + Math.random() * 10);
+			i++;
+		}
+		return new String(charArry);
+	}
+	
 }
