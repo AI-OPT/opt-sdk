@@ -2,7 +2,9 @@ package com.ai.opt.sdk.web.model;
 
 import java.io.Serializable;
 
-public class ResponseData<T> implements Serializable {
+import com.ai.opt.base.vo.BaseResponse;
+
+public class ResponseData<T> extends BaseResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
