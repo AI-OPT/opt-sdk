@@ -32,6 +32,23 @@ public final class OptConfHelper {
         }
         return instance;
     }
+    /**
+     * 手动加载paas-conf配置
+     * @param p paas-conf配置  最小配置如下：
+     * ccs.appname=aiopt-baas-xxx
+     * ccs.zk_address=127.0.0.1:2181
+     * @return
+     * @author gucl
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    public static OptConfHelper loadPaaSConf(Properties p) {
+    	if (instance == null) {
+    		prop=p;
+    		instance = new OptConfHelper();
+    	}
+    	return instance;
+    }
 
     private static void loadProp() {
         InputStream is = OptConfHelper.class.getClassLoader().getResourceAsStream(
