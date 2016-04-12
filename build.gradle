@@ -13,7 +13,7 @@ ext {
     optPaaSMCSVersion="1.0-SNAPSHOT"
 
     appName="opt-sdk"
-    moduleVersion='1.0.2-SNAPSHOT'
+    moduleVersion='1.0.3-SNAPSHOT'
     builtBy="gradle 2.2"
     publishUserName = "runnerdev"
     publishUserPassword = "runnerdev"
