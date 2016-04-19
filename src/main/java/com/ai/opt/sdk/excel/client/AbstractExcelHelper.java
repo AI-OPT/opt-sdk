@@ -119,6 +119,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 写入数据到指定excel文件中
 	 * @param file 目标excel文件
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @throws Exception
@@ -137,6 +138,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 写入数据到指定excel文件中
 	 * @param file 目标excel文件
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @param fieldNames 属性列表
@@ -150,6 +152,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 抽象方法：写入数据到指定excel文件中，由子类实现
 	 * @param file 目标excel文件
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @param fieldNames 属性列表
@@ -162,6 +165,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 写入数据到指定excel文件中
 	 * @param filepath 目标excel文件路径
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @throws Exception
@@ -180,6 +184,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 写入数据到指定excel文件中
 	 * @param filepath 目标excel文件路径
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @param fieldNames 属性列表
@@ -193,6 +198,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 抽象方法：写入数据到指定excel文件中，由子类实现
 	 * @param filepath 目标excel文件路径
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @param fieldNames 属性列表
@@ -209,6 +215,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 写入数据到指定excel输出流中
 	 * @param file 目标excel文件
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @throws Exception
@@ -227,6 +234,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 写入数据到指定excel输出流中
 	 * @param file 目标excel文件
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @param fieldNames 属性列表
@@ -240,6 +248,7 @@ public abstract class AbstractExcelHelper {
 	/**
 	 * 抽象方法：写入数据到指定excel输出流中，由子类实现
 	 * @param file 目标excel文件
+	 * @param sheetName excel sheet页的名称，为空时，默认取当前时间戳yyyyMMddHHmmssSS
 	 * @param clazz 数据类型
 	 * @param dataModels 数据列表
 	 * @param fieldNames 属性列表
