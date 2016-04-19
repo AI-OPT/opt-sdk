@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.CollectionUtil;
@@ -55,9 +56,8 @@ public class DubboRequestTrackFilter implements Filter {
             if (result.hasException()) {
                 Throwable e = result.getException();
                 if (LOG.isErrorEnabled()) {
-                    LOG.error("TRADE_SEQ:{},调用服务{}类中的{}方法发生异常，原因:{}", tradeSeq, reqSV,
-                            reqMethod, result.getException().getMessage(),
-                            result.getException());
+                    LOG.error("TRADE_SEQ:{},调用服务{}类中的{}方法发生异常，原因:{}", tradeSeq, reqSV, reqMethod,
+                            result.getException().getMessage(), result.getException());
                 }
                 if (e instanceof BusinessException) {
                     BaseResponse response = new BaseResponse();
@@ -66,6 +66,10 @@ public class DubboRequestTrackFilter implements Filter {
                     RpcResult r = new RpcResult();
                     r.setValue(response);
                     return r;
+                } else if (e instanceof SystemException) {
+                    throw (SystemException) e;
+                } else {
+                    throw new SystemException((Exception) e);
                 }
             }
             if (LOG.isInfoEnabled()) {
@@ -80,7 +84,8 @@ public class DubboRequestTrackFilter implements Filter {
             RpcResult r = new RpcResult();
             if (ex.getCause() instanceof ConstraintViolationException) {
                 if (LOG.isErrorEnabled()) {
-                    LOG.error("TRADE_SEQ:{},执行{}类中的{}方法发生参数约束性校验异常:{},将被转换成业务异常输出", tradeSeq, reqSV, reqMethod, ex);
+                    LOG.error("TRADE_SEQ:{},执行{}类中的{}方法发生参数约束性校验异常:{},将被转换成业务异常输出", tradeSeq,
+                            reqSV, reqMethod, ex);
                 }
                 ConstraintViolationException ve = (ConstraintViolationException) ex.getCause();
                 Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
