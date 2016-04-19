@@ -13,7 +13,7 @@ ext {
     optPaaSMCSVersion="1.0-SNAPSHOT"
 
     appName="opt-sdk"
-    moduleVersion='1.0.3-SNAPSHOT'
+    moduleVersion='1.0.4-SNAPSHOT'
     builtBy="gradle 2.2"
     publishUserName = "runnerdev"
     publishUserPassword = "runnerdev"
@@ -79,6 +79,13 @@ dependencies {
     //apache mail
     compile	'org.apache.commons:commons-email:1.4'
     compile 'org.dom4j:dom4j:1.6.1'
+    
+    //excel
+    compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+    compile 'org.apache.poi:poi:3.13'
+    compile 'org.apache.poi:poi-ooxml:3.13'
+    compile 'org.apache.poi:poi-ooxml-schemas:3.13'
+    
 }
 
 jar {
@@ -245,6 +252,26 @@ publishing {
                             delegate.groupId("org.hibernate")
                             delegate.artifactId("hibernate-validator")
                             delegate.version("4.2.0.Final")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("net.sourceforge.jexcelapi")
+                            delegate.artifactId("jxl")
+                            delegate.version("2.6.12")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.poi")
+                            delegate.artifactId("poi")
+                            delegate.version("3.13")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.poi")
+                            delegate.artifactId("poi-ooxml")
+                            delegate.version("3.13")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.poi")
+                            delegate.artifactId("poi-ooxml-schemas")
+                            delegate.version("3.13")
                         }
                     }
                 }
