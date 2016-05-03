@@ -86,6 +86,9 @@ public class ConfigCenterClient implements IConfigCenterClient {
 	private String appendAppname(String path) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(PaaSConstant.UNIX_SEPERATOR + this.appname);
+		if(path!=null&&!path.startsWith(PaaSConstant.UNIX_SEPERATOR)){
+			sb.append(PaaSConstant.UNIX_SEPERATOR);
+		}
 		sb.append(path);
 		LOG.debug("Real path=" + sb.toString());
 		return sb.toString();
