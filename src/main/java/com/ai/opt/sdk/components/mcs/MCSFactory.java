@@ -7,7 +7,6 @@ import com.ai.opt.sdk.components.base.ComponentConfigLoader;
 import com.ai.opt.sdk.components.mo.PaasConf;
 import com.ai.opt.sdk.components.util.ConfigTool;
 import com.ai.opt.sdk.exception.SDKException;
-import com.ai.paas.ipaas.ccs.ConfigFactory;
 import com.ai.paas.ipaas.mcs.CacheFactory;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;

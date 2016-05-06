@@ -32,6 +32,7 @@ public class CCSTest {
     public void addServiceIdPwdMap() throws ConfigException {
     	String cachesnsConfig = "{\"MCS001\":\"" + "123456"     
     			+ "\",\"MCS002\":\"" + "123456"
+    			+ "\",\"MDS001\":\"" + "123456"
     			+ "\"}";
         
         // paas serviceid password 映射配置
@@ -77,7 +78,43 @@ public class CCSTest {
     	
     }
 
-    
+    @Test
+    public void addMdsConfig() throws ConfigException {
+        // 
+        String mds001 = "MDS001";
+        // 空间
+        String mdssnsConfig = "{\"baas-bmc-topic\":\"" + mds001
+                + "\",\"baas-amc-topic\":\"" + mds001
+                + "\",\"baas-omc-topic\":\"" + mds001
+                + "\",\"baas-smc-topic\":\"" + mds001 + "\"}";
+
+        // MDS空间配置
+        if (!client.exists(SDKConstants.PAAS_MDSNS_MDS_MAPPED_PATH))
+            client.add(SDKConstants.PAAS_MDSNS_MDS_MAPPED_PATH,
+                    mdssnsConfig);
+        else {
+            client.modify(SDKConstants.PAAS_MDSNS_MDS_MAPPED_PATH,
+                    mdssnsConfig);
+        }
+        
+     // 
+        String mdsRealTopic = "BCA976731EF24B899B143755A3AF5794_MDS001_1743120261";
+        // 空间
+        String mdstopicConfig = "{\"MDS001\":\"" + mdsRealTopic
+                + "\"}";
+
+        // MDS空间配置
+        if (!client.exists(SDKConstants.PAAS_MDS_TOPIC_MAPPED_PATH))
+            client.add(SDKConstants.PAAS_MDS_TOPIC_MAPPED_PATH,
+            		mdstopicConfig);
+        else {
+            client.modify(SDKConstants.PAAS_MDS_TOPIC_MAPPED_PATH,
+            		mdstopicConfig);
+        }
+        
+        
+        
+    }
 
     /**
      * DBS配置

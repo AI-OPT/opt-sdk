@@ -56,6 +56,55 @@ public final class ConfigTool {
             throw new SDKException("获取缓存命名空间对应的服务ID错误", e);
         }
     }
+    /**
+     * 获取业务场景对应的MDS ID
+     * @param mdsns
+     * @return
+     * @author gucl
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    public static final String getMDSId(String mdsns) {
+        try {
+            if (StringUtil.isBlank(mdsns)) {
+                throw new SDKException("命名空间为空，无法获取消息服务ID");
+            }
+            String conf = CCSFactory.getDefaultConfigClient().get(
+                    SDKConstants.PAAS_MDSNS_MDS_MAPPED_PATH);
+            if (StringUtil.isBlank(conf)) {
+                throw new SDKException("获取不到消息应用场景对应的MDS服务ID，请检查默认配置服务中的相关配置");
+            }
+            JSONObject data = JSON.parseObject(conf);
+            String mdsId = data.getString(mdsns);
+            if (StringUtil.isBlank(mdsId)) {
+                throw new SDKException("从默认配置服务中无法获取消息命名空间[" + mdsns + "]对应的MDS服务ID");
+            }
+            return mdsId;
+        } catch (ConfigException e) {
+            throw new SDKException("获取消息命名空间对应的服务ID错误", e);
+        }
+    }
+    
+    public static final String getMDSTopic(String mdsId) {
+        try {
+            if (StringUtil.isBlank(mdsId)) {
+                throw new SDKException("消息服务ID为空，无法获取消息服务对应的topic");
+            }
+            String conf = CCSFactory.getDefaultConfigClient().get(
+                    SDKConstants.PAAS_MDS_TOPIC_MAPPED_PATH);
+            if (StringUtil.isBlank(conf)) {
+                throw new SDKException("获取不到消息ID对应的topic，请检查默认配置服务中的相关配置");
+            }
+            JSONObject data = JSON.parseObject(conf);
+            String mdsTopic = data.getString(mdsId);
+            if (StringUtil.isBlank(mdsTopic)) {
+                throw new SDKException("从默认配置服务中无法获取消息服务ID[" + mdsId + "]对应的topic");
+            }
+            return mdsTopic;
+        } catch (ConfigException e) {
+            throw new SDKException("获取消息ID对应的topic错误", e);
+        }
+    }
 
     public static HikariConfig getDBConf(String dataSourceName) {
         String data;

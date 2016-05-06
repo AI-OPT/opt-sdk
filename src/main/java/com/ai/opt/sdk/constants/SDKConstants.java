@@ -13,6 +13,13 @@ public final class SDKConstants {
 
     // 配置某种场景下用哪个缓存服务ID {"com.ai.opt.xxx.xxx":"MCS001","com.ai.opt.xxx.yyy":"MCS002","com.ai.opt.xxx.zzz":"MCS003"}
     public static final String PAAS_CACHENS_MCS_MAPPED_PATH = "/com/ai/opt/paas-cachens-mcs-mapped";
+    
+    // 配置某种场景下用哪个消息服务ID {"baasSmcCheckTopic":"MDS001","baasAmcTopic":"MDS002","baasOmcTopic":"MDS003"}
+    public static final String PAAS_MDSNS_MDS_MAPPED_PATH = "/com/ai/opt/paas-mdsns-mds-mapped";
+   
+    // 配置消息服务ID与实际kakfa topic名称的映射关系 {"MDS001":"BCA976731EF24B899B143755A3AF5794_MDS001_1743120261","MDS002":"BCA976731EF24B899B143755A3AF5794_MDS001_1743120261"}
+    public static final String PAAS_MDS_TOPIC_MAPPED_PATH = "/com/ai/opt/paas-mds-topic-mapped";
+    
     // 技术服务与密码的映射关系 {"MCS001":"password","DSS001":"password","MDS001":"password"}
     public static final String PAAS_SERVICE_PWD_MAPPED_PATH = "/com/ai/opt/paas-service-pwd-mapped";
 
