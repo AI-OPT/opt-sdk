@@ -36,7 +36,7 @@ public final class ConfigTool {
         }
     }
 
-    public static final String getCCSId(String cachens) {
+    public static final String getMCSId(String cachens) {
         try {
             if (StringUtil.isBlank(cachens)) {
                 throw new SDKException("命名空间为空，无法获取缓存服务ID");
@@ -47,11 +47,11 @@ public final class ConfigTool {
                 throw new SDKException("获取不到缓存应用场景对应的CCS服务ID，请检查默认配置服务中的相关配置");
             }
             JSONObject data = JSON.parseObject(conf);
-            String ccsId = data.getString(cachens);
-            if (StringUtil.isBlank(ccsId)) {
+            String mcsId = data.getString(cachens);
+            if (StringUtil.isBlank(mcsId)) {
                 throw new SDKException("从默认配置服务中无法获取缓存命名空间[" + cachens + "]对应的CCS服务ID");
             }
-            return ccsId;
+            return mcsId;
         } catch (ConfigException e) {
             throw new SDKException("获取缓存命名空间对应的服务ID错误", e);
         }

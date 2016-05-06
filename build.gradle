@@ -11,6 +11,12 @@ ext {
     optBaseVersion="1.0.1-SNAPSHOT"
     optPaaSZookeeperVersion="0.2.2-SNAPSHOT"
     optPaaSMCSVersion="1.0-SNAPSHOT"
+    
+    ipaasUacVersion="0.3";
+    ipaasCcsVersion="0.3";
+    ipaasMcsVersion="0.2.2";
+    ipaasDssVersion="0.3";
+    ipaasMdsVersion="0.2.9";
 
     appName="opt-sdk"
     moduleVersion='2.0-SNAPSHOT'
@@ -25,15 +31,15 @@ repositories { maven { url "http://10.1.228.199:18081/nexus/content/groups/publi
 
 dependencies {
 
-	compile "com.ai:ipaas-uac:0.3"
-    compile "com.ai:ipaas-ccs:0.3"
-    compile "com.ai:ipaas-mcs:0.2.2"
-    compile "com.ai:ipaas-dss:0.3"
-    compile "com.ai:ipaas-mds:0.2.9"
+	compile "com.ai:ipaas-uac:${ipaasUacVersion}"
+    compile "com.ai:ipaas-ccs:${ipaasCcsVersion}"
+    compile "com.ai:ipaas-mcs:${ipaasMcsVersion}"
+    compile "com.ai:ipaas-dss:${ipaasDssVersion}"
+    compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
     
     compile "com.ai.opt:opt-base:${optBaseVersion}"
-    compile "com.ai:ipaas-zookeeper-utility:${optPaaSZookeeperVersion}"
-    compile "com.ai:paas-sdk-mcs-exclude-auth:${optPaaSMCSVersion}"
+    //compile "com.ai:ipaas-zookeeper-utility:${optPaaSZookeeperVersion}"
+    //compile "com.ai:paas-sdk-mcs-exclude-auth:${optPaaSMCSVersion}"
     compile "javax.validation:validation-api:1.0.0.GA"
 	compile "org.hibernate:hibernate-validator:4.2.0.Final"
     compile 'com.alibaba:fastjson:1.2.6'
@@ -123,15 +129,35 @@ publishing {
                             delegate.artifactId("HikariCP")
                             delegate.version("2.4.0")
                         }
+                        compile "com.ai:ipaas-uac:${ipaasUacVersion}"
+					    compile "com.ai:ipaas-ccs:${ipaasCcsVersion}"
+					    compile "com.ai:ipaas-mcs:${ipaasMcsVersion}"
+					    compile "com.ai:ipaas-dss:${ipaasDssVersion}"
+					    compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
                         delegate.dependency {
                             delegate.groupId("com.ai")
-                            delegate.artifactId("ipaas-zookeeper-utility")
-                            delegate.version("${optPaaSZookeeperVersion}")
+                            delegate.artifactId("ipaas-uac")
+                            delegate.version("${ipaasUacVersion}")
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
-                            delegate.artifactId("paas-sdk-mcs-exclude-auth")
-                            delegate.version("${optPaaSMCSVersion}")
+                            delegate.artifactId("ipaas-ccs")
+                            delegate.version("${ipaasCcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mcs")
+                            delegate.version("${ipaasMcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-dss")
+                            delegate.version("${ipaasDssVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mds")
+                            delegate.version("${ipaasMdsVersion}")
                         }
                         delegate.dependency {
                             delegate.groupId("org.springframework")
