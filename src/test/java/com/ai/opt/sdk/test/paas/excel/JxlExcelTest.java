@@ -3,9 +3,9 @@ package com.ai.opt.sdk.test.paas.excel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ai.opt.sdk.excel.client.AbstractExcelHelper;
-import com.ai.opt.sdk.excel.client.impl.JxlExcelHelper;
-import com.ai.opt.sdk.excel.factory.ExcelFactory;
+import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
+import com.ai.opt.sdk.components.excel.client.impl.JxlExcelHelper;
+import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 
 /**
  * Excel工具抽象类

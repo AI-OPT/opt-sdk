@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ai.opt.sdk.excel.client.AbstractExcelHelper;
-import com.ai.opt.sdk.excel.client.impl.HssfExcelHelper;
-import com.ai.opt.sdk.excel.client.impl.JxlExcelHelper;
-import com.ai.opt.sdk.excel.client.impl.XssfExcelHelper;
+import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
+import com.ai.opt.sdk.components.excel.client.impl.HssfExcelHelper;
+import com.ai.opt.sdk.components.excel.client.impl.JxlExcelHelper;
+import com.ai.opt.sdk.components.excel.client.impl.XssfExcelHelper;
 
 /**
  * Excel工具抽象类

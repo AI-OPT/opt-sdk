@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ai.opt.sdk.helper.DubboPropUtil;
-
 public final class RestServiceStart {
 
     private static final Logger LOG = LoggerFactory.getLogger(RestServiceStart.class.getName());
@@ -19,7 +17,7 @@ public final class RestServiceStart {
     private static void startRest() {
         LOG.info("开始启动 REST 服务---------------------------");
         try {
-            DubboPropUtil.setDubboRestProviderProperties();
+            //DubboPropUtil.setDubboRestProviderProperties();
         } catch (Exception ex) {
             LOG.error("从配置中心加载DUBBO-REST配置出现异常,尝试读取本地配置", ex);
         }

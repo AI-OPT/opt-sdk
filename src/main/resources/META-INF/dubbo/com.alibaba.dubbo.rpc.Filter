@@ -1,1 +1,1 @@
-DubboRequestTrackFilter=com.ai.opt.sdk.filter.DubboRequestTrackFilter
+DubboRequestTrackFilter=com.ai.opt.sdk.dubbo.filter.DubboRequestTrackFilter

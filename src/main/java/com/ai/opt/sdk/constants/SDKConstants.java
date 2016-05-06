@@ -10,7 +10,12 @@ public final class SDKConstants {
      * PaaS配置中心配置文件
      */
     public static final String PAAS_CONFIG_FILE = "paas/paas-conf.properties";
-    
+
+    // 配置某种场景下用哪个缓存服务ID {"com.ai.opt.xxx.xxx":"MCS001","com.ai.opt.xxx.yyy":"MCS002","com.ai.opt.xxx.zzz":"MCS003"}
+    public static final String PAAS_CACHENS_MCS_MAPPED_PATH = "/com/ai/opt/paas-cachens-mcs-mapped";
+    // 技术服务与密码的映射关系 {"MCS001":"password","DSS001":"password","MDS001":"password"}
+    public static final String PAAS_SERVICE_PWD_MAPPED_PATH = "/com/ai/opt/paas-service-pwd-mapped";
+
     /**
      * db-conf的配置信息 /com/ai/opt/db-conf 
      * { 
@@ -35,42 +40,6 @@ public final class SDKConstants {
     public static final String DB_CONF_PATH = "/com/ai/opt/db-conf";
     
     /**
-     * 缓存空间和redis主机(集群)ID的配置<br/>
-     * <p/>
-     * {"namespaceA":"redisclusterA", "namspaceB":"redisclusterB", "namspaceC":"redisclusterC"}
-     */
-    public static final String PAAS_CACHENS_MCS_MAPPED_PATH = "/com/ai/opt/paas-cachens-mcs-mapped";
-    
-    /**
-     * 缓存空间和redis集群ID的配置<br/>
-     * <p/>
-     * 示例数据：
-     * {
-     *   "redisclusterA":
-     *   {
-     * 		  "mcsHost":"127.0.0.1:6379", 
-     * 	  	  "mcsMaxtotal":"200", 
-     * 		  "mcsMaxIdle":"10",
-     * 		  "mcsMinIdle":"5",
-     * 		  "mcsTestOnBorrow":"true",
-     * 		  "mcsPassword":"123456"
-     *   },
-     *   "redisclusterB":
-     *   {
-     *        "mcsHost":"192.168.0.21:6379;192.168.0.22:6379;192.168.0.23:6379", 
-     * 	  	  "mcsMaxtotal":"200", 
-     * 		  "mcsMaxIdle":"10",
-     * 		  "mcsMinIdle":"5",
-     * 		  "mcsTestOnBorrow":"true",
-     * 		  "mcsPassword":"123456"
-     *   }
-     * }
-     */
-    public static final String PAAS_CACHE_REDIS_CLUSTER_MAPPED_PATH = "/com/ai/opt/paas-cache-redis-cluster-mapped";
-
-    
-    
-    /**
      * /com/ai/opt/dubbo/provider {"dubbo.provider.retries":"0","dubbo.registry.address":
      * "10.123.121.253\:39181","dubbo.provider.timeout":"30000"}
      */
@@ -93,10 +62,4 @@ public final class SDKConstants {
     public static final String DUBBO_CONSUMER_CONF_PATH = "/com/ai/opt/dubbo/consumer";
 
 
-    public static final String MCS = "mcs";
-
-    /**
-     * ccs默认超时时间
-     */
-    public static final int PAAS_CCS_DEFAULT_TIMEOUT = 1000 * 10;
 }

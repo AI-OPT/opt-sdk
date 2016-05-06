@@ -2,8 +2,8 @@ package com.ai.opt.sdk.test.paas.mail;
 
 import org.junit.Test;
 
-import com.ai.opt.sdk.mail.EmailFactory;
-import com.ai.opt.sdk.mail.EmailTemplateUtil;
+import com.ai.opt.sdk.components.mail.EmailFactory;
+import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 
 public class MailTest {
 

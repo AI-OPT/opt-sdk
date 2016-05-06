@@ -13,7 +13,7 @@ ext {
     optPaaSMCSVersion="1.0-SNAPSHOT"
 
     appName="opt-sdk"
-    moduleVersion='1.0.6-SNAPSHOT'
+    moduleVersion='2.0-SNAPSHOT'
     builtBy="gradle 2.2"
     publishUserName = "runnerdev"
     publishUserPassword = "runnerdev"
@@ -25,6 +25,12 @@ repositories { maven { url "http://10.1.228.199:18081/nexus/content/groups/publi
 
 dependencies {
 
+	compile "com.ai:ipaas-uac:0.3"
+    compile "com.ai:ipaas-ccs:0.3"
+    compile "com.ai:ipaas-mcs:0.2.2"
+    compile "com.ai:ipaas-dss:0.3"
+    compile "com.ai:ipaas-mds:0.2.9"
+    
     compile "com.ai.opt:opt-base:${optBaseVersion}"
     compile "com.ai:ipaas-zookeeper-utility:${optPaaSZookeeperVersion}"
     compile "com.ai:paas-sdk-mcs-exclude-auth:${optPaaSMCSVersion}"

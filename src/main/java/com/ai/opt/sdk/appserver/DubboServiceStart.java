@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ai.opt.sdk.helper.DubboPropUtil;
-
 public final class DubboServiceStart {
 
 	private static final Logger LOG = LoggerFactory
@@ -21,7 +19,7 @@ public final class DubboServiceStart {
 		LOG.error("开始启动 Dubbo 服务---------------------------");
 		// 从配置中心加载DUBBO的核心配置
 		try {
-			DubboPropUtil.setDubboProviderProperties();
+			//DubboPropUtil.setDubboProviderProperties();
 		} catch (Exception ex) {
 			LOG.error("从配置中心加载DUBBO配置出现异常,尝试读取本地配置", ex);
 		}
