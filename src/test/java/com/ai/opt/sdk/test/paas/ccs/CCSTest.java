@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ai.opt.sdk.components.ccs.CCSFactory;
+import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.paas.ipaas.ccs.constants.ConfigException;
@@ -17,7 +17,7 @@ public class CCSTest {
 
     @Before
     public void initData() {
-        this.client = CCSFactory.getDefaultConfigClient();
+        this.client = CCSClientFactory.getDefaultConfigClient();
     }
 
     @Ignore
@@ -33,6 +33,7 @@ public class CCSTest {
     	String cachesnsConfig = "{\"MCS001\":\"" + "123456"     
     			+ "\",\"MCS002\":\"" + "123456"
     			+ "\",\"MDS001\":\"" + "123456"
+    			+ "\",\"DSS001\":\"" + "123456"
     			+ "\"}";
         
         // paas serviceid password 映射配置
@@ -112,8 +113,28 @@ public class CCSTest {
             		mdstopicConfig);
         }
         
+    }
+    
+    @Test
+    public void addDssConfig() throws ConfigException {
+        // 缓存服务主机
+        String dssId = "DSS001";
+        // 缓存空间
+        String dssnsConfig = "{\"baas-bmc-dss\":\"" + dssId
+                + "\",\"baas-amc-dss\":\"" + dssId
+                + "\",\"baas-omc-dss\":\"" + dssId
+                + "\",\"baas-smc-dss\":\"" + dssId + "\"}";
         
         
+
+        // 缓存空间配置
+        if (!client.exists(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH))
+            client.add(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH,
+                    dssnsConfig);
+        else {
+            client.modify(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH,
+                    dssnsConfig);
+        }
     }
 
     /**
