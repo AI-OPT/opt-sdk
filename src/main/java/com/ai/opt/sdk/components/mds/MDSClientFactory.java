@@ -15,11 +15,11 @@ import com.ai.paas.ipaas.mds.MsgSenderFactory;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 
-public final class MDSFactory {
+public final class MDSClientFactory {
 	private static Map<String, IMessageSender> sendMap = new ConcurrentHashMap<String, IMessageSender>();
 	private static Map<String, IMessageConsumer> recvMap = new ConcurrentHashMap<String, IMessageConsumer>();
 
-    private MDSFactory() {
+    private MDSClientFactory() {
 
     }
 

@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ai.opt.sdk.components.mcs.MCSFactory;
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 
 public class mcsTest {
@@ -16,7 +16,7 @@ public class mcsTest {
 
     @Before
     public void initData() {
-        this.cacheClient = MCSFactory.getCacheClient(
+        this.cacheClient = MCSClientFactory.getCacheClient(
                 namespace);
     }
     //@Ignore

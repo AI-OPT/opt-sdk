@@ -21,13 +21,13 @@ import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
  * 
  * @author gucl
  */
-public final class CCSFactory {
+public final class CCSClientFactory {
 
-    private static final Logger LOG = LogManager.getLogger(CCSFactory.class);
+    private static final Logger LOG = LogManager.getLogger(CCSClientFactory.class);
     
     private static Map<String, IConfigClient> baseMap = new ConcurrentHashMap<String, IConfigClient>();
 
-    private CCSFactory() {
+    private CCSClientFactory() {
 
     }
 
