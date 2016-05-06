@@ -12,10 +12,10 @@ import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 
-public final class MCSFactory {
+public final class MCSClientFactory {
 	private static Map<String, ICacheClient> baseMap = new ConcurrentHashMap<String, ICacheClient>();
 
-    private MCSFactory() {
+    private MCSClientFactory() {
 
     }
 
