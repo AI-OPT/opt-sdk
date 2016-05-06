@@ -129,11 +129,6 @@ publishing {
                             delegate.artifactId("HikariCP")
                             delegate.version("2.4.0")
                         }
-                        compile "com.ai:ipaas-uac:${ipaasUacVersion}"
-					    compile "com.ai:ipaas-ccs:${ipaasCcsVersion}"
-					    compile "com.ai:ipaas-mcs:${ipaasMcsVersion}"
-					    compile "com.ai:ipaas-dss:${ipaasDssVersion}"
-					    compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
                         delegate.dependency {
                             delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-uac")
