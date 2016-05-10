@@ -6,7 +6,10 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.7
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
+configurations.all { 
+	    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+ 	}
 ext {
     optBaseVersion="1.0.1-SNAPSHOT"
     optPaaSZookeeperVersion="0.2.2-SNAPSHOT"
