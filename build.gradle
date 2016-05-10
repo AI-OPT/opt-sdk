@@ -19,7 +19,7 @@ ext {
     ipaasCcsVersion="0.3";
     ipaasMcsVersion="0.2.3";
     ipaasDssVersion="0.3";
-    ipaasMdsVersion="0.2.9";
+    ipaasMdsVersion="0.3";
 
     appName="opt-sdk"
     moduleVersion='2.0-SNAPSHOT'
