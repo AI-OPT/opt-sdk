@@ -46,7 +46,23 @@ public final class ComponentConfigLoader {
         return INSTANCE;
 
     }
+    public static ComponentConfigLoader loadPaaSConf(Properties p) {
+    	  if (INSTANCE == null) {
+              // 多线程并发获取实例时候，避免等线程锁造成性能低下，因此在创建实例时候进行同步处理
+              synchronized (ComponentConfigLoader.class) {
+                  if (INSTANCE == null) {
+                      INSTANCE = new ComponentConfigLoader();
+                      INSTANCE.loadProp(p);
+                  }
+              }
+          }
+          return INSTANCE;
+    	
+    }
 
+    private void loadProp(Properties p) {
+    	prop=p;
+    }
     /**
      * 加载配置文件
      * 
