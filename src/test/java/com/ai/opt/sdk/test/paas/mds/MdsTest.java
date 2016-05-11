@@ -25,7 +25,7 @@ public class MdsTest {
 		IMessageSender msgSender = MDSClientFactory.getSenderClient(mdsns);
 		for(int i=0;i<5;i++){
 			int part=i%2;
-			msgSender.send("[opt-sdk-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
+			msgSender.send("[baas-bmc-topic-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
 			
 		}
 
