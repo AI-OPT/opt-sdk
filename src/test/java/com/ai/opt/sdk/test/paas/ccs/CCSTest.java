@@ -28,6 +28,7 @@ public class CCSTest {
         System.out.println("aaaaaa");
     }
 
+    @Ignore
     @Test
     public void addServiceIdPwdMap() throws ConfigException {
     	String cachesnsConfig = "{\"MCS001\":\"" + "123456"     
@@ -45,7 +46,7 @@ public class CCSTest {
                     cachesnsConfig);
         }
     }
-    //@Ignore
+    @Ignore
     @Test
     public void addMcsConfig() throws ConfigException {
         // 缓存服务主机
@@ -69,7 +70,7 @@ public class CCSTest {
                     cachesnsConfig);
         }
     }
-    //@Ignore
+    @Ignore
     @Test
     public void readMcsConfig() throws ConfigException {
     	
@@ -79,6 +80,7 @@ public class CCSTest {
     	
     }
 
+    @Ignore
     @Test
     public void addMdsConfig() throws ConfigException {
         // 
@@ -114,7 +116,7 @@ public class CCSTest {
         }
         
     }
-    
+    @Ignore
     @Test
     public void addDssConfig() throws ConfigException {
         // 缓存服务主机
@@ -138,9 +140,10 @@ public class CCSTest {
     }
 
     /**
-     * DBS配置
+     * DB配置
      * @throws ConfigException 
      */
+    @Ignore
      @Test
     public void addDbConfInfo() throws ConfigException {
         System.out.println("DBConf config ... start");
