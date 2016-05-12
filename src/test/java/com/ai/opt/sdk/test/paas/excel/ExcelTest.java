@@ -25,7 +25,7 @@ public abstract class ExcelTest {
 		employees.add(new Employee(1002, "Clark", 40, "Manager", 2450));
 		employees.add(new Employee(1003, "Scott", 30, "Analyst", 3000));
 		employees.add(new Employee(1004, "King", 50, "President", 5000));
-		String[] titles = new String[]{"工号", "姓名", "年龄", "职称", "薪资（美元）", "入职时间","出生时间"};
+		String[] titles = new String[]{"工号", "姓名", "年龄", "职称", "薪资（美元）", "入职时间","缴费充值金额（元）"};
 		String[] fieldNames = new String[]{"id", "name", "age", "job",
 				"salery", "addtime","birthtime"};
 		try {
