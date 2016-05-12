@@ -25,9 +25,9 @@ public abstract class ExcelTest {
 		employees.add(new Employee(1002, "Clark", 40, "Manager", 2450));
 		employees.add(new Employee(1003, "Scott", 30, "Analyst", 3000));
 		employees.add(new Employee(1004, "King", 50, "President", 5000));
-		String[] titles = new String[]{"工号", "姓名", "年龄", "职称", "薪资（美元）", "入职时间"};
+		String[] titles = new String[]{"工号", "姓名", "年龄", "职称", "薪资（美元）", "入职时间","出生时间"};
 		String[] fieldNames = new String[]{"id", "name", "age", "job",
-				"salery", "addtime"};
+				"salery", "addtime","birthtime"};
 		try {
 			
 			AbstractExcelHelper eh1 = JxlExcelHelper.getInstance();
@@ -52,7 +52,7 @@ public abstract class ExcelTest {
 //			List<Employee> list2 = eh2.readExcel(file2,Employee.class, fieldNames,
 //					true);
 			String filepath2="E:\\POI2003.xls";
-			eh2.writeExcel(filepath2,"员工通讯录",Employee.class, employees);
+			//eh2.writeExcel(filepath2,"员工通讯录",Employee.class, employees);
 			eh2.writeExcel(filepath2,"员工通讯录",Employee.class, employees, fieldNames, titles);
 			List<Employee> list2 = eh2.readExcel(filepath2,Employee.class, fieldNames,
 					true);
@@ -68,7 +68,7 @@ public abstract class ExcelTest {
 //			List<Employee> list3 = eh3.readExcel(file3,Employee.class, fieldNames,
 //					true);
 			String filepath3="E:\\POI2007.xlsx";
-			eh3.writeExcel(filepath3,"员工通讯录",Employee.class, employees);
+			//eh3.writeExcel(filepath3,"员工通讯录",Employee.class, employees);
 			eh3.writeExcel(filepath3,"员工通讯录",Employee.class, employees, fieldNames, titles);
 			List<Employee> list3 = eh3.readExcel(filepath3,Employee.class, fieldNames,
 					true);

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,7 +94,12 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 					// 如果属性是日期类型则将内容转换成日期对象
 					ReflectUtil.invokeSetter(target, fieldName,
 							ExcelDateUtil.parse(content));
-				} else {
+				}
+				else if(isTimestampType(clazz, fieldName)){
+					// 如果属性是日期类型则将内容转换成日期对象
+					ReflectUtil.invokeSetter(target, fieldName,
+							ExcelDateUtil.parseTimestamp(content));
+				}else {
 					Field field = clazz.getDeclaredField(fieldName);
 					ReflectUtil.invokeSetter(target, fieldName,
 							parseValueWithType(content, field.getType()));
@@ -101,6 +107,7 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 			}
 			dataModels.add(target);
 		}
+		workbook.close();
 		return dataModels;
 	}
 
@@ -155,12 +162,17 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 				if (isDateType(clazz, fieldName)) {
 					cell.setCellValue(ExcelDateUtil.format((Date) result));
 				}
+				// 如果是日期类型则进行格式化处理
+				if (isTimestampType(clazz, fieldName)) {
+					cell.setCellValue(ExcelDateUtil.format((Timestamp) result));
+				}
 			}
 		}
 		// 将数据写到磁盘上
 		FileOutputStream fos = new FileOutputStream(file);
 		try {
 			workbook.write(new FileOutputStream(file));
+			workbook.close();
 		} finally {
 			if (fos != null) {
 				fos.close(); // 不管是否有异常发生都关闭文件输出流
@@ -213,11 +225,16 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 				if (isDateType(clazz, fieldName)) {
 					cell.setCellValue(ExcelDateUtil.format((Date) result));
 				}
+				// 如果是日期类型则进行格式化处理
+				if (isTimestampType(clazz, fieldName)) {
+					cell.setCellValue(ExcelDateUtil.format((Timestamp) result));
+				}
 			}
 		}
 		// 将数据写到磁盘上
 		try {
 			workbook.write(os);
+			workbook.close();
 		} finally {
 			if (os != null) {
 				os.close(); // 不管是否有异常发生都关闭文件输出流

@@ -1,6 +1,7 @@
 package com.ai.opt.sdk.test.paas.excel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
@@ -23,9 +24,9 @@ public abstract class JxlExcelTest {
 		employees.add(new Employee(1002, "Clark", 40, "Manager", 2450));
 		employees.add(new Employee(1003, "Scott", 30, "Analyst", 3000));
 		employees.add(new Employee(1004, "King", 50, "President", 5000));
-		String[] titles = new String[]{"工号", "姓名", "年龄", "职称", "薪资（美元）", "入职时间"};
+		String[] titles = new String[]{"工号", "姓名", "年龄", "职称", "薪资（美元）", "入职时间","出生时间"};
 		String[] fieldNames = new String[]{"id", "name", "age", "job",
-				"salery", "addtime"};
+				"salery", "addtime","birthtime"};
 		try {
 			
 			AbstractExcelHelper eh1 = ExcelFactory.getJxlExcelHelper();
@@ -36,7 +37,7 @@ public abstract class JxlExcelTest {
 //					true);
 			String file1path="E:\\JXL2003-jxl2.xls";
 			//eh1.writeExcel(file1path,Employee.class, employees);
-			eh1.writeExcel(file1path,"员工通讯录",Employee.class, employees, fieldNames, titles);
+			eh1.writeExcel(file1path,"员工通讯录"+new Date().getTime(),Employee.class, employees, fieldNames, titles);
 			List<Employee> list1 = eh1.readExcel(file1path,Employee.class, fieldNames,
 					true);
 			System.out.println("-----------------JXL2003.xls-----------------");

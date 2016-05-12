@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -275,6 +276,19 @@ public abstract class AbstractExcelHelper {
 		}
 		return flag;
 	}
+	
+	protected <T> boolean isTimestampType(Class<T> clazz, String fieldName) {
+		boolean flag = false;
+		try {
+			Field field = clazz.getDeclaredField(fieldName);
+			String fieldType=field.getType().getName();
+			//Object typeObj = field.getType().newInstance();
+			flag = fieldType.equals("java.sql.Timestamp");
+		} catch (Exception e) {
+			// 把异常吞掉直接返回false
+		}
+		return flag;
+	}
 	/**
 	 * 判断属性是否为数字类型（int,long,float,double等）
 	 * @param clazz
@@ -288,7 +302,7 @@ public abstract class AbstractExcelHelper {
 		boolean flag = false;
 		try {
 			Field field = clazz.getDeclaredField(fieldName);
-			String fieldType=field.getType().toString();
+			String fieldType=field.getType().getName();
 			flag = fieldType.equals("short")||fieldType.equals("int") 
 					|| fieldType.equals("long")||fieldType.equals("float")
 					||fieldType.equals("double");

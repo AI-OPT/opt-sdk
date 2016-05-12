@@ -3,6 +3,7 @@ package com.ai.opt.sdk.components.excel.client.impl;
 import java.io.File;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,6 @@ import com.ai.opt.sdk.components.excel.util.ExcelStringUtil;
 import com.ai.opt.sdk.components.excel.util.ReflectUtil;
 
 import jxl.Cell;
-import jxl.CellView;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -96,7 +96,13 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 						// 如果属性是日期类型则将内容转换成日期对象
 						ReflectUtil.invokeSetter(target, fieldName,
 								ExcelDateUtil.parse(content));
-					} else {
+					}
+					else if(isTimestampType(clazz, fieldName)){
+						// 如果属性是日期类型则将内容转换成日期对象
+						ReflectUtil.invokeSetter(target, fieldName,
+								ExcelDateUtil.parseTimestamp(content));
+					}
+					else {
 						Field field = clazz.getDeclaredField(fieldName);
 						ReflectUtil.invokeSetter(target, fieldName,
 								parseValueWithType(content, field.getType()));
@@ -199,6 +205,10 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 					if (isDateType(clazz, fieldName)) {
 						label.setString(ExcelDateUtil.format((Date) result));
 					}
+					// 如果是日期类型则进行格式化处理
+					if (isTimestampType(clazz, fieldName)) {
+						label.setString(ExcelDateUtil.format((Timestamp) result));
+					}
 					sheet.addCell(label);
 				}
 			}
@@ -254,6 +264,10 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 					// 如果是日期类型则进行格式化处理
 					if (isDateType(clazz, fieldName)) {
 						label.setString(ExcelDateUtil.format((Date) result));
+					}
+					// 如果是日期类型则进行格式化处理
+					if (isTimestampType(clazz, fieldName)) {
+						label.setString(ExcelDateUtil.format((Timestamp) result));
 					}
 					sheet.addCell(label);
 				}
