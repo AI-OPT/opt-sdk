@@ -4,8 +4,8 @@ package com.ai.opt.sdk.components.ccs;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.components.base.ComponentConfigLoader;
 import com.ai.opt.sdk.components.mo.PaasConf;
@@ -23,7 +23,7 @@ import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
  */
 public final class CCSClientFactory {
 
-    private static final Logger LOG = LogManager.getLogger(CCSClientFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CCSClientFactory.class);
     
     private static Map<String, IConfigClient> baseMap = new ConcurrentHashMap<String, IConfigClient>();
 

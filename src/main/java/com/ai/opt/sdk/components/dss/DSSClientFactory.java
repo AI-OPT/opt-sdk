@@ -9,7 +9,6 @@ import com.ai.opt.sdk.components.util.ConfigTool;
 import com.ai.opt.sdk.exception.SDKException;
 import com.ai.paas.ipaas.dss.DSSFactory;
 import com.ai.paas.ipaas.dss.base.interfaces.IDSSClient;
-import com.ai.paas.ipaas.mcs.CacheFactory;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 
