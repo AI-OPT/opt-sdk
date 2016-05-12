@@ -145,9 +145,10 @@ public class XssfExcelHelper extends AbstractExcelHelper {
 			cell.setCellValue(titles[i]);
 			//设置样式
 			cell.setCellStyle(headCellStyle);
-			// 设置单元格宽度(15个字节宽度)
-			sheet.setDefaultColumnWidth(15);
-			//sheet.setColumnWidth(i, titles[i].length() * 1000);
+			// 设置单元格宽度(20个字节宽度)
+			//sheet.setDefaultColumnWidth(20);
+			int colWidth=titles[i].length()>4?titles[i].length():4;
+			sheet.setColumnWidth(i, colWidth*1000);
 		}
 		// 添加表格内容
 		for (int i = 0; i < dataModels.size(); i++) {
@@ -316,9 +317,10 @@ public class XssfExcelHelper extends AbstractExcelHelper {
 			cell.setCellValue(titles[i]);
 			//设置样式
 			cell.setCellStyle(headCellStyle);
-			// 设置单元格宽度(15个字节宽度)
-			sheet.setDefaultColumnWidth(15);
-			//sheet.setColumnWidth(i, titles[i].length() * 1000);
+			// 设置单元格宽度(20个字节宽度)
+			//sheet.setDefaultColumnWidth(20);
+			int colWidth=titles[i].length()>4?titles[i].length():4;
+			sheet.setColumnWidth(i, colWidth*1000);
 		}
 		// 添加表格内容
 		for (int i = 0; i < dataModels.size(); i++) {
