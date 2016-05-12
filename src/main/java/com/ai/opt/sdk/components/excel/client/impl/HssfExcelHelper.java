@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,9 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.util.ExcelDateUtil;
@@ -93,7 +96,12 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 					// 如果属性是日期类型则将内容转换成日期对象
 					ReflectUtil.invokeSetter(target, fieldName,
 							ExcelDateUtil.parse(content));
-				} else {
+				}
+				else if(isTimestampType(clazz, fieldName)){
+					// 如果属性是日期类型则将内容转换成日期对象
+					ReflectUtil.invokeSetter(target, fieldName,
+							ExcelDateUtil.parseTimestamp(content));
+				}else {
 					Field field = clazz.getDeclaredField(fieldName);
 					ReflectUtil.invokeSetter(target, fieldName,
 							parseValueWithType(content, field.getType()));
@@ -101,6 +109,7 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 			}
 			dataModels.add(target);
 		}
+		workbook.close();
 		return dataModels;
 	}
 
@@ -121,21 +130,24 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		}
 		HSSFSheet sheet = workbook.createSheet(sheetName);
 		HSSFRow headRow = sheet.createRow(0);
+		//标题单元格样式
+		HSSFCellStyle headCellStyle = buildHeadCellStyle(workbook);
+		//正文单元格样式
+		HSSFCellStyle bodyCellStyle = buildBodyCellStyle(workbook);
+		//正文数字单元格样式
+		HSSFCellStyle bodyDigitalCellStyle = buildBodyDigitalCellStyle(workbook);		
+						
+		
 		// 添加表格标题
 		for (int i = 0; i < titles.length; i++) {
 			HSSFCell cell = headRow.createCell(i);
 			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-			cell.setCellValue(titles[i]);
-			// 设置字体加粗
-			HSSFCellStyle cellStyle = workbook.createCellStyle();
-			HSSFFont font = workbook.createFont();
-			font.setBoldweight(Font.BOLDWEIGHT_BOLD);
-			cellStyle.setFont(font);
-			// 设置自动换行
-			cellStyle.setWrapText(true);
-			cell.setCellStyle(cellStyle);
-			// 设置单元格宽度
-			sheet.setColumnWidth(i, titles[i].length() * 1000);
+			cell.setCellValue(titles[i]);			
+			//设置样式
+			cell.setCellStyle(headCellStyle);
+			// 设置单元格宽度(20个字节宽度)
+			sheet.setDefaultColumnWidth(20);
+			//sheet.setColumnWidth(i, titles[i].length() * 1000);
 		}
 		// 添加表格内容
 		for (int i = 0; i < dataModels.size(); i++) {
@@ -150,10 +162,22 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 				Object result = ReflectUtil.invokeGetter(dataModels.get(i),
 						fieldName);
 				HSSFCell cell = row.createCell(j);
-				cell.setCellValue(ExcelStringUtil.toString(result));
+				cell.setCellStyle(bodyCellStyle);
+				//数值类型 居右
+				if(isDigitalType(clazz, fieldName)){
+					cell.setCellStyle(bodyDigitalCellStyle);
+				}
 				// 如果是日期类型则进行格式化处理
 				if (isDateType(clazz, fieldName)) {
 					cell.setCellValue(ExcelDateUtil.format((Date) result));
+				}
+				// 如果是日期类型则进行格式化处理
+				else if (isTimestampType(clazz, fieldName)) {
+					cell.setCellValue(ExcelDateUtil.format((Timestamp) result));
+				}
+				//其他类型  均作为字符串处理
+				else{
+					cell.setCellValue(ExcelStringUtil.toString(result));
 				}
 			}
 		}
@@ -161,6 +185,7 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		FileOutputStream fos = new FileOutputStream(file);
 		try {
 			workbook.write(new FileOutputStream(file));
+			workbook.close();
 		} finally {
 			if (fos != null) {
 				fos.close(); // 不管是否有异常发生都关闭文件输出流
@@ -179,21 +204,25 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		}
 		HSSFSheet sheet = workbook.createSheet(sheetName);
 		HSSFRow headRow = sheet.createRow(0);
+		
+		//标题单元格样式
+		HSSFCellStyle headCellStyle = buildHeadCellStyle(workbook);
+		//正文单元格样式
+		HSSFCellStyle bodyCellStyle = buildBodyCellStyle(workbook);
+		//正文数字单元格样式
+		HSSFCellStyle bodyDigitalCellStyle = buildBodyDigitalCellStyle(workbook);		
+						
+		
 		// 添加表格标题
 		for (int i = 0; i < titles.length; i++) {
 			HSSFCell cell = headRow.createCell(i);
 			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-			cell.setCellValue(titles[i]);
-			// 设置字体加粗
-			HSSFCellStyle cellStyle = workbook.createCellStyle();
-			HSSFFont font = workbook.createFont();
-			font.setBoldweight(Font.BOLDWEIGHT_BOLD);
-			cellStyle.setFont(font);
-			// 设置自动换行
-			cellStyle.setWrapText(true);
-			cell.setCellStyle(cellStyle);
-			// 设置单元格宽度
-			sheet.setColumnWidth(i, titles[i].length() * 1000);
+			cell.setCellValue(titles[i]);			
+			//设置样式
+			cell.setCellStyle(headCellStyle);
+			// 设置单元格宽度(20个字节宽度)
+			sheet.setDefaultColumnWidth(20);
+			//sheet.setColumnWidth(i, titles[i].length() * 1000);
 		}
 		// 添加表格内容
 		for (int i = 0; i < dataModels.size(); i++) {
@@ -208,16 +237,29 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 				Object result = ReflectUtil.invokeGetter(dataModels.get(i),
 						fieldName);
 				HSSFCell cell = row.createCell(j);
-				cell.setCellValue(ExcelStringUtil.toString(result));
+				cell.setCellStyle(bodyCellStyle);
+				//数值类型 居右
+				if(isDigitalType(clazz, fieldName)){
+					cell.setCellStyle(bodyDigitalCellStyle);
+				}
 				// 如果是日期类型则进行格式化处理
 				if (isDateType(clazz, fieldName)) {
 					cell.setCellValue(ExcelDateUtil.format((Date) result));
+				}
+				// 如果是日期类型则进行格式化处理
+				else if (isTimestampType(clazz, fieldName)) {
+					cell.setCellValue(ExcelDateUtil.format((Timestamp) result));
+				}
+				//其他类型  均作为字符串处理
+				else{
+					cell.setCellValue(ExcelStringUtil.toString(result));
 				}
 			}
 		}
 		// 将数据写到磁盘上
 		try {
 			workbook.write(os);
+			workbook.close();
 		} finally {
 			if (os != null) {
 				os.close(); // 不管是否有异常发生都关闭文件输出流
@@ -225,5 +267,62 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		}
 		
 	}
+	
+
+
+	private HSSFCellStyle buildBodyDigitalCellStyle(HSSFWorkbook workbook) {
+		HSSFCellStyle bodyDigitalCellStyle = workbook.createCellStyle();
+		HSSFFont bodyDigitalFont = workbook.createFont();
+		bodyDigitalFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+		bodyDigitalFont.setFontHeightInPoints((short)10);
+		bodyDigitalCellStyle.setFont(bodyDigitalFont);
+		bodyDigitalCellStyle.setWrapText(true);// 设置自动换行
+		//bodyDigitalCellStyle.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+		//bodyDigitalCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		bodyDigitalCellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);  //底边框
+		bodyDigitalCellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);  //左边框
+		bodyDigitalCellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);  //右边框
+		bodyDigitalCellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);  //顶边框
+		bodyDigitalCellStyle.setAlignment(HSSFCellStyle.ALIGN_RIGHT); //居中
+		return bodyDigitalCellStyle;
+	}
+
+
+	private HSSFCellStyle buildBodyCellStyle(HSSFWorkbook workbook) {
+		HSSFCellStyle bodyCellStyle = workbook.createCellStyle();
+		HSSFFont bodyFont = workbook.createFont();
+		bodyFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+		bodyFont.setFontHeightInPoints((short)10);
+		bodyCellStyle.setFont(bodyFont);
+		bodyCellStyle.setWrapText(true);// 设置自动换行
+		//bodyCellStyle.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+		//bodyCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		bodyCellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);  //底边框
+		bodyCellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);  //左边框
+		bodyCellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);  //右边框
+		bodyCellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);  //顶边框
+		bodyCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); //居中
+		return bodyCellStyle;
+	}
+
+
+	private HSSFCellStyle buildHeadCellStyle(HSSFWorkbook workbook) {
+		//标题单元格样式
+		HSSFCellStyle headCellStyle = workbook.createCellStyle();
+		HSSFFont headFont = workbook.createFont();
+		headFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		headFont.setFontHeightInPoints((short)10);
+		headCellStyle.setFont(headFont);
+		headCellStyle.setWrapText(true);// 设置自动换行
+		headCellStyle.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+		headCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		headCellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);  //底边框
+		headCellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);  //左边框
+		headCellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);  //右边框
+		headCellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);  //顶边框
+		headCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); //居中
+		return headCellStyle;
+	}
+
 
 }

@@ -3,6 +3,7 @@ package com.ai.opt.sdk.components.excel.client.impl;
 import java.io.File;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,6 @@ import com.ai.opt.sdk.components.excel.util.ExcelStringUtil;
 import com.ai.opt.sdk.components.excel.util.ReflectUtil;
 
 import jxl.Cell;
-import jxl.CellView;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -27,6 +27,7 @@ import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 /**
  * 基于JXL实现的Excel 2003工具类
@@ -96,7 +97,13 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 						// 如果属性是日期类型则将内容转换成日期对象
 						ReflectUtil.invokeSetter(target, fieldName,
 								ExcelDateUtil.parse(content));
-					} else {
+					}
+					else if(isTimestampType(clazz, fieldName)){
+						// 如果属性是日期类型则将内容转换成日期对象
+						ReflectUtil.invokeSetter(target, fieldName,
+								ExcelDateUtil.parseTimestamp(content));
+					}
+					else {
 						Field field = clazz.getDeclaredField(fieldName);
 						ReflectUtil.invokeSetter(target, fieldName,
 								parseValueWithType(content, field.getType()));
@@ -130,31 +137,13 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 				sheetName = ExcelDateUtil.format(new Date(), "yyyyMMddHHmmssSS");
 			}
 			WritableSheet sheet = workbook.createSheet(sheetName, sheetNo);
-			//标题字体
-			WritableFont headwfont =  new WritableFont(WritableFont.ARIAL,10,WritableFont.BOLD,false,UnderlineStyle.NO_UNDERLINE,Colour.BLACK);  
-			//正文字体
-			WritableFont bodywfont =  new WritableFont(WritableFont.ARIAL,10,WritableFont.NO_BOLD,false,UnderlineStyle.NO_UNDERLINE,Colour.BLACK);  
+			
 			//标题样式
-			WritableCellFormat headFormat = new WritableCellFormat(headwfont);
+			WritableCellFormat headFormat = buildHeadCellFormat();
 			//正文样式
-			WritableCellFormat bodyFormat = new WritableCellFormat(bodywfont);
+			WritableCellFormat bodyFormat = buildBodyCellFormat();
 			//正文数字样式
-			WritableCellFormat bodyDigitalFormat = new WritableCellFormat(bodywfont);
-			
-			
-			headFormat.setAlignment(Alignment.CENTRE);
-			headFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
-			headFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
-			headFormat.setBackground(Colour.ICE_BLUE);
-			
-			bodyFormat.setAlignment(Alignment.CENTRE);
-			bodyFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
-			bodyFormat.setBackground(Colour.WHITE);
-			
-			bodyDigitalFormat.setAlignment(Alignment.RIGHT);
-			bodyDigitalFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
-			bodyDigitalFormat.setBackground(Colour.WHITE);
-			
+			WritableCellFormat bodyDigitalFormat = buildBodyDigitalFormat();
 			
 			// 添加表格标题
 			for (int i = 0; i < titles.length; i++) {
@@ -199,6 +188,10 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 					if (isDateType(clazz, fieldName)) {
 						label.setString(ExcelDateUtil.format((Date) result));
 					}
+					// 如果是日期类型则进行格式化处理
+					if (isTimestampType(clazz, fieldName)) {
+						label.setString(ExcelDateUtil.format((Timestamp) result));
+					}
 					sheet.addCell(label);
 				}
 			}
@@ -208,6 +201,43 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 				workbook.close();
 			}
 		}
+	}
+
+
+	private WritableCellFormat buildBodyDigitalFormat() throws WriteException {
+		//正文数字字体
+		WritableFont bodyDigitalwfont =  new WritableFont(WritableFont.ARIAL,10,WritableFont.NO_BOLD,false,UnderlineStyle.NO_UNDERLINE,Colour.BLACK);  
+		//正文数字样式
+		WritableCellFormat bodyDigitalFormat = new WritableCellFormat(bodyDigitalwfont);
+		bodyDigitalFormat.setAlignment(Alignment.RIGHT);
+		bodyDigitalFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
+		bodyDigitalFormat.setBackground(Colour.WHITE);
+		return bodyDigitalFormat;
+	}
+
+
+	private WritableCellFormat buildBodyCellFormat() throws WriteException {
+		//正文字体
+		WritableFont bodywfont =  new WritableFont(WritableFont.ARIAL,10,WritableFont.NO_BOLD,false,UnderlineStyle.NO_UNDERLINE,Colour.BLACK);  
+		//正文样式
+		WritableCellFormat bodyFormat = new WritableCellFormat(bodywfont);
+		bodyFormat.setAlignment(Alignment.CENTRE);
+		bodyFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
+		bodyFormat.setBackground(Colour.WHITE);
+		return bodyFormat;
+	}
+
+
+	private WritableCellFormat buildHeadCellFormat() throws WriteException {
+		//标题字体
+		WritableFont headwfont =  new WritableFont(WritableFont.ARIAL,10,WritableFont.BOLD,false,UnderlineStyle.NO_UNDERLINE,Colour.BLACK);  
+		//标题样式
+		WritableCellFormat headFormat = new WritableCellFormat(headwfont);
+		headFormat.setAlignment(Alignment.CENTRE);
+		headFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+		headFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
+		headFormat.setBackground(Colour.ICE_BLUE);
+		return headFormat;
 	}
 
 
@@ -224,7 +254,15 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 				sheetName = ExcelDateUtil.format(new Date(), "yyyyMMddHHmmssSS");
 			}
 			WritableSheet sheet = workbook.createSheet(sheetName, sheetNo);
-			sheet.getSettings().setShowGridLines(true);
+			//sheet.getSettings().setShowGridLines(true);
+			
+			//标题样式
+			WritableCellFormat headFormat = buildHeadCellFormat();
+			//正文样式
+			WritableCellFormat bodyFormat = buildBodyCellFormat();
+			//正文数字样式
+			WritableCellFormat bodyDigitalFormat = buildBodyDigitalFormat();
+			
 			// 添加表格标题
 			for (int i = 0; i < titles.length; i++) {
 				// 设置字体加粗
@@ -233,10 +271,15 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 				WritableCellFormat format = new WritableCellFormat(font);
 				// 设置自动换行
 				format.setWrap(true);
-				Label label = new Label(i, 0, titles[i], format);
+				Label label = new Label(i, 0, titles[i], headFormat);
 				sheet.addCell(label);
 				// 设置单元格宽度
-				sheet.setColumnView(i, titles[i].length() + 10);
+				sheet.setColumnView(i, titles[i].length() + 15);
+				
+				/*CellView cellView = new CellView();  
+			    cellView.setAutosize(true); //设置自动大小
+			    cellView.setSize(18);
+			    sheet.setColumnView(i, cellView);*/
 			}
 			// 添加表格内容
 			for (int i = 0; i < dataModels.size(); i++) {
@@ -249,11 +292,23 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 						continue; // 过滤serialVersionUID属性
 					}
 					Object result = ReflectUtil.invokeGetter(target, fieldName);
-					Label label = new Label(j, i + 1,
-							ExcelStringUtil.toString(result));
+					Label label =null;
+					if(isDigitalType(clazz, fieldName)){
+						label=new Label(j, i + 1,
+								ExcelStringUtil.toString(result),bodyDigitalFormat);
+					}
+					else{
+						label = new Label(j, i + 1,
+								ExcelStringUtil.toString(result),bodyFormat);
+					}
+					
 					// 如果是日期类型则进行格式化处理
 					if (isDateType(clazz, fieldName)) {
 						label.setString(ExcelDateUtil.format((Date) result));
+					}
+					// 如果是日期类型则进行格式化处理
+					if (isTimestampType(clazz, fieldName)) {
+						label.setString(ExcelDateUtil.format((Timestamp) result));
 					}
 					sheet.addCell(label);
 				}

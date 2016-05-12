@@ -1,9 +1,16 @@
 package com.ai.opt.sdk.components.excel.util;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ai.opt.base.exception.SystemException;
  
 /**
  * 日期工具类：用于日期相关的处理
@@ -12,6 +19,7 @@ import java.util.Date;
  * 
  */
 public class ExcelDateUtil {
+	private static final Logger LOG = LoggerFactory.getLogger(ExcelDateUtil.class);
     // Grace style
     public static final String PATTERN_GRACE = "yyyy/MM/dd HH:mm:ss";
     public static final String PATTERN_GRACE_NORMAL = "yyyy/MM/dd HH:mm";
@@ -55,6 +63,19 @@ public class ExcelDateUtil {
         }
         return null;
     }
+    public static Timestamp parseTimestamp(String str) {
+        return parseTimestamp(str, PATTERN_CLASSICAL);
+    }
+    public static Timestamp parseTimestamp(String str, String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        Timestamp ts = null;
+        try {
+        	ts = new Timestamp(format.parse(str).getTime());
+        } catch (ParseException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return ts;
+    }
  
     /**
      * 根据默认格式将日期转格式化成字符串
@@ -64,6 +85,10 @@ public class ExcelDateUtil {
      * @return 返回格式化后的字符串
      */
     public static String format(Date date) {
+        return format(date, PATTERN_CLASSICAL);
+    }
+    
+    public static String format(Timestamp date) {
         return format(date, PATTERN_CLASSICAL);
     }
  
@@ -516,6 +541,42 @@ public class ExcelDateUtil {
         System.out.println(getFirstWorkday());
         System.out.println(getLastWorkday());
         System.out.println(getWeekdayDesc(null));
+    }
+    
+    /**
+     * 获取当前时间戳
+     * 
+     * @return
+     * @author zhangchao
+     */
+    public static long getCurrentTimeMillis() {
+        Timestamp time = getSysDate();
+        return time.getTime();
+    }
+
+    public static String getCurrentTime() throws SystemException {
+        return getDateString(PATTERN_CLASSICAL);
+    }
+
+    public static Timestamp getSysDate() {
+        return new Timestamp(System.currentTimeMillis());
+    }
+    
+    public static String getDateString(String pattern) {
+        Timestamp time = getSysDate();
+        DateFormat dfmt = new SimpleDateFormat(pattern);
+        java.util.Date date = time;
+        return dfmt.format(date);
+    }
+    public static String getDateString(Timestamp time, String pattern) {
+        DateFormat dfmt = new SimpleDateFormat(pattern);
+        Date date = time;
+        return date != null ? dfmt.format(date) : "";
+    }
+    
+    public static String getDateString(Date date, String pattern) {
+        SimpleDateFormat sdfmt = new SimpleDateFormat(pattern);
+        return date != null ? sdfmt.format(date) : "";
     }
  
 }

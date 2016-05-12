@@ -1,5 +1,6 @@
 package com.ai.opt.sdk.test.paas.excel;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Employee {
@@ -9,6 +10,7 @@ public class Employee {
 	private String job;
 	private double salery;
 	private Date addtime;
+	private Timestamp birthtime;
 
 	public Employee() {
 
@@ -22,6 +24,7 @@ public class Employee {
 		this.job = job;
 		this.salery = salery;
 		this.addtime = new Date();
+		this.birthtime=new Timestamp(new Date().getTime());
 	}
 
 	public long getId() {
@@ -42,6 +45,16 @@ public class Employee {
 
 	public int getAge() {
 		return age;
+	}
+	
+	
+
+	public Timestamp getBirthtime() {
+		return birthtime;
+	}
+
+	public void setBirthtime(Timestamp birthtime) {
+		this.birthtime = birthtime;
 	}
 
 	public void setAge(int age) {
@@ -76,7 +89,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", age=" + age
 				+ ", job=" + job + ", salery=" + salery + ", addtime="
-				+ addtime + "]";
+				+ addtime  + birthtime +"]";
 	}
 
 }

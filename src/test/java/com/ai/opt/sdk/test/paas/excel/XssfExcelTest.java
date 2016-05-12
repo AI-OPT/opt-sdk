@@ -14,7 +14,7 @@ import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
  * @author gucl
  * @param <T> 操作数据类型
  */
-public abstract class JxlExcelTest {
+public abstract class XssfExcelTest {
 	
 
 	public static void main(String[] args) {
@@ -29,18 +29,18 @@ public abstract class JxlExcelTest {
 				"salery", "addtime","birthtime"};
 		try {
 			
-			AbstractExcelHelper eh1 = ExcelFactory.getJxlExcelHelper();
+			AbstractExcelHelper eh1 = ExcelFactory.getXssfExcelHelper();
 //			File file1 = new File("E:\\JXL2003.xls");
 //			eh1.writeExcel(file1,Employee.class, employees);
 //			eh1.writeExcel(file1,Employee.class, employees, fieldNames, titles);
 //			List<Employee> list1 = eh1.readExcel(file1,Employee.class, fieldNames,
 //					true);
-			String file1path="E:\\JXL2003-jxl2.xls";
+			String file1path="E:\\POI2007-test222.xlsx";
 			//eh1.writeExcel(file1path,Employee.class, employees);
 			eh1.writeExcel(file1path,"员工通讯录"+new Date().getTime(),Employee.class, employees, fieldNames, titles);
 			List<Employee> list1 = eh1.readExcel(file1path,Employee.class, fieldNames,
 					true);
-			System.out.println("-----------------JXL2003.xls-----------------");
+			System.out.println("-----------------POI2007-test.xlsx-----------------");
 			for (Employee user : list1) {
 				System.out.println(user);
 			}
