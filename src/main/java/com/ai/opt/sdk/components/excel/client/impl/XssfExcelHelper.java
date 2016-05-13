@@ -209,6 +209,7 @@ public class XssfExcelHelper extends AbstractExcelHelper {
 		bodyDigitalCellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);  //右边框
 		bodyDigitalCellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);  //顶边框
 		bodyDigitalCellStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT); //居中
+		bodyDigitalCellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		return bodyDigitalCellStyle;
 	}
 
@@ -227,6 +228,7 @@ public class XssfExcelHelper extends AbstractExcelHelper {
 		bodyCellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);  //右边框
 		bodyCellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);  //顶边框
 		bodyCellStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER); //居中
+		bodyCellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		return bodyCellStyle;
 	}
 
@@ -246,6 +248,7 @@ public class XssfExcelHelper extends AbstractExcelHelper {
 		headCellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);  //右边框
 		headCellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);  //顶边框
 		headCellStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER); //居中
+		headCellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		return headCellStyle;
 	}
 

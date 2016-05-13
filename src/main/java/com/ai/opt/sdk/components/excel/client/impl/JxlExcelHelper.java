@@ -195,6 +195,7 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 					sheet.addCell(label);
 				}
 			}
+			
 		} finally {
 			if (workbook != null) {
 				workbook.write();
@@ -210,6 +211,7 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 		//正文数字样式
 		WritableCellFormat bodyDigitalFormat = new WritableCellFormat(bodyDigitalwfont);
 		bodyDigitalFormat.setAlignment(Alignment.RIGHT);
+		bodyDigitalFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 		bodyDigitalFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
 		bodyDigitalFormat.setBackground(Colour.WHITE);
 		return bodyDigitalFormat;
@@ -222,6 +224,7 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 		//正文样式
 		WritableCellFormat bodyFormat = new WritableCellFormat(bodywfont);
 		bodyFormat.setAlignment(Alignment.CENTRE);
+		bodyFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 		bodyFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
 		bodyFormat.setBackground(Colour.WHITE);
 		return bodyFormat;
@@ -234,6 +237,7 @@ public class JxlExcelHelper extends AbstractExcelHelper {
 		//标题样式
 		WritableCellFormat headFormat = new WritableCellFormat(headwfont);
 		headFormat.setAlignment(Alignment.CENTRE);
+		headFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 		headFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 		headFormat.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.DARK_BLUE);
 		headFormat.setBackground(Colour.ICE_BLUE);
