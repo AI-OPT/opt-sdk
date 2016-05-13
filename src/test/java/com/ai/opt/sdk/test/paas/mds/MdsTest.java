@@ -5,17 +5,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.ai.opt.sdk.appserver.DubboServiceStart;
-import com.ai.opt.sdk.components.base.ComponentConfigLoader;
 import com.ai.opt.sdk.components.mds.MDSClientFactory;
-import com.ai.opt.sdk.components.mo.PaasConf;
 import com.ai.paas.ipaas.mds.IMessageConsumer;
 import com.ai.paas.ipaas.mds.IMessageProcessor;
 import com.ai.paas.ipaas.mds.IMessageSender;
 import com.ai.paas.ipaas.mds.IMsgProcessorHandler;
-import com.ai.paas.ipaas.mds.MsgConsumerFactory;
-import com.ai.paas.ipaas.mds.MsgSenderFactory;
-import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 
 public class MdsTest {
 
@@ -25,7 +19,7 @@ public class MdsTest {
 		IMessageSender msgSender = MDSClientFactory.getSenderClient(mdsns);
 		for(int i=0;i<5;i++){
 			int part=i%2;
-			msgSender.send("[baas-bmc-topic-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
+			msgSender.send("[test-baas-bmc-topic-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
 			
 		}
 

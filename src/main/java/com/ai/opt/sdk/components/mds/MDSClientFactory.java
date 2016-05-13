@@ -29,7 +29,6 @@ public final class MDSClientFactory {
         }
         String mdsId = ConfigTool.getMDSId(mdsns);
         String mdsPwd = ConfigTool.getServicePwd(mdsId);
-        String topic=ConfigTool.getMDSTopic(mdsId);
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), mdsPwd, mdsId);
@@ -37,7 +36,7 @@ public final class MDSClientFactory {
         IMessageSender client;
         try {
         	if (!sendMap.containsKey(mdsId)) {
-        		client = MsgSenderFactory.getClient(authDescriptor, topic);
+        		client = MsgSenderFactory.getClient(authDescriptor);
     			sendMap.put(mdsId, client);
     		}
         	else{
@@ -55,7 +54,6 @@ public final class MDSClientFactory {
         }
         String mdsId = ConfigTool.getMDSId(mdsns);
         String mdsPwd = ConfigTool.getServicePwd(mdsId);
-        String topic=ConfigTool.getMDSTopic(mdsId);
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), mdsPwd, mdsId);
@@ -63,7 +61,7 @@ public final class MDSClientFactory {
         IMessageConsumer client;
         try {
         	if (!recvMap.containsKey(mdsId)) {
-        		client = MsgConsumerFactory.getClient(authDescriptor, topic,msgProcessorHandler);
+        		client = MsgConsumerFactory.getClient(authDescriptor, msgProcessorHandler);
         		recvMap.put(mdsId, client);
     		}
         	else{
