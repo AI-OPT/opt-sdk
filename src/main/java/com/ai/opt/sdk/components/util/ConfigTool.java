@@ -56,6 +56,7 @@ public final class ConfigTool {
             throw new SDKException("获取缓存命名空间对应的服务ID错误", e);
         }
     }
+
     public static final String getDSSId(String dssns) {
         try {
             if (StringUtil.isBlank(dssns)) {
@@ -76,8 +77,31 @@ public final class ConfigTool {
             throw new SDKException("获取文档存储命名空间对应的服务ID错误", e);
         }
     }
+
+    public static final String getSESId(String sesns) {
+        try {
+            if (StringUtil.isBlank(sesns)) {
+                throw new SDKException("命名空间为空，无法获取搜索服务服务ID");
+            }
+            String conf = CCSClientFactory.getDefaultConfigClient().get(
+                    SDKConstants.PAAS_SESNS_SES_MAPPED_PATH);
+            if (StringUtil.isBlank(conf)) {
+                throw new SDKException("获取不到文档存储应用场景对应的CCS服务ID，请检查默认配置服务中的相关配置");
+            }
+            JSONObject data = JSON.parseObject(conf);
+            String dssId = data.getString(sesns);
+            if (StringUtil.isBlank(dssId)) {
+                throw new SDKException("从默认配置服务中无法获取搜索服务命名空间[" + sesns + "]对应的SES服务ID");
+            }
+            return dssId;
+        } catch (ConfigException e) {
+            throw new SDKException("获取搜索服务命名空间对应的SES服务ID错误", e);
+        }
+    }
+
     /**
      * 获取业务场景对应的MDS ID
+     * 
      * @param mdsns
      * @return
      * @author gucl
@@ -104,7 +128,7 @@ public final class ConfigTool {
             throw new SDKException("获取消息命名空间对应的服务ID错误", e);
         }
     }
-    
+
     public static final String getMDSTopic(String mdsId) {
         try {
             if (StringUtil.isBlank(mdsId)) {
@@ -131,8 +155,8 @@ public final class ConfigTool {
         try {
             data = CCSClientFactory.getDefaultConfigClient().get(SDKConstants.DB_CONF_PATH);
         } catch (ConfigException e) {
-            throw new SDKException("get database conf error from path["
-                    + SDKConstants.DB_CONF_PATH + "]", e);
+            throw new SDKException("get database conf error from path[" + SDKConstants.DB_CONF_PATH
+                    + "]", e);
         }
         if (StringUtil.isBlank(data)) {
             throw new SDKException("cann't get database conf from path["
