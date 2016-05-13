@@ -19,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.util.ExcelDateUtil;
@@ -286,6 +287,7 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		bodyDigitalCellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);  //右边框
 		bodyDigitalCellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);  //顶边框
 		bodyDigitalCellStyle.setAlignment(HSSFCellStyle.ALIGN_RIGHT); //居中
+		bodyDigitalCellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		return bodyDigitalCellStyle;
 	}
 
@@ -304,6 +306,7 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		bodyCellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);  //右边框
 		bodyCellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);  //顶边框
 		bodyCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); //居中
+		bodyCellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		return bodyCellStyle;
 	}
 
@@ -323,6 +326,7 @@ public class HssfExcelHelper extends AbstractExcelHelper {
 		headCellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);  //右边框
 		headCellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);  //顶边框
 		headCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); //居中
+		headCellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		return headCellStyle;
 	}
 
