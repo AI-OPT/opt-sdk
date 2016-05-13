@@ -7,7 +7,7 @@ import com.ai.opt.sdk.components.excel.client.impl.XssfExcelHelper;
 
 public class ExcelFactory {
 	/**
-	 * Excel2003操作工具类--JXL
+	 * Excel2003 .xls文件操作工具类--JXL 
 	 * @return
 	 * @author gucl
 	 */
@@ -15,7 +15,7 @@ public class ExcelFactory {
 		return JxlExcelHelper.getInstance();
 	}
 	/**
-	 * Excel2003操作工具类--POI
+	 * Excel2003 .xls文件操作工具类--POI
 	 * @return
 	 * @author gucl
 	 */
@@ -23,7 +23,7 @@ public class ExcelFactory {
 		return HssfExcelHelper.getInstance();
 	}
 	/**
-	 * Excel2007操作工具类--POI
+	 * Excel2007 .xlsx文件操作工具类--POI
 	 * @return
 	 * @author gucl
 	 */
