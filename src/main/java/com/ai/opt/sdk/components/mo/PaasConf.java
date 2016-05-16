@@ -2,7 +2,7 @@ package com.ai.opt.sdk.components.mo;
 
 
 import com.ai.opt.sdk.exception.SDKException;
-import com.alibaba.dubbo.common.utils.StringUtils;
+import com.ai.opt.sdk.util.StringUtil;
 
 public class PaasConf {
     // 认证地址
@@ -22,7 +22,7 @@ public class PaasConf {
     }
 
     public void setAuthUrl(String authUrl) {
-        if (StringUtils.isBlank(authUrl)) {
+        if (StringUtil.isBlank(authUrl)) {
             throw new SDKException("认证地址为空，请确认是否在paas-conf.properties中是否配置[paas.auth.url]");
         }
         this.authUrl = authUrl;
@@ -33,7 +33,7 @@ public class PaasConf {
     }
 
     public void setPid(String pid) {
-        if (StringUtils.isBlank(pid)) {
+        if (StringUtil.isBlank(pid)) {
             throw new SDKException("config pid is null");
         }
         this.pid = pid;
@@ -44,7 +44,7 @@ public class PaasConf {
     }
 
     public void setCcsPassword(String ccsPassword) {
-        if (StringUtils.isBlank(ccsPassword)) {
+        if (StringUtil.isBlank(ccsPassword)) {
             throw new SDKException("config service passpord is null");
         }
         this.ccsPassword = ccsPassword;
@@ -55,7 +55,7 @@ public class PaasConf {
     }
 
     public void setCcsServiceId(String ccsServiceId) {
-        if (StringUtils.isBlank(ccsServiceId)) {
+        if (StringUtil.isBlank(ccsServiceId)) {
             throw new SDKException("config service Id is null");
         }
         this.ccsServiceId = ccsServiceId;
