@@ -1,4 +1,4 @@
-package com.ai.opt.sdk.test.paas.idps;
+package com.ai.opt.sdk.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
