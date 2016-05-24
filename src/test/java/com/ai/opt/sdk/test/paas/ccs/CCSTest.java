@@ -138,6 +138,28 @@ public class CCSTest {
                     dssnsConfig);
         }
     }
+    @Ignore
+    @Test
+    public void addIdpsConfig() throws ConfigException {
+        // 缓存服务主机
+        String idpsId = "IDPS001";
+        // 缓存空间
+        String idpsnsConfig = "{\"slp-mall-web-idps\":\"" + idpsId
+//                + "\",\"slp-mall-web-idps2\":\"" + idpsId
+//                + "\",\"baas-omc-dss\":\"" + idpsId
+                + "\",\"slp-mall-web-idps2\":\"" + idpsId + "\"}";
+        
+        
+
+        // 缓存空间配置
+        if (!client.exists(SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH))
+            client.add(SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH,
+                    idpsnsConfig);
+        else {
+            client.modify(SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH,
+                    idpsnsConfig);
+        }
+    }
 
     /**
      * DB配置

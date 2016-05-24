@@ -21,6 +21,7 @@ ext {
     ipaasDssVersion="0.3";
     ipaasMdsVersion="0.3";
     ipaasSesVersion="0.2.2";
+    ipaasIdpsVersion="0.3";
 
     appName="opt-sdk"
     moduleVersion='2.0-SNAPSHOT'
@@ -41,6 +42,7 @@ dependencies {
     compile "com.ai:ipaas-dss:${ipaasDssVersion}"
     compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
     compile "com.ai:ipaas-ses:${ipaasSesVersion}"
+    compile "com.ai:ipaas-idps:${ipaasIdpsVersion}"
     
     compile "com.ai.opt:opt-base:${optBaseVersion}"
     compile "javax.validation:validation-api:1.0.0.GA"

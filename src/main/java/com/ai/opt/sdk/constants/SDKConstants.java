@@ -26,6 +26,10 @@ public final class SDKConstants {
     // 配置某种场景下用哪个文档存储服务ID
     // {"com.ai.opt.xxx.xxx":"DSS001","com.ai.opt.xxx.yyy":"DSS002","com.ai.opt.xxx.zzz":"DSS003"}
     public static final String PAAS_DSSNS_DSS_MAPPED_PATH = "/com/ai/opt/paas-dssns-dss-mapped";
+    
+    // 配置某种场景下用哪个图片服务ID
+    // {"com.ai.opt.xxx.xxx":"IDPS001","com.ai.opt.xxx.yyy":"IDPS002","com.ai.opt.xxx.zzz":"IDPS003"}
+    public static final String PAAS_IDPSNS_IDPS_MAPPED_PATH = "/com/ai/opt/paas-idpsns-idps-mapped";
 
     // 配置某种场景下用哪个搜索服务ID
     // {"com.ai.opt.xxx.xxx":"SES001","com.ai.opt.xxx.yyy":"SES002","com.ai.opt.xxx.zzz":"SES003"}

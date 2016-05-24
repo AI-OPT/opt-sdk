@@ -128,6 +128,27 @@ public final class ConfigTool {
             throw new SDKException("获取消息命名空间对应的服务ID错误", e);
         }
     }
+    
+    public static final String getIDPSId(String idpsns) {
+        try {
+            if (StringUtil.isBlank(idpsns)) {
+                throw new SDKException("命名空间为空，无法获取图片服务ID");
+            }
+            String conf = CCSClientFactory.getDefaultConfigClient().get(
+                    SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH);
+            if (StringUtil.isBlank(conf)) {
+                throw new SDKException("获取不到图片应用场景对应的CCS服务ID，请检查默认配置服务中的相关配置");
+            }
+            JSONObject data = JSON.parseObject(conf);
+            String dssId = data.getString(idpsns);
+            if (StringUtil.isBlank(dssId)) {
+                throw new SDKException("从默认配置服务中无法获取图片命名空间[" + idpsns + "]对应的IDPS服务ID");
+            }
+            return dssId;
+        } catch (ConfigException e) {
+            throw new SDKException("获取图片命名空间对应的服务ID错误", e);
+        }
+    }
 
     public static final String getMDSTopic(String mdsId) {
         try {
