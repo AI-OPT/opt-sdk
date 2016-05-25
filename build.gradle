@@ -163,6 +163,11 @@ publishing {
                             delegate.version("${ipaasSesVersion}")
                         }
                         delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-idps")
+                            delegate.version("${ipaasIdpsVersion}")
+                        }
+                        delegate.dependency {
                             delegate.groupId("org.springframework")
                             delegate.artifactId("spring-context")
                             delegate.version("4.1.7.RELEASE")
