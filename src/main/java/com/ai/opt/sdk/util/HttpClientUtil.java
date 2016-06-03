@@ -131,7 +131,7 @@ public class HttpClientUtil {
         return buffer.toString();
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    /*public static void main(String[] args) throws IOException, URISyntaxException {
 
 //        String result = HttpClientUtil.sendPostRequest(
 //                "http://10.1.228.222:15101/serviceAgent/rest/ipaas/dubbo-testA/dubbo-test/testServiceMethod", "{\"count\":1,\"SrcSysCode\":\"1005\"}");
@@ -155,5 +155,5 @@ public class HttpClientUtil {
 //        System.out.println("++++++++++++  " + result);
 
 
-    }
+    }*/
 }
