@@ -4,13 +4,13 @@ package com.ai.opt.sdk.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -36,8 +36,10 @@ public class HttpClientUtil {
             URISyntaxException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(new URL(url).toURI());
-        for (Map.Entry<String, String> entry : header.entrySet()) {
-            httpPost.setHeader(entry.getKey(), entry.getValue());
+        if(header!=null){
+        	for (Map.Entry<String, String> entry : header.entrySet()) {
+        		httpPost.setHeader(entry.getKey(), entry.getValue());
+        	}        	
         }
         StringEntity dataEntity = new StringEntity(data, ContentType.APPLICATION_JSON);
         httpPost.setEntity(dataEntity);
@@ -97,34 +99,52 @@ public class HttpClientUtil {
      * @return 远程响应结果
      */
     public static String sendGet(String url, Map<String, String> parameters) {
+    	return sendGet(url,parameters,null);
+    }
+    
+    public static String sendGet(String url, Map<String, String> parameters, Map<String, String> header) {
         StringBuffer buffer = new StringBuffer();// 返回的结果
         BufferedReader in = null;// 读取响应输入流
         StringBuffer sb = new StringBuffer();// 存储参数
         String params = "";// 编码之后的参数
+        String full_url = url;
         try {
-            // 编码请求参数
-            if (parameters.size() == 1) {
-                for (String name : parameters.keySet()) {
-                    sb.append(name).append("=")
-                            .append(java.net.URLEncoder.encode(parameters.get(name), "UTF-8"));
-                }
-                params = sb.toString();
-            } else {
-                for (String name : parameters.keySet()) {
-                    sb.append(name).append("=")
-                            .append(java.net.URLEncoder.encode(parameters.get(name), "UTF-8"))
-                            .append("&");
-                }
-                String temp_params = sb.toString();
-                params = temp_params.substring(0, temp_params.length() - 1);
-            }
-            String full_url = url + "?" + params;
+        	if(parameters!=null){
+        		// 编码请求参数
+        		if (parameters.size() == 1) {
+        			for (String name : parameters.keySet()) {
+        				sb.append(name).append("=")
+        				.append(java.net.URLEncoder.encode(parameters.get(name), "UTF-8"));
+        			}
+        			params = sb.toString();
+        		} else {
+        			for (String name : parameters.keySet()) {
+        				sb.append(name).append("=")
+        				.append(java.net.URLEncoder.encode(parameters.get(name), "UTF-8"))
+        				.append("&");
+        			}
+        			String temp_params = sb.toString();
+        			params = temp_params.substring(0, temp_params.length() - 1);
+        		}
+        		if(!url.startsWith("?")){
+        			full_url += "?" + params;        			
+        		}
+        		else{
+        			full_url += "&" + params;    
+        		}
+        	}
             logger.info("restful address : " + full_url);
             // 创建URL对象
             URL connURL = new URL(full_url);
+            
             // 打开URL连接
-            java.net.HttpURLConnection httpConn = (java.net.HttpURLConnection) connURL
+            HttpURLConnection httpConn = (HttpURLConnection) connURL
                     .openConnection();
+            if(header!=null){
+            	for (Map.Entry<String, String> entry : header.entrySet()) {
+            		httpConn.addRequestProperty(entry.getKey(), entry.getValue());
+            	}            	
+            }
             // 建立实际的连接
             httpConn.connect();
             // 定义BufferedReader输入流来读取URL的响应,并设置编码方式
@@ -147,6 +167,9 @@ public class HttpClientUtil {
         }
         return buffer.toString();
     }
+    
+    
+    
 
     /*public static void main(String[] args) throws IOException, URISyntaxException {
 
