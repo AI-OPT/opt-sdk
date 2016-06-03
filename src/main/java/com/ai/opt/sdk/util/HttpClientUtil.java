@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -22,7 +22,17 @@ import org.slf4j.LoggerFactory;
 public class HttpClientUtil {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
 
-    public static String sendPostRequest(String url, String data, Map<String, String> header) throws IOException,
+    /**
+     * 发送Post请求
+     * @param url
+     * @param data
+     * @param header
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     * @author gucl
+     */
+    public static String sendPost(String url, String data, Map<String, String> header) throws IOException,
             URISyntaxException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(new URL(url).toURI());
@@ -52,12 +62,19 @@ public class HttpClientUtil {
         }
     }
 
-    public static String send(String address, String param) {
-        logger.info("restful address : " + address);
+    /**
+     * 发送Post请求
+     * @param url
+     * @param param
+     * @return
+     * @author gucl
+     */
+    public static String sendPost(String url, String param) {
+        logger.info("restful address : " + url);
         logger.info("param : " + param);
         String result = "";
         try {
-            result = HttpClientUtil.sendPostRequest(address, param, null);
+            result = HttpClientUtil.sendPost(url, param, null);
             logger.info("result : " + result);
         } catch (IOException e) {
             String errorMessage = e.getMessage();
@@ -133,7 +150,7 @@ public class HttpClientUtil {
 
     /*public static void main(String[] args) throws IOException, URISyntaxException {
 
-//        String result = HttpClientUtil.sendPostRequest(
+//        String result = HttpClientUtil.sendPost(
 //                "http://10.1.228.222:15101/serviceAgent/rest/ipaas/dubbo-testA/dubbo-test/testServiceMethod", "{\"count\":1,\"SrcSysCode\":\"1005\"}");
 //        System.out.println("++++++++++++  " + result);
 
@@ -141,7 +158,7 @@ public class HttpClientUtil {
         headerValue.put("appkey","03379980ba661ad9ba678d386e39c1ca");
         headerValue.put("sign","12345");
 
-        String result = HttpClientUtil.sendPostRequest(
+        String result = HttpClientUtil.sendPost(
                 "http://10.1.235.246:8081/serviceAgent/http/BIS-3A-USERADD", "{\"loginname\":\"xj109\",\"orgcode\":\"4001\",\"password\":\"abcdEFG123\",\"status\":\"active\"}", headerValue);
         System.out.println("++++++++++++  " + result);
 
@@ -149,7 +166,7 @@ public class HttpClientUtil {
 //        headerValue.put("appkey","893f09f81402f23bf5b2bd5596d668b0");
 //        headerValue.put("sign","12346");
 //
-//        String result = HttpClientUtil.sendPostRequest(
+//        String result = HttpClientUtil.sendPost(
 //                "http://10.1.235.246:8081/serviceAgent/http/RUNNER-QUERYCUSTIDBYPHONENUM-001",
 //                "{\"tenantId\":\"HX\",\"custPhoneNum\":\"15930008252\"}", headerValue);
 //        System.out.println("++++++++++++  " + result);
