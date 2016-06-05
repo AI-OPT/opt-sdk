@@ -104,6 +104,9 @@ dependencies {
     //httpclient
     compile 'org.apache.httpcomponents:httpclient:4.5'
     
+    //htmlparser
+    compile 'org.htmlparser:htmlparser:2.1'
+    
 }
 
 jar {
@@ -321,6 +324,12 @@ publishing {
                             delegate.groupId("org.apache.httpcomponents")
                             delegate.artifactId("httpclient")
                             delegate.version("4.5")
+                        }
+                        //htmlparser
+                        delegate.dependency {
+                            delegate.groupId("org.htmlparser")
+                            delegate.artifactId("htmlparser")
+                            delegate.version("2.1")
                         }
                     }
                 }
