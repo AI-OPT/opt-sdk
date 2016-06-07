@@ -40,7 +40,7 @@ public final class ComponentConfigLoader {
      */
     public static ComponentConfigLoader getInstance() {
     	LOG.debug("【getInstance INSTANCE  开始。。。】");
-        if (INSTANCE == null && prop==null) {
+        if (INSTANCE == null || prop==null) {
             // 多线程并发获取实例时候，避免等线程锁造成性能低下，因此在创建实例时候进行同步处理
         	LOG.debug("【INSTANCE和prop均为空，ComponentConfigLoader需进行实例化】");
             synchronized (ComponentConfigLoader.class) {
@@ -59,7 +59,7 @@ public final class ComponentConfigLoader {
     }
     public static ComponentConfigLoader loadPaaSConf(Properties p) {
     	LOG.debug("【loadPaaSConf INSTANCE  开始。。。】");
-    	  if (INSTANCE == null && prop==null) {
+    	  if (INSTANCE == null || prop==null) {
               // 多线程并发获取实例时候，避免等线程锁造成性能低下，因此在创建实例时候进行同步处理
     		  LOG.debug("【loadPaaSConf INSTANCE和prop均为空，ComponentConfigLoader需进行实例化】");
               synchronized (ComponentConfigLoader.class) {
