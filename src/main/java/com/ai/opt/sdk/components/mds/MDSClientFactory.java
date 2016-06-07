@@ -32,15 +32,15 @@ public final class MDSClientFactory {
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), mdsPwd, mdsId);
-        
+        String keyId=authInfo.getPid()+"."+mdsId;
         IMessageSender client;
         try {
-        	if (!sendMap.containsKey(mdsId)) {
+        	if (!sendMap.containsKey(keyId)) {
         		client = MsgSenderFactory.getClient(authDescriptor);
-    			sendMap.put(mdsId, client);
+    			sendMap.put(keyId, client);
     		}
         	else{
-        		client=sendMap.get(mdsId);
+        		client=sendMap.get(keyId);
         	}
         } catch (Exception e) {
             throw new SDKException("无法获取缓存服务[" + mdsId + "]对应的客户端实例", e);

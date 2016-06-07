@@ -28,14 +28,15 @@ public final class DSSClientFactory {
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), dssPwd, dssId);
+        String keyId=authInfo.getPid()+"."+dssId;
         IDSSClient client;
         try {
-        	if (!baseMap.containsKey(dssId)) {
+        	if (!baseMap.containsKey(keyId)) {
         		client = DSSFactory.getClient(authDescriptor);
-    			baseMap.put(dssId, client);
+    			baseMap.put(keyId, client);
     		}
         	else{
-        		client=baseMap.get(dssId);
+        		client=baseMap.get(keyId);
         	}
         } catch (Exception e) {
             throw new SDKException("无法获取文档存储服务[" + dssId + "]对应的客户端实例", e);

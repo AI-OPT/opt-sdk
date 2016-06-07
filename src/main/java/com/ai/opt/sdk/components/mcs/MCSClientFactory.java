@@ -28,14 +28,15 @@ public final class MCSClientFactory {
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), mcsPwd, mcsId);
+        String keyId=authInfo.getPid()+"."+mcsId;
         ICacheClient client;
         try {
-        	if (!baseMap.containsKey(mcsId)) {
+        	if (!baseMap.containsKey(keyId)) {
         		client = CacheFactory.getClient(authDescriptor);
-    			baseMap.put(mcsId, client);
+    			baseMap.put(keyId, client);
     		}
         	else{
-        		client=baseMap.get(mcsId);
+        		client=baseMap.get(keyId);
         	}
         } catch (Exception e) {
             throw new SDKException("无法获取缓存服务[" + mcsId + "]对应的客户端实例", e);

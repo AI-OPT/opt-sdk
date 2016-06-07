@@ -13,6 +13,7 @@ import com.ai.opt.sdk.exception.SDKException;
 import com.ai.paas.ipaas.ccs.ConfigFactory;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
+import com.alibaba.fastjson.JSON;
 
 /**
  * 获取指定服务ID的配置中心技术组件服务实例<br>
@@ -32,25 +33,29 @@ public final class CCSClientFactory {
     }
 
     public static IConfigClient getDefaultConfigClient() {
+    	LOG.error("getDefaultConfigClient开始");
     	IConfigClient client = null;
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), authInfo.getCcsPassword(), authInfo.getCcsServiceId());
-        String ccsId=authInfo.getCcsServiceId();
-        
+        String keyId=authInfo.getPid()+"."+authInfo.getCcsServiceId();
+        LOG.error("authInfo="+JSON.toJSONString(authInfo));
         try {
-        	if (!baseMap.containsKey(ccsId)) {
+        	if (!baseMap.containsKey(keyId)) {
         		client = ConfigFactory.getConfigClient(authDescriptor);
-    			baseMap.put(ccsId, client);
+    			baseMap.put(keyId, client);
+    			LOG.error("从baseMap直接取数据["+keyId+"]"+JSON.toJSONString(baseMap));
     		}
         	else{
-        		client=baseMap.get(ccsId);
+        		client=baseMap.get(keyId);
+        		LOG.error("baseMap无数据["+keyId+"]"+JSON.toJSONString(baseMap));
         	}
             
         } catch (Exception e) {
             LOG.error("get paas config center error", e);
             throw new SDKException(e);
         }
+        LOG.error("getDefaultConfigClient结束");
         return client;
     }
 

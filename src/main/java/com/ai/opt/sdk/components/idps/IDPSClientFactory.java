@@ -28,14 +28,15 @@ public final class IDPSClientFactory {
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), idpsPwd, idpsId);
+        String keyId=authInfo.getPid()+"."+idpsId;
         IImageClient client;
         try {
-        	if (!baseMap.containsKey(idpsId)) {
+        	if (!baseMap.containsKey(keyId)) {
         		client = ImageClientFactory.getClient(authDescriptor);
-    			baseMap.put(idpsId, client);
+    			baseMap.put(keyId, client);
     		}
         	else{
-        		client=baseMap.get(idpsId);
+        		client=baseMap.get(keyId);
         	}
         } catch (Exception e) {
             throw new SDKException("无法获取图片服务[" + idpsId + "]对应的客户端实例", e);

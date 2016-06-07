@@ -29,13 +29,14 @@ public final class SESClientFactory {
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), sesPwd, sesId);
+        String keyId=authInfo.getPid()+"."+sesId;
         ISearchClient client;
         try {
-            if (!baseMap.containsKey(sesId)) {
+            if (!baseMap.containsKey(keyId)) {
                 client = SearchClientFactory.getSearchClient(authDescriptor);
-                baseMap.put(sesId, client);
+                baseMap.put(keyId, client);
             } else {
-                client = baseMap.get(sesId);
+                client = baseMap.get(keyId);
             }
         } catch (Exception e) {
             throw new SDKException("无法获取SES服务[" + sesId + "]对应的客户端实例", e);
