@@ -34,7 +34,7 @@ public final class ComponentConfigLoader {
      * @author zhangchao
      */
     public static ComponentConfigLoader getInstance() {
-        if (INSTANCE == null && prop==null) {
+        if (INSTANCE == null || prop==null) {
             // 多线程并发获取实例时候，避免等线程锁造成性能低下，因此在创建实例时候进行同步处理
             synchronized (ComponentConfigLoader.class) {
                 if (INSTANCE == null) {
@@ -47,7 +47,7 @@ public final class ComponentConfigLoader {
 
     }
     public static ComponentConfigLoader loadPaaSConf(Properties p) {
-    	  if (INSTANCE == null && prop==null) {
+    	  if (INSTANCE == null || prop==null) {
               // 多线程并发获取实例时候，避免等线程锁造成性能低下，因此在创建实例时候进行同步处理
               synchronized (ComponentConfigLoader.class) {
                   if (INSTANCE == null) {
