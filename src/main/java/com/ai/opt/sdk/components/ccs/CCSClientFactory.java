@@ -33,7 +33,7 @@ public final class CCSClientFactory {
     }
 
     public static IConfigClient getDefaultConfigClient() {
-    	LOG.error("getDefaultConfigClient开始");
+    	LOG.debug("getDefaultConfigClient开始");
     	IConfigClient client = null;
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
@@ -44,18 +44,18 @@ public final class CCSClientFactory {
         	if (!baseMap.containsKey(keyId)) {
         		client = ConfigFactory.getConfigClient(authDescriptor);
     			baseMap.put(keyId, client);
-    			LOG.error("从baseMap直接取数据["+keyId+"]"+JSON.toJSONString(baseMap));
+    			LOG.debug("从baseMap直接取数据["+keyId+"]"+JSON.toJSONString(baseMap));
     		}
         	else{
         		client=baseMap.get(keyId);
-        		LOG.error("baseMap无数据["+keyId+"]"+JSON.toJSONString(baseMap));
+        		LOG.debug("baseMap无数据["+keyId+"]"+JSON.toJSONString(baseMap));
         	}
             
         } catch (Exception e) {
             LOG.error("get paas config center error", e);
             throw new SDKException(e);
         }
-        LOG.error("getDefaultConfigClient结束");
+        LOG.debug("getDefaultConfigClient结束");
         return client;
     }
 
