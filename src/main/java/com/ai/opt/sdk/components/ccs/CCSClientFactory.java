@@ -39,7 +39,7 @@ public final class CCSClientFactory {
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), authInfo.getCcsPassword(), authInfo.getCcsServiceId());
         String keyId=authInfo.getPid()+"."+authInfo.getCcsServiceId();
-        LOG.error("authInfo="+JSON.toJSONString(authInfo));
+        LOG.debug("authInfo="+JSON.toJSONString(authInfo));
         try {
         	if (!baseMap.containsKey(keyId)) {
         		client = ConfigFactory.getConfigClient(authDescriptor);
