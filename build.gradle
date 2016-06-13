@@ -109,6 +109,10 @@ dependencies {
     //htmlparser
     compile 'org.htmlparser:htmlparser:2.1'
     
+    //servlet
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
+    
 }
 
 jar {
@@ -339,6 +343,17 @@ publishing {
                             delegate.groupId("org.htmlparser")
                             delegate.artifactId("htmlparser")
                             delegate.version("2.1")
+                        }
+                        //servlet
+                        delegate.dependency {
+                            delegate.groupId("javax.servlet")
+                            delegate.artifactId("javax.servlet-api")
+                            delegate.version("3.1.0")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("javax.servlet")
+                            delegate.artifactId("javax.servlet-api")
+                            delegate.version("2.3.1")
                         }
                     }
                 }

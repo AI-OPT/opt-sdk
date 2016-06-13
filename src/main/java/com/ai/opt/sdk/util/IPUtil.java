@@ -3,6 +3,8 @@ package com.ai.opt.sdk.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class IPUtil {
 	// 将127.0.0.1形式的IP地址转换成十进制整数，这里没有进行任何错误处理
 		public static long ipToLong(String strIp) {
@@ -103,4 +105,24 @@ public class IPUtil {
 		private static boolean isInner(long userIp, long begin, long end) {
 			return (userIp >= begin) && (userIp <= end);
 		}
+		
+		/**
+		 * 获取客户端真实的IP地址
+		 * @param request
+		 * @return
+		 * @author gucl
+		 */
+		public static String getRealClientIpAddr(HttpServletRequest request) { 
+		       String ip = request.getHeader("x-forwarded-for"); 
+		       if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		           ip = request.getHeader("Proxy-Client-IP"); 
+		       } 
+		       if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		           ip = request.getHeader("WL-Proxy-Client-IP"); 
+		       } 
+		       if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		           ip = request.getRemoteAddr(); 
+		       } 
+		       return ip; 
+		   }
 }
