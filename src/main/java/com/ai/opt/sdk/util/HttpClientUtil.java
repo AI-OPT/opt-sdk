@@ -19,21 +19,27 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ai.opt.sdk.dubbo.extension.DubboRestResponse;
+import com.alibaba.fastjson.JSON;
+
 public class HttpClientUtil {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
 
     /**
      * 发送Post请求
-     * @param url
-     * @param data
-     * @param header
-     * @return
+     * @param url 请求的url地址
+     * @param param 参数报文体
+     * @param header 请求头信息
+     * @return 处理结果报文
      * @throws IOException
      * @throws URISyntaxException
      * @author gucl
      */
-    public static String sendPost(String url, String data, Map<String, String> header) throws IOException,
+    public static String sendPost(String url, String param, Map<String, String> header) throws IOException,
             URISyntaxException {
+    	logger.info("restful request url:"+url);
+    	logger.info("restful request param:"+param);
+    	StringBuffer buffer = new StringBuffer();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(new URL(url).toURI());
         if(header!=null){
@@ -41,27 +47,68 @@ public class HttpClientUtil {
         		httpPost.setHeader(entry.getKey(), entry.getValue());
         	}        	
         }
-        StringEntity dataEntity = new StringEntity(data, ContentType.APPLICATION_JSON);
+        StringEntity dataEntity = new StringEntity(param, ContentType.APPLICATION_JSON);
         httpPost.setEntity(dataEntity);
         CloseableHttpResponse response = httpclient.execute(httpPost);
         try {
+        	//请求成功且有返回体
             if (response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entity = response.getEntity();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
                         entity.getContent()));
-                StringBuffer buffer = new StringBuffer();
                 String tempStr;
                 while ((tempStr = reader.readLine()) != null)
                     buffer.append(tempStr);
+                logger.info("=============http请求成功，返回结果===="+buffer.toString()); 
                 return buffer.toString();
-            } else {
-                throw new RuntimeException("error code " + response.getStatusLine().getStatusCode()
-                        + ":" + response.getStatusLine().getReasonPhrase());
+            } 
+            //请求成功，但没有返回体
+            else if (response.getStatusLine().getStatusCode() == 204) {
+            	DubboRestResponse resp204 = new DubboRestResponse();
+            	resp204.setResultCode(String.valueOf(response.getStatusLine().getStatusCode()));
+            	resp204.setResultMessage("请求成功，无返回体！");
+            	String resp204Json = JSON.toJSONString(resp204);
+            	logger.info("=============http请求成功，无返回体===="+resp204Json.toString());
+            	
+            	return resp204Json.toString();
             }
-        } finally {
-            response.close();
-            httpclient.close();
+            //请求失败
+            else {
+            	DubboRestResponse respError = new DubboRestResponse();
+            	respError.setResultCode(String.valueOf(response.getStatusLine().getStatusCode()));
+            	respError.setResultMessage("请求异常！");
+            	String respErrorJson = JSON.toJSONString(respError);
+            	logger.error("=============http请求异常===="+respErrorJson.toString());
+            	
+            	return respErrorJson.toString();
+            }
         }
+        //系统异常
+        catch(Exception e){
+        	logger.error(e.getMessage(),e);
+        	DubboRestResponse sysError = new DubboRestResponse();
+        	sysError.setResultCode("DUBBO_REST_SYSTEM_ERROR");
+        	sysError.setResultMessage(e.getMessage());
+        	String sysErrorJson = JSON.toJSONString(sysError);
+        	logger.error("=============HttpPost请求系统异常===="+sysErrorJson.toString(),e);
+        	
+        	return sysErrorJson.toString();
+        }
+        //释放资源
+        finally {
+        	try {
+        		if(response != null ){
+        			response.close();    			
+        		}
+        		if(httpclient != null ){
+        			httpclient.close();    			
+        		}
+        	} catch (IOException e) {
+	        	logger.error(e.getMessage(),e);
+			}
+        }
+        
+        
     }
 
     /**
@@ -155,7 +202,14 @@ public class HttpClientUtil {
                 buffer.append(line);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+        	logger.error(e.getMessage(),e);
+        	DubboRestResponse sysError = new DubboRestResponse();
+        	sysError.setResultCode("DUBBO_REST_SYSTEM_ERROR");
+        	sysError.setResultMessage(e.getMessage());
+        	String sysErrorJson = JSON.toJSONString(sysError);
+        	logger.error("=============HttpGet请求系统异常===="+sysErrorJson.toString(),e);
+        	
+        	return sysErrorJson.toString();
         } finally {
             try {
                 if (in != null) {

@@ -12,7 +12,11 @@ public class DubboRestResponse implements Serializable {
 
     private Object data;
 
-    public DubboRestResponse(String resultCode, String resultMessage, Object data) {
+    public DubboRestResponse() {
+		super();
+	}
+
+	public DubboRestResponse(String resultCode, String resultMessage, Object data) {
         this.resultCode = resultCode;
         this.resultMessage = resultMessage;
         this.data = data;
