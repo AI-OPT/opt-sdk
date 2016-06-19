@@ -69,7 +69,7 @@ public class DubboRequestTrackFilter implements Filter {
                 } else if (e instanceof SystemException) {
                     throw (SystemException) e;
                 } else {
-                    throw new SystemException((Exception) e);
+                    throw new SystemException(e.getMessage(),e);
                 }
             }
             if (LOG.isInfoEnabled()) {

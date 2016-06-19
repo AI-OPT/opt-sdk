@@ -15,6 +15,8 @@ ext {
     optPaaSZookeeperVersion="0.2.2-SNAPSHOT"
     optPaaSMCSVersion="1.0-SNAPSHOT"
     
+    dubboxVersion="2.8.3.1";
+    
     ipaasUacVersion="0.3";
     ipaasCcsVersion="0.3";
     ipaasMcsVersion="0.3";
@@ -74,7 +76,7 @@ dependencies {
 
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1'
 
-    compile ("com.alibaba:dubbox:2.8.3.1") {
+    compile ("com.alibaba:dubbox:${dubboxVersion}") {
         exclude group: 'org.springframework', module: 'spring'
     }
     compile 'org.jboss.netty:netty:3.2.10.Final'
@@ -267,7 +269,7 @@ publishing {
                         delegate.dependency {
                             delegate.groupId("com.alibaba")
                             delegate.artifactId("dubbox")
-                            delegate.version("2.8.3.1")
+                            delegate.version("${dubboxVersion}")
                         }
                         delegate.dependency {
                             delegate.groupId("org.jboss.netty")
