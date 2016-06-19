@@ -63,7 +63,7 @@ dependencies {
     compile 'commons-lang:commons-lang:2.6'
     compile 'commons-io:commons-io:2.4'
     compile 'commons-beanutils:commons-beanutils:1.9.2'
-    compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    //compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
     compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
 
@@ -201,11 +201,11 @@ publishing {
                             delegate.artifactId("spring-context")
                             delegate.version("4.1.7.RELEASE")
                         }
-                        delegate.dependency {
+                        /*delegate.dependency {
                             delegate.groupId("javax.ws.rs")
                             delegate.artifactId("javax.ws.rs-api")
                             delegate.version("2.0.1")
-                        }
+                        }*/
                         delegate.dependency {
                             delegate.groupId("com.alibaba")
                             delegate.artifactId("fastjson")
