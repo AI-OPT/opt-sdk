@@ -4,6 +4,7 @@ package com.ai.opt.sdk.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -19,7 +20,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ai.opt.sdk.dubbo.extension.DubboRestResponse;
 import com.alibaba.fastjson.JSON;
 
 public class HttpClientUtil {
@@ -64,9 +64,9 @@ public class HttpClientUtil {
             } 
             //请求成功，但没有返回体
             else if (response.getStatusLine().getStatusCode() == 204) {
-            	DubboRestResponse resp204 = new DubboRestResponse();
-            	resp204.setResultCode(String.valueOf(response.getStatusLine().getStatusCode()));
-            	resp204.setResultMessage("请求成功，无返回体！");
+            	RestResponse resp204 = new RestResponse();
+            	resp204.setResponseCode(String.valueOf(response.getStatusLine().getStatusCode()));
+            	resp204.setResponseMessage("请求成功，无返回体！");
             	String resp204Json = JSON.toJSONString(resp204);
             	logger.info("=============http请求成功，无返回体===="+resp204Json.toString());
             	
@@ -74,9 +74,9 @@ public class HttpClientUtil {
             }
             //请求失败
             else {
-            	DubboRestResponse respError = new DubboRestResponse();
-            	respError.setResultCode(String.valueOf(response.getStatusLine().getStatusCode()));
-            	respError.setResultMessage("请求异常！");
+            	RestResponse respError = new RestResponse();
+            	respError.setResponseCode(String.valueOf(response.getStatusLine().getStatusCode()));
+            	respError.setResponseMessage("请求异常！");
             	String respErrorJson = JSON.toJSONString(respError);
             	logger.error("=============http请求异常===="+respErrorJson.toString());
             	
@@ -86,9 +86,9 @@ public class HttpClientUtil {
         //系统异常
         catch(Exception e){
         	logger.error(e.getMessage(),e);
-        	DubboRestResponse sysError = new DubboRestResponse();
-        	sysError.setResultCode("DUBBO_REST_SYSTEM_ERROR");
-        	sysError.setResultMessage(e.getMessage());
+        	RestResponse sysError = new RestResponse();
+        	sysError.setResponseCode("DUBBO_REST_SYSTEM_ERROR");
+        	sysError.setResponseMessage(e.getMessage());
         	String sysErrorJson = JSON.toJSONString(sysError);
         	logger.error("=============HttpPost请求系统异常===="+sysErrorJson.toString(),e);
         	
@@ -203,9 +203,9 @@ public class HttpClientUtil {
             }
         } catch (Exception e) {
         	logger.error(e.getMessage(),e);
-        	DubboRestResponse sysError = new DubboRestResponse();
-        	sysError.setResultCode("DUBBO_REST_SYSTEM_ERROR");
-        	sysError.setResultMessage(e.getMessage());
+        	RestResponse sysError = new RestResponse();
+        	sysError.setResponseCode("DUBBO_REST_SYSTEM_ERROR");
+        	sysError.setResponseMessage(e.getMessage());
         	String sysErrorJson = JSON.toJSONString(sysError);
         	logger.error("=============HttpGet请求系统异常===="+sysErrorJson.toString(),e);
         	
@@ -222,7 +222,59 @@ public class HttpClientUtil {
         return buffer.toString();
     }
     
-    
+    static class RestResponse implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+
+        private String responseCode;
+
+        private String responseMessage;
+
+        private Object data;
+
+        public RestResponse() {
+    		super();
+    	}
+
+    	public RestResponse(String responseCode, String responseMessage, Object data) {
+            this.responseCode = responseCode;
+            this.responseMessage = responseMessage;
+            this.data = data;
+        }
+
+        public RestResponse(String responseCode, String responseMessage) {
+            this.responseCode = responseCode;
+            this.responseMessage = responseMessage;
+        }
+
+		public String getResponseCode() {
+			return responseCode;
+		}
+
+		public void setResponseCode(String responseCode) {
+			this.responseCode = responseCode;
+		}
+
+		public String getResponseMessage() {
+			return responseMessage;
+		}
+
+		public void setResponseMessage(String responseMessage) {
+			this.responseMessage = responseMessage;
+		}
+
+		public Object getData() {
+			return data;
+		}
+
+		public void setData(Object data) {
+			this.data = data;
+		}
+
+        
+
+    }
+
     
 
     /*public static void main(String[] args) throws IOException, URISyntaxException {
