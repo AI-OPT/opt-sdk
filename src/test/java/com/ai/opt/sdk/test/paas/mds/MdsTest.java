@@ -17,8 +17,9 @@ public class MdsTest {
 	public void sendMsgTest(){
 		String mdsns = "baas-bmc-topic";//
 		IMessageSender msgSender = MDSClientFactory.getSenderClient(mdsns);
+		int partNum=msgSender.getParititions();
 		for(int i=0;i<5;i++){
-			int part=i%2;
+			int part=i%partNum;
 			msgSender.send("[test-baas-bmc-topic-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
 			
 		}
