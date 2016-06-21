@@ -45,7 +45,7 @@ dependencies {
     compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
     compile "com.ai:ipaas-ses:${ipaasSesVersion}"
     compile ("com.ai:ipaas-idps:${ipaasIdpsVersion}") {
-        exclude group: 'commons-httpclient', module: 'commons-httpclient'
+        //exclude group: 'commons-httpclient', module: 'commons-httpclient'
     }
     
     compile "com.ai.opt:opt-base:${optBaseVersion}"
@@ -188,13 +188,12 @@ publishing {
                             delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-idps")
                             delegate.version("${ipaasIdpsVersion}")
-                            delegate.exclusions{
+                            /*delegate.exclusions{
                                 delegate.exclusion{
                                     delegate.groupId("commons-httpclient")
                                     delegate.artifactId("commons-httpclient")
                                 }
-                                
-                            }
+                            }*/
                         }
                         delegate.dependency {
                             delegate.groupId("org.springframework")
