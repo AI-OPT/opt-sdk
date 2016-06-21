@@ -296,6 +296,11 @@ publishing {
                             delegate.version("2.4")
                         }
                         delegate.dependency {
+                            delegate.groupId("log4j")
+                            delegate.artifactId("log4j")
+                            delegate.version("1.2.17")
+                        }
+                        delegate.dependency {
                             delegate.groupId("net.sf.json-lib")
                             delegate.artifactId("json-lib")
                             delegate.version("2.4")
