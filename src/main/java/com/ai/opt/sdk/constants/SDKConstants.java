@@ -75,4 +75,29 @@ public final class SDKConstants {
      */
     public static final String DUBBO_CONSUMER_CONF_PATH = "/com/ai/opt/dubbo/consumer";
 
+    
+    
+    /**
+     * DTS所需要的QUARTZ的配置信息 
+     * {
+     *  "org.quartz.jobStore.dataSource":"myDS",
+     *  "org.quartz.dataSource.myDS.driver":"com.mysql.jdbc.Driver",
+     *  "org.quartz.dataSource.myDS.URL":"jdbc:mysql://10.1.245.7:31306/devslpdtsdb1",
+     *  "org.quartz.dataSource.myDS.user":"devslpdtsusr1",
+     *  "org.quartz.dataSource.myDS.password":"devslpdtsusr1@8899",
+     *  "org.quartz.dataSource.myDS.maxConnections":"5",
+     *  "org.quartz.dataSource.myDS.validationQuery":"select 0",
+     *  "org.quartz.jobStore.misfireThreshold":"60000",
+     *  "org.quartz.jobStore.useProperties":"false",
+     *  "org.quartz.jobStore.tablePrefix":"QRTZ_",
+     *  "org.quartz.jobStore.class":"com.ai.opt.sdk.dts.jdbcstore.DTSJobStore",
+     *  "org.quartz.jobStore.isClustered":"true",
+     *  "org.quartz.scheduler.skipUpdateCheck":"true",
+     *  "org.quartz.threadPool.threadCount":"5",
+     *  "org.quartz.threadPool.class":"org.quartz.simpl.SimpleThreadPool",
+     *  "org.quartz.threadPool.threadPriority":"5"
+     * }
+     */
+	public static final String DTS_QUARTZ_CONF_PATH = "/com/ai/opt/dts/quartz-conf";
+
 }

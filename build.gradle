@@ -64,6 +64,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'commons-beanutils:commons-beanutils:1.9.2'
     compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    compile 'org.quartz-scheduler:quartz:2.2.1'
     compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
 
@@ -123,6 +124,8 @@ dependencies {
 	compile 'org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21'
 	compile "javax.el:javax.el-api:2.2.4"
 	
+	//mysql
+	compile 'mysql:mysql-connector-java:5.1.36'
 }
 
 jar {
@@ -393,7 +396,12 @@ publishing {
                                 delegate.groupId("org.apache.tomcat.embed")
                                 delegate.artifactId("tomcat-embed-logging-juli")
                                 delegate.version("8.0.21")
-                        }       
+                        } 
+                        delegate.dependency {
+                                delegate.groupId("org.quartz-scheduler")
+                                delegate.artifactId("quartz")
+                                delegate.version("2.2.1")
+                        }      
                     	                                                                                                       
  			
                     }

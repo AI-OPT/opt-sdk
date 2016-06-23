@@ -194,5 +194,42 @@ public class CCSTest {
 
         System.out.println("DBConf config ... end");
     }
+    
+    @Ignore
+    @Test
+    public void addDtsInfo() throws ConfigException {
+        System.out.println("dts config ... start");
+        StringBuilder sb = new StringBuilder();
+
+
+        
+       sb.append("{                                                                                          ");
+       sb.append("	   \"org.quartz.jobStore.dataSource\":\"myDS\",                                              ");
+       sb.append("	   \"org.quartz.dataSource.myDS.driver\":\"com.mysql.jdbc.Driver\",                          ");
+       sb.append("	   \"org.quartz.dataSource.myDS.URL\":\"jdbc:mysql://10.1.245.7:31306/devslpdtsdb1\",        ");
+       sb.append("	   \"org.quartz.dataSource.myDS.user\":\"devslpdtsusr1\",                                    ");
+       sb.append("	   \"org.quartz.dataSource.myDS.password\":\"devslpdtsusr1@8899\",                           ");
+       sb.append("	   \"org.quartz.dataSource.myDS.maxConnections\":\"5\",                                      ");
+       sb.append("	   \"org.quartz.dataSource.myDS.validationQuery\":\"select 0\",                              ");
+       sb.append("	   \"org.quartz.jobStore.misfireThreshold\":\"60000\",                                       ");
+       sb.append("	   \"org.quartz.jobStore.useProperties\":\"false\",                                          ");
+       sb.append("	   \"org.quartz.jobStore.tablePrefix\":\"QRTZ_\",                                            ");
+       sb.append("	   \"org.quartz.jobStore.class\":\"com.ai.opt.sdk.dts.jdbcstore.DTSJobStore\",               ");
+       sb.append("	   \"org.quartz.jobStore.isClustered\":\"true\",                                             ");
+       sb.append("	   \"org.quartz.scheduler.skipUpdateCheck\":\"true\",                                        ");
+       sb.append("	   \"org.quartz.threadPool.threadCount\":\"5\",                                              ");
+       sb.append("	   \"org.quartz.threadPool.class\":\"org.quartz.simpl.SimpleThreadPool\",                    ");
+       sb.append("	   \"org.quartz.threadPool.threadPriority\":\"5\"                                            ");
+       sb.append("	}                                                                                        ");
+        
+        
+        if (!client.exists(SDKConstants.DTS_QUARTZ_CONF_PATH)) {
+            client.add(SDKConstants.DTS_QUARTZ_CONF_PATH, sb.toString());
+        } else {
+            client.modify(SDKConstants.DTS_QUARTZ_CONF_PATH, sb.toString());
+        }
+
+        System.out.println("dts config ... end");
+    }
 
 }

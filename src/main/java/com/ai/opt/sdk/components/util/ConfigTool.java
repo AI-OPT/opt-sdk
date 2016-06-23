@@ -1,5 +1,8 @@
 package com.ai.opt.sdk.components.util;
 
+import java.util.Map;
+import java.util.Properties;
+
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.SDKException;
@@ -191,6 +194,32 @@ public final class ConfigTool {
         }
         HikariConfig dbconf = JSONObject.toJavaObject(confObject, HikariConfig.class);
         return dbconf;
+    }
+    
+    
+    
+    public static Properties getDTSQuartzProperties() {
+        String conf="";
+		try {
+			conf = CCSClientFactory.getDefaultConfigClient().get(
+			        SDKConstants.DTS_QUARTZ_CONF_PATH);
+		} catch (ConfigException e) {
+			throw new SDKException("get dts conf error from path[" + SDKConstants.DTS_QUARTZ_CONF_PATH
+                    + "]", e);
+		}
+        if (StringUtil.isBlank(conf)) {
+            return null;
+        }
+        Properties p = new Properties();
+        
+        JSONObject data = JSONObject.parseObject(conf);
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+        	String key=entry.getKey();
+        	String value=(String) entry.getValue();
+        	p.put(key, value);
+        }
+        
+        return p;
     }
 
 }
