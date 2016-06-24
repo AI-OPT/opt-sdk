@@ -7,6 +7,7 @@ import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.dts.constants.DTSConstants;
 import com.ai.opt.sdk.dts.factory.DTSSchedulerFactory;
 import com.ai.opt.sdk.dts.service.interfaces.IDTSManagerSV;
+import com.ai.opt.sdk.dts.service.param.TaskCond;
 import com.ai.opt.sdk.dts.service.param.TaskData;
 import com.ai.opt.sdk.dts.vo.SchedulerDef;
 import com.ai.opt.sdk.util.CollectionUtil;
@@ -66,8 +67,8 @@ public class DTSUtil {
         }
         String group = getIDTSManagerGroup(schedulerName);
         String registryURL = getZKAddress(schedulerName);
-        TaskData data = DTSUtil.getIDTSManagerSV(registryURL, group).getTaskData(schedulerName,
-                jobName, jobGroup);
+        TaskCond taskCond=new TaskCond(schedulerName, jobName, jobGroup);
+        TaskData data = DTSUtil.getIDTSManagerSV(registryURL, group).getTaskData(taskCond);
         if (data != null) {
             data.setEnvVarsJSON(JSON.toJSONString(data.getEnvVars()));
         }
@@ -170,7 +171,7 @@ public class DTSUtil {
         }
         ReferenceConfig<IDTSManagerSV> reference = new ReferenceConfig<IDTSManagerSV>();
         ApplicationConfig application = new ApplicationConfig();
-        application.setName("runner-op");
+        application.setName("opt-dts");
         RegistryConfig registry = new RegistryConfig();
         registry.setAddress(registryURL);
         registry.setTimeout(100000);
