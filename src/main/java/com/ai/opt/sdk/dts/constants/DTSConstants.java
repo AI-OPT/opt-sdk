@@ -16,10 +16,10 @@ public class DTSConstants {
     
     
     // (用户web页面操作)调度器配置信息
-    // [{"schedulerName":"runner-bis","systemName":"BIS产品","zkAddress":"zookeeper://10.1.228.222:19181"}]
-    public static final String OP_DTS_SCHEDULER_DEF_PATH = "/com/ai/runner/op/dts/scheduler-def";
+    // [{"schedulerName":"opt-dts-test","systemName":"SLP产品dts测试","zkAddress":"zookeeper://10.1.245.9:29181"}]
+    public static final String OP_DTS_SCHEDULER_DEF_PATH = "/com/ai/opt/op/dtsweb/scheduler-def";
 
-    // (用户web页面操作)调度器与其dubbo服务分组的映射关系 {"runner-bis":"runner.bis.xxx"}
-    public static final String OP_DTS_MANAGERSV_GROUP_PATH = "/com/ai/runner/op/dts/dtsmanagersv-group";
+    // (用户web页面操作)调度器与其dubbo服务分组的映射关系 {"opt-dts-test":"opt.slp.xxx"}
+    public static final String OP_DTS_MANAGERSV_GROUP_PATH = "/com/ai/opt/op/dtsweb/dtsmanagersv-group";
 
 }
