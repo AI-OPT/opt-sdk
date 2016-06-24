@@ -117,7 +117,9 @@ dependencies {
     compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
     
     //restful jars
-	compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final'
+	compile ("org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final") {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
 	compile 'org.jboss.resteasy:resteasy-client:3.0.11.Final'
 	compile 'org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final'
 	compile 'org.apache.tomcat.embed:tomcat-embed-core:8.0.21'
@@ -376,6 +378,12 @@ publishing {
                                 delegate.groupId("org.jboss.resteasy")
                                 delegate.artifactId("resteasy-jaxrs")
                                 delegate.version("3.0.11.Final")
+                                delegate.exclusions{
+	                                delegate.exclusion{
+	                                    delegate.groupId("org.apache.httpcomponents")
+	                                    delegate.artifactId("httpclient")
+	                                }
+	                            }
                         }    
                     	delegate.dependency {
                                 delegate.groupId("org.jboss.resteasy")
