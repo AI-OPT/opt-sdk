@@ -16,7 +16,6 @@ public class TestTask implements ITask {
 	private static final Logger LOG = LoggerFactory.getLogger(TestTask.class);
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.out.println("开始执行任务了");
         LOG.error("开始执行任务了");
 
     }
