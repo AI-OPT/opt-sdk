@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.ai.opt.sdk.util.ApplicationContextUtil;
+
 public final class DubboServiceStart {
 
 	private static final Logger LOG = LoggerFactory
@@ -28,6 +30,8 @@ public final class DubboServiceStart {
 				new String[] { DUBBO_CONTEXT });
 		context.registerShutdownHook();
 		context.start();
+		//对外暴露context
+		ApplicationContextUtil.loadApplicationContext(context);
 		LOG.error(" Dubbo 服务启动完毕---------------------------");
 		synchronized (DubboServiceStart.class) {
 			while (true) {
