@@ -16,7 +16,6 @@ public final class DubboServiceStart {
 	private DubboServiceStart() {
 	}
 
-	@SuppressWarnings("resource")
 	private static void startDubbo() {
 		LOG.error("开始启动 Dubbo 服务---------------------------");
 		// 从配置中心加载DUBBO的核心配置
