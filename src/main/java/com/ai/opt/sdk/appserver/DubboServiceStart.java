@@ -1,9 +1,13 @@
 package com.ai.opt.sdk.appserver;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.ai.opt.sdk.components.mds.base.AbstractMdsConsumer;
 import com.ai.opt.sdk.util.ApplicationContextUtil;
 
 public final class DubboServiceStart {
@@ -32,6 +36,8 @@ public final class DubboServiceStart {
 		//对外暴露context
 		ApplicationContextUtil.loadApplicationContext(context);
 		LOG.error(" Dubbo 服务启动完毕---------------------------");
+		//若有消息队列，则启动消费监听
+		startMdsConsumer(context);
 		synchronized (DubboServiceStart.class) {
 			while (true) {
 				try {
@@ -46,5 +52,25 @@ public final class DubboServiceStart {
 
 	public static void main(String[] args) {
 		startDubbo();
+	}
+	
+	
+	private static void startMdsConsumer(ApplicationContext context){
+		 Map<String, AbstractMdsConsumer> mdses = context
+	                .getBeansOfType(AbstractMdsConsumer.class);
+		 if(mdses!=null&&mdses.size()>0){
+			 LOG.error("开始启动MDS消息消费服务。。。。");
+			 for (AbstractMdsConsumer mds : mdses.values()) {
+				 try {
+					 mds.startMdsConsumer();
+				 } catch (Exception ex) {
+					 LOG.error("启动MDS消息消费服务失败",ex);
+				 }
+				 
+			 }
+			 
+			 LOG.error("启动MDS消息消费服务完毕。。。。");
+		 }
+       
 	}
 }
