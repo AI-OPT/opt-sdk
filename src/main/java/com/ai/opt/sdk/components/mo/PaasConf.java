@@ -5,18 +5,43 @@ import com.ai.opt.sdk.exception.SDKException;
 import com.ai.opt.sdk.util.StringUtil;
 
 public class PaasConf {
-    // 认证地址
+	
+	//========ipaas 服务使用模式 参数  start==========
+    /**
+     * --ipaas service模式--  认证地址(paasSdkMode=1时有效)
+     */
     private String authUrl;
 
-    // 分配给PaaS层的用户
+    /**
+     * --ipaas service模式--  分配给PaaS层的用户(paasSdkMode=1时有效)
+     */
     private String pid;
     
-    // 分配给平台的配置中心服务密码
+    /**
+     * --ipaas service模式--  分配给平台的配置中心服务密码(paasSdkMode=1时有效)
+     */
     private String ccsPassword;
 
-    // 分配给平台的配置中心地址
+    /**
+     *  --ipaas service模式--  分配给平台的配置中心地址(paasSdkMode=1时有效)
+     */
     private String ccsServiceId;
-
+    //========ipaas 服务使用模式 参数  end==========
+    
+    
+    /**
+     * ipaas使用模式 0：以service方式使用   1：以SDK方式使用
+     */
+  	private String paasSdkMode;
+  	/**
+  	 * --ipaas service模式--  应用程序名称标识(paasSdkMode=0时有效)
+  	 */
+    private String ccsAppName;
+    /**
+     * --ipaas service模式--  zk地址(paasSdkMode=0时有效)
+     */
+    private String ccsZkAddress;
+    //========ipaas SDK使用模式 参数  end==========
     public String getAuthUrl() {
         return authUrl;
     }
@@ -60,6 +85,30 @@ public class PaasConf {
         }
         this.ccsServiceId = ccsServiceId;
     }
+
+	public String getPaasSdkMode() {
+		return paasSdkMode;
+	}
+
+	public void setPaasSdkMode(String paasSdkMode) {
+		this.paasSdkMode = paasSdkMode;
+	}
+
+	public String getCcsAppName() {
+		return ccsAppName;
+	}
+
+	public void setCcsAppName(String ccsAppName) {
+		this.ccsAppName = ccsAppName;
+	}
+
+	public String getCcsZkAddress() {
+		return ccsZkAddress;
+	}
+
+	public void setCcsZkAddress(String ccsZkAddress) {
+		this.ccsZkAddress = ccsZkAddress;
+	}
 
 
 }
