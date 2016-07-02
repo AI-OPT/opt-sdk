@@ -32,7 +32,7 @@ public class SdkModeCCSTest {
         System.out.println("aaaaaa");
     }
 
-    //@Ignore
+    @Ignore
     @Test
     public void addMcsConfig() throws ConfigException {
         // 缓存服务主机
@@ -79,7 +79,7 @@ public class SdkModeCCSTest {
                     sb.toString());
         }
     }
-    //@Ignore
+    @Ignore
     @Test
     public void readMcsConfig() throws ConfigException {
     	
@@ -99,7 +99,7 @@ public class SdkModeCCSTest {
     	
     }
 
-    //@Ignore
+    @Ignore
     @Test
     public void addMdsConfig() throws ConfigException {
         // 
@@ -212,6 +212,32 @@ public class SdkModeCCSTest {
             client.modify(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH,
                     dssnsConfig);
         }
+        
+
+        StringBuilder sb_mongodb = new StringBuilder();
+        sb_mongodb.append("{																																																				");
+        sb_mongodb.append("		\"DSS001\":                                                                                   ");
+        sb_mongodb.append("		{                                                                                                     ");
+        sb_mongodb.append("			\"mongoServer\":\"127.0.0.1:27017\",                                                          ");
+        sb_mongodb.append("			\"database\":\"foobar\",   ");
+        sb_mongodb.append("			\"userName\":\"foobaruser\",                                                                         ");
+        sb_mongodb.append("			\"password\":\"foobaruser\",                                                                         ");
+        sb_mongodb.append("			\"bucket\":\"mygridfs01\"                                                                              ");
+        sb_mongodb.append("		}                                                                                                     ");
+        sb_mongodb.append("}                                                                                                        ");
+        
+        String mongodbConf=sb_mongodb.toString();
+        if (!client.exists(SDKConstants.SDK_MODE_PAAS_DSS_MONGO_MAPPED_PATH))
+            client.add(SDKConstants.SDK_MODE_PAAS_DSS_MONGO_MAPPED_PATH,
+            		mongodbConf);
+        else {
+            client.modify(SDKConstants.SDK_MODE_PAAS_DSS_MONGO_MAPPED_PATH,
+            		mongodbConf);
+        }
+        
+        System.out.println("dssns="+client.get(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH));
+        System.out.println("mongodb="+client.get(SDKConstants.SDK_MODE_PAAS_DSS_MONGO_MAPPED_PATH));
+        
     }
     @Ignore
     @Test
@@ -241,7 +267,7 @@ public class SdkModeCCSTest {
      * @throws ConfigException 
      */
     @Ignore
-     @Test
+    @Test
     public void addDbConfInfo() throws ConfigException {
         System.out.println("DBConf config ... start");
         StringBuilder sb = new StringBuilder();
@@ -270,14 +296,11 @@ public class SdkModeCCSTest {
         System.out.println("DBConf config ... end");
     }
     
-    //@Ignore
+    @Ignore
     @Test
     public void addDtsInfo() throws ConfigException {
         System.out.println("dts config ... start");
         StringBuilder sb = new StringBuilder();
-
-
-        
        sb.append("{                                                                                          ");
        sb.append("	   \"org.quartz.jobStore.dataSource\":\"myDS\",                                              ");
        sb.append("	   \"org.quartz.dataSource.myDS.driver\":\"com.mysql.jdbc.Driver\",                          ");
