@@ -2,6 +2,7 @@ package com.ai.opt.sdk.test.paas.mds;
 
 import com.ai.paas.ipaas.mds.IMessageProcessor;
 import com.ai.paas.ipaas.mds.vo.MessageAndMetadata;
+import com.alibaba.fastjson.JSON;
 
 public class MessageProcessorImpl implements IMessageProcessor{
 
@@ -12,6 +13,8 @@ public class MessageProcessorImpl implements IMessageProcessor{
 			System.out.println("------Topic:" + message.getTopic() + ",key:"
 					+ new String(message.getKey(), "UTF-8") + ",content:"
 					+ new String(message.getMessage(), "UTF-8"));
+			
+			//System.out.println("------Topic:" + JSON.toJSONString(message));
 		}
 
 	}
