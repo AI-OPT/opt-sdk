@@ -106,7 +106,7 @@ public final class ComponentConfigLoader {
         String ccsAppName = prop.getProperty("ccs.appname");
         String zkAddress = prop.getProperty("ccs.zk_address");
         
-        if (StringUtil.isBlank(authUrl)) {
+        /*if (StringUtil.isBlank(authUrl)) {
             throw new SDKException("paas auth url is null");
         }
         if (StringUtil.isBlank(pid)) {
@@ -117,7 +117,7 @@ public final class ComponentConfigLoader {
         }
         if (StringUtil.isBlank(ccsServicePwd)) {
             throw new SDKException("paas ccs service password is null");
-        }
+        }*/
         PaasConf pc = new PaasConf();
         pc.setAuthUrl(authUrl);
         pc.setPid(pid);

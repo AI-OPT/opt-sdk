@@ -47,9 +47,9 @@ public class PaasConf {
     }
 
     public void setAuthUrl(String authUrl) {
-        if (StringUtil.isBlank(authUrl)) {
+        /*if (StringUtil.isBlank(authUrl)) {
             throw new SDKException("认证地址为空，请确认是否在paas-conf.properties中是否配置[paas.auth.url]");
-        }
+        }*/
         this.authUrl = authUrl;
     }
 
@@ -58,9 +58,9 @@ public class PaasConf {
     }
 
     public void setPid(String pid) {
-        if (StringUtil.isBlank(pid)) {
+       /* if (StringUtil.isBlank(pid)) {
             throw new SDKException("config pid is null");
-        }
+        }*/
         this.pid = pid;
     }
 
@@ -69,9 +69,9 @@ public class PaasConf {
     }
 
     public void setCcsPassword(String ccsPassword) {
-        if (StringUtil.isBlank(ccsPassword)) {
+       /* if (StringUtil.isBlank(ccsPassword)) {
             throw new SDKException("config service passpord is null");
-        }
+        }*/
         this.ccsPassword = ccsPassword;
     }
 
@@ -80,9 +80,9 @@ public class PaasConf {
     }
 
     public void setCcsServiceId(String ccsServiceId) {
-        if (StringUtil.isBlank(ccsServiceId)) {
+        /*if (StringUtil.isBlank(ccsServiceId)) {
             throw new SDKException("config service Id is null");
-        }
+        }*/
         this.ccsServiceId = ccsServiceId;
     }
 
