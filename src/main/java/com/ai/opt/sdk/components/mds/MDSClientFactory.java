@@ -48,7 +48,7 @@ public final class MDSClientFactory {
     public static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler){
     		return getConsumerClient(mdsns, msgProcessorHandler,null);
     }
-    private static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler,String consumerId){
+    public static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler,String consumerId){
 		PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
 		if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
 			return getConsumerClientByServiceMode(mdsns, msgProcessorHandler,consumerId);
@@ -80,6 +80,16 @@ public final class MDSClientFactory {
 			if (!recvMap_sdkMode.containsKey(keyId)) {
 				if(!StringUtil.isBlank(consumerId)){
 					kafkaConsumerProp.put(MDSConsumerConstants.KAFKA_CONSUMER_ID, consumerId);
+					
+					String mdsConsumerBasePath=kafkaConsumerProp.getProperty(MDSConsumerConstants.MDS_CONSUMER_BASE_PATH);
+					String newMdsConsumerBasePath=mdsConsumerBasePath+"/"+consumerId;
+					
+					kafkaConsumerProp.put(MDSConsumerConstants.KAFKA_CONSUMER_ID, consumerId);
+					kafkaConsumerProp.put(MDSConsumerConstants.MDS_PARTITION_RUNNINGLOCK_PATH, newMdsConsumerBasePath+ "/partitions/running");
+					kafkaConsumerProp.put(MDSConsumerConstants.MDS_PARTITION_PAUSELOCK_PATH, newMdsConsumerBasePath+ "/partitions/pause");
+					kafkaConsumerProp.put(MDSConsumerConstants.MDS_PARTITION_OFFSET_BASEPATH, newMdsConsumerBasePath+ "/offsets");
+					kafkaConsumerProp.put(MDSConsumerConstants.MDS_CONSUMER_BASE_PATH, newMdsConsumerBasePath);
+					
 					client = MsgConsumerCmpFactory.getClient(kafkaConsumerProp,topicId, msgProcessorHandler);
 				}
 				else{
