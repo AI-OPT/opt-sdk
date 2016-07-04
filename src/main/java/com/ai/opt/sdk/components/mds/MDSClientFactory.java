@@ -46,14 +46,91 @@ public final class MDSClientFactory {
     	}
     }
     public static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler){
-    	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
-    	if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
-    		return getConsumerClientByServiceMode(mdsns, msgProcessorHandler);
-    	}
-    	else{
-    		return getConsumerClientBySdkMode(mdsns, msgProcessorHandler);
-    	}
+    		return getConsumerClient(mdsns, msgProcessorHandler,null);
     }
+    private static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler,String consumerId){
+		PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
+		if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
+			return getConsumerClientByServiceMode(mdsns, msgProcessorHandler,consumerId);
+		}
+		else{
+			return getConsumerClientBySdkMode(mdsns, msgProcessorHandler,consumerId);
+		}
+    		
+    }
+    
+    private static IMessageConsumer getConsumerClientBySdkMode(String mdsns, IMsgProcessorHandler msgProcessorHandler,
+			String consumerId) {
+    	if (StringUtil.isBlank(mdsns)) {
+			throw new SDKException("请输入消息服务配置映射的常量标识");
+		}
+		String mdsId = ConfigTool.getMDSId(mdsns);
+        PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
+        String appname = authInfo.getCcsAppName();
+		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		Properties kafkaConsumerProp=ConfigTool.assembleMdsConsumerProperties(mdsns);
+		String topicId=kafkaConsumerProp.getProperty(MDSConsumerConstants.MDS_TOPIC);
+        String keyId=appname+"."+mdsId;
+        if(!StringUtil.isBlank(consumerId)){
+        	keyId+="."+consumerId;
+        }
+		
+		IMessageConsumer client;
+		try {
+			if (!recvMap_sdkMode.containsKey(keyId)) {
+				if(!StringUtil.isBlank(consumerId)){
+					kafkaConsumerProp.put(MDSConsumerConstants.KAFKA_CONSUMER_ID, consumerId);
+					client = MsgConsumerCmpFactory.getClient(kafkaConsumerProp,topicId, msgProcessorHandler);
+				}
+				else{
+					client = MsgConsumerCmpFactory.getClient(kafkaConsumerProp,topicId, msgProcessorHandler);
+				}
+				recvMap_sdkMode.put(keyId, client);
+			}
+			else{
+				client=recvMap_sdkMode.get(keyId);
+			}
+		} catch (Exception e) {
+			throw new SDKException("无法获取消息服务[" + mdsId + "]对应的客户端实例", e);
+		}
+		return client;
+	}
+
+	private static IMessageConsumer getConsumerClientByServiceMode(String mdsns,
+			IMsgProcessorHandler msgProcessorHandler, String consumerId) {
+		if (StringUtil.isBlank(mdsns)) {
+            throw new SDKException("请输入消息服务配置映射的常量标识");
+        }
+        String mdsId = ConfigTool.getMDSId(mdsns);
+        String mdsPwd = ConfigTool.getServicePwd(mdsId);
+        PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
+        AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
+                authInfo.getPid(), mdsPwd, mdsId);
+        String keyId=authInfo.getPid()+"."+mdsId;
+        if(!StringUtil.isBlank(consumerId)){
+        	keyId+="."+consumerId;
+        }
+        IMessageConsumer client;
+        try {
+        	if (!recvMap_serviceMode.containsKey(keyId)) {
+        		if(!StringUtil.isBlank(consumerId)){
+        			client = MsgConsumerFactory.getClient(authDescriptor, msgProcessorHandler,consumerId);
+        		}
+        		else{
+        			client = MsgConsumerFactory.getClient(authDescriptor, msgProcessorHandler);
+        		}
+        		recvMap_serviceMode.put(keyId, client);
+    		}
+        	else{
+        		client=recvMap_serviceMode.get(keyId);
+        	}
+        } catch (Exception e) {
+            throw new SDKException("无法获取消息服务[" + mdsId + "]对应的客户端实例", e);
+        }
+        return client;
+	}
+
+	
 
 	private static IMessageSender getSenderClientByServiceMode(String mdsns) {
 		if (StringUtil.isBlank(mdsns)) {

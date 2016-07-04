@@ -25,7 +25,7 @@ public class MdsTest {
 				part=i%partNum;
 			}
 			msgSender.send("[test-baas-bmc-topic-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
-			
+			System.out.println("sender---[test-baas-bmc-topic-msg:"+i+"]This is a test message……");
 		}
 
 	}

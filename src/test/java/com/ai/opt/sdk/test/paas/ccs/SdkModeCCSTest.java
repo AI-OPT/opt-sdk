@@ -24,7 +24,7 @@ public class SdkModeCCSTest {
         this.client = CCSClientFactory.getDefaultConfigClient();
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void testGetConfig() throws Exception {
         client.add("/test", "test");
@@ -32,7 +32,7 @@ public class SdkModeCCSTest {
         System.out.println("aaaaaa");
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void addMcsConfig() throws ConfigException {
         // 缓存服务主机
@@ -55,9 +55,6 @@ public class SdkModeCCSTest {
         sb.append("			\"mcs.maxIdle\":\"10\",     ");
         sb.append("			\"mcs.minIdle\":\"5\",   ");
         sb.append("			\"mcs.testOnBorrow\":\"true\",    ");
-//        sb.append("			\"connectionTimeout\":\"30000\",   ");
-//        sb.append("			\"idleTimeout\":\"600000\",     ");
-//        sb.append("			\"maxLifetime\":\"1800000\",    ");
         sb.append("			\"mcs.password\":\"123456\"                                                                              ");
         sb.append("		}                                                                                                     ");
         sb.append("}              ");
@@ -99,7 +96,7 @@ public class SdkModeCCSTest {
     	
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void addMdsConfig() throws ConfigException {
         // 
@@ -137,7 +134,7 @@ public class SdkModeCCSTest {
         sb_kafkaSend.append("			\"batch.num.messages\":\"64000\",                                                                            ");
         sb_kafkaSend.append("			\"send.buffer.bytes\":\"67108864\",                                                                            ");
         sb_kafkaSend.append("			\"maxProducer\":\"5\",                                                                            ");
-        sb_kafkaSend.append("			\"mds.topic\":\"test\"                                                                              ");
+        sb_kafkaSend.append("			\"mds.topic\":\"my-topic-test\"                                                                              ");
         sb_kafkaSend.append("		}                                                                                                     ");
         sb_kafkaSend.append("}                                                                                                        ");
         
@@ -166,7 +163,7 @@ public class SdkModeCCSTest {
         sb_kafkaConsume.append("			\"mds.partition.offset.basepath\":\"/baas/MDS/MDS001/consumer/offsets\",                                                                            ");
         sb_kafkaConsume.append("			\"mds.consumer.base.path\":\"/baas/MDS/MDS001\",                                                                            ");
         sb_kafkaConsume.append("			\"mds.zookeeper.hosts\":\"127.0.0.1:2181\",                                                                            ");
-        sb_kafkaConsume.append("			\"mds.topic\":\"test\"                                                                              ");
+        sb_kafkaConsume.append("			\"mds.topic\":\"my-topic-test\"                                                                              ");
         sb_kafkaConsume.append("		}                                                                                                     ");
         sb_kafkaConsume.append("}                                                                                                        ");
         
@@ -191,7 +188,7 @@ public class SdkModeCCSTest {
     	System.out.println("mdsSend="+mdsSend);
     	System.out.println("mdConsumer="+mdConsumer);
     }
-    @Ignore
+    //@Ignore
     @Test
     public void addDssConfig() throws ConfigException {
         // 缓存服务主机

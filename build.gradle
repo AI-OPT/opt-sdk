@@ -26,12 +26,12 @@ ext {
     ipaasIdpsVersion="0.3";
 
     appName="opt-sdk"
-    moduleVersion='2.0'
+    moduleVersion='2.1-SNAPSHOT'
     builtBy="gradle 2.2"
     publishUserName = "runnerdev"
     publishUserPassword = "runnerdev"
-    //publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
-    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/releases/"
+    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+    //publishURL = "http://10.1.228.199:18081/nexus/content/repositories/releases/"
 }
 
 repositories { maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" } }
@@ -41,8 +41,10 @@ dependencies {
 	compile "com.ai:ipaas-uac:${ipaasUacVersion}"
     compile "com.ai:ipaas-ccs:${ipaasCcsVersion}"
     compile "com.ai:ipaas-mcs:${ipaasMcsVersion}"
+    compile "com.ai:ipaas-mcs-comp:${ipaasMcsVersion}"
     compile "com.ai:ipaas-dss:${ipaasDssVersion}"
     compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
+    compile "com.ai:ipaas-mds-comp:${ipaasMdsVersion}"
     compile "com.ai:ipaas-ses:${ipaasSesVersion}"
     compile ("com.ai:ipaas-idps:${ipaasIdpsVersion}") {
         //exclude group: 'commons-httpclient', module: 'commons-httpclient'
@@ -176,12 +178,22 @@ publishing {
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mcs-comp")
+                            delegate.version("${ipaasMcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-dss")
                             delegate.version("${ipaasDssVersion}")
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-mds")
+                            delegate.version("${ipaasMdsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mds-comp")
                             delegate.version("${ipaasMdsVersion}")
                         }
                         delegate.dependency {
