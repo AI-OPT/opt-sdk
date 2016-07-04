@@ -2,6 +2,7 @@ package com.ai.opt.sdk.test.paas.mds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -17,16 +18,11 @@ public class MdsTest {
 	public void sendMsgTest(){
 		String mdsns = "baas-bmc-topic";//
 		IMessageSender msgSender = MDSClientFactory.getSenderClient(mdsns);
-		int partNum=msgSender.getParititions();
-		System.out.println("partNum="+partNum);
+		//msgSender.getParititions() 方法废弃，以后不再调用
 		for(int i=0;i<5;i++){
-			int part=0;
-			//sdkmode 下目前获取不到分区数，故做此处理
-			if(partNum>0){
-				part=i%partNum;
-			}
-			msgSender.send("[test-baas-bmc-topic-msg:"+i+"]This is a test message……", part);//第二个参数为分区键，如果不分区，传入0
-			System.out.println("sender---[test-baas-bmc-topic-msg:"+i+"]This is a test message……");
+			//send方法的第二个参数为随机数，依据该随机数均匀往各个片区发送消息
+			msgSender.send("[test-baas-bmc-topic-msg:"+i+"]This is a test message……", new Random(1000).nextLong());
+			//System.out.println("sender---[test-baas-bmc-topic-msg:"+i+"]This is a test message……");
 		}
 
 	}
