@@ -18,6 +18,7 @@ public class MdsTest {
 		String mdsns = "baas-bmc-topic";//
 		IMessageSender msgSender = MDSClientFactory.getSenderClient(mdsns);
 		int partNum=msgSender.getParititions();
+		System.out.println("partNum="+partNum);
 		for(int i=0;i<5;i++){
 			int part=0;
 			//sdkmode 下目前获取不到分区数，故做此处理
@@ -48,6 +49,7 @@ public class MdsTest {
 
 			}
 		};
+//		IMessageConsumer msgConsumer= MDSClientFactory.getConsumerClient(mdsns, msgProcessorHandler,"mds-consumer-mytopic1");
 		IMessageConsumer msgConsumer= MDSClientFactory.getConsumerClient(mdsns, msgProcessorHandler);
 		msgConsumer.start();
 		synchronized (MdsTest.class) {
