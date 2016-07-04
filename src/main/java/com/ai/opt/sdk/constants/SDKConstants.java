@@ -90,10 +90,6 @@ public final class SDKConstants {
      *   	"kafka.zookeeper.broker.path":"/brokers",
      *   	"kafka.zookeeper.user":"",
      *   	"kafka.zookeeper.user.passwd":"",
-     *   	"kafka.consumer.id":"mds-consumer-id-test",
-     *   	"mds.partition.runninglock.path":"/baas/MDS/MDS001/consumer/partitions/running",
-     *   	"mds.partition.pauselock.path":"/baas/MDS/MDS001/consumer/partitions/pause",
-     *   	"mds.partition.offset.basepath":"/baas/MDS/MDS001/consumer/offsets",
      *   	"mds.consumer.base.path":"/baas/MDS/MDS001",
      *   	"mds.zookeeper.hosts":"127.0.0.1:2181",
      *   	"mds.topic":"bmc_kafka"

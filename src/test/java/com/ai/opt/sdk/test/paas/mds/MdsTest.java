@@ -50,7 +50,7 @@ public class MdsTest {
 			}
 		};
 //		IMessageConsumer msgConsumer= MDSClientFactory.getConsumerClient(mdsns, msgProcessorHandler,"mds-consumer-mytopic1");
-		IMessageConsumer msgConsumer= MDSClientFactory.getConsumerClient(mdsns, msgProcessorHandler);
+		IMessageConsumer msgConsumer= MDSClientFactory.getConsumerClient(mdsns, msgProcessorHandler,"mds-consumer-mytopic1111");
 		msgConsumer.start();
 		synchronized (MdsTest.class) {
 			while (true) {

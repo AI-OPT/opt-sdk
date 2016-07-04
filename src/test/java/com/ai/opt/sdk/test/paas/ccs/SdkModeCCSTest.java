@@ -157,10 +157,6 @@ public class SdkModeCCSTest {
         sb_kafkaConsume.append("			\"kafka.zookeeper.broker.path\":\"/brokers\",   ");
         sb_kafkaConsume.append("			\"kafka.zookeeper.user\":\"\",                                                                         ");
         sb_kafkaConsume.append("			\"kafka.zookeeper.user.passwd\":\"\",                                                                         ");
-        sb_kafkaConsume.append("			\"kafka.consumer.id\":\"mds-consumer-id-test\",                                                                                ");
-        sb_kafkaConsume.append("			\"mds.partition.runninglock.path\":\"/baas/MDS/MDS001/consumer/partitions\",                                                                        ");
-        sb_kafkaConsume.append("			\"mds.partition.pauselock.path\":\"/baas/MDS/MDS001/consumer/partitions\",                                                                             ");
-        sb_kafkaConsume.append("			\"mds.partition.offset.basepath\":\"/baas/MDS/MDS001/consumer/offsets\",                                                                            ");
         sb_kafkaConsume.append("			\"mds.consumer.base.path\":\"/baas/MDS/MDS001\",                                                                            ");
         sb_kafkaConsume.append("			\"mds.zookeeper.hosts\":\"127.0.0.1:2181\",                                                                            ");
         sb_kafkaConsume.append("			\"mds.topic\":\"my-topic-test\"                                                                              ");

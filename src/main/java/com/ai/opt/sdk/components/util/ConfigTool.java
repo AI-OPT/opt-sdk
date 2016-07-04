@@ -404,10 +404,6 @@ public final class ConfigTool {
     	mdsConsumerProperties.put(MDSConsumerConstants.KAFKA_ZOOKEEPER_BROKER_PATH, kafkaJson.get(MDSConsumerConstants.KAFKA_ZOOKEEPER_BROKER_PATH));
     	mdsConsumerProperties.put(MDSConsumerConstants.KAFKA_ZOOKEEPER_USER, kafkaJson.get(MDSConsumerConstants.KAFKA_ZOOKEEPER_USER));
     	mdsConsumerProperties.put(MDSConsumerConstants.KAFKA_ZOOKEEPER_USER_PASSWD, kafkaJson.get(MDSConsumerConstants.KAFKA_ZOOKEEPER_USER_PASSWD));
-    	mdsConsumerProperties.put(MDSConsumerConstants.KAFKA_CONSUMER_ID, kafkaJson.get(MDSConsumerConstants.KAFKA_CONSUMER_ID));
-    	mdsConsumerProperties.put(MDSConsumerConstants.MDS_PARTITION_RUNNINGLOCK_PATH, kafkaJson.get(MDSConsumerConstants.MDS_PARTITION_RUNNINGLOCK_PATH));
-    	mdsConsumerProperties.put(MDSConsumerConstants.MDS_PARTITION_PAUSELOCK_PATH, kafkaJson.get(MDSConsumerConstants.MDS_PARTITION_PAUSELOCK_PATH));
-    	mdsConsumerProperties.put(MDSConsumerConstants.MDS_PARTITION_OFFSET_BASEPATH, kafkaJson.get(MDSConsumerConstants.MDS_PARTITION_OFFSET_BASEPATH));
     	mdsConsumerProperties.put(MDSConsumerConstants.MDS_CONSUMER_BASE_PATH, kafkaJson.get(MDSConsumerConstants.MDS_CONSUMER_BASE_PATH));
     	mdsConsumerProperties.put(MDSConsumerConstants.MDS_ZOOKEEPER_HOSTS, kafkaJson.get(MDSConsumerConstants.MDS_ZOOKEEPER_HOSTS));
     	mdsConsumerProperties.put(MDSConsumerConstants.MDS_TOPIC, kafkaJson.get(MDSConsumerConstants.MDS_TOPIC));
