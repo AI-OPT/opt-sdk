@@ -30,6 +30,7 @@ public class DubboRequestTrackFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) {
+    	String protocol = invoker.getUrl().getProtocol();
         String reqSV = invoker.getInterface().getName();
         String reqMethod = invocation.getMethodName();
         Object[] requestParams = invocation.getArguments();
@@ -59,18 +60,32 @@ public class DubboRequestTrackFilter implements Filter {
                     LOG.error("TRADE_SEQ:{},调用服务{}类中的{}方法发生异常，原因:{}", tradeSeq, reqSV, reqMethod,
                             result.getException().getMessage(), result.getException());
                 }
-                if (e instanceof BusinessException) {
-                    BaseResponse response = new BaseResponse();
-                    response.setResponseHeader(new ResponseHeader(false, ((BusinessException) e)
-                            .getErrorCode(), ((BusinessException) e).getErrorMessage()));
+                
+                //rest的情况下，不抛出异常
+                if (null != protocol && protocol.equalsIgnoreCase("rest")){
+                	BaseResponse response = new BaseResponse();
+                    response.setResponseHeader(new ResponseHeader(false, "999999", e.getMessage(),e.getStackTrace()));
                     RpcResult r = new RpcResult();
                     r.setValue(response);
-                    return r;
-                } else if (e instanceof SystemException) {
-                    throw (SystemException) e;
-                } else {
-                    throw new SystemException(e.getMessage(),e);
+                    return r;                	
                 }
+                //dubbo情况下，抛出异常
+                else{
+                	if (e instanceof BusinessException) {
+                        BaseResponse response = new BaseResponse();
+                        response.setResponseHeader(new ResponseHeader(false, ((BusinessException) e)
+                                .getErrorCode(), ((BusinessException) e).getErrorMessage()));
+                        RpcResult r = new RpcResult();
+                        r.setValue(response);
+                        return r;
+                    } else if (e instanceof SystemException) {
+                        throw (SystemException) e;
+                    } else {
+                        throw new SystemException(e.getMessage(),e);
+                    }
+                }
+                
+                
             }
             if (LOG.isInfoEnabled()) {
                 LOG.info("TRADE_SEQ:{},调用服务{}类中的{}方法的结果:{}", tradeSeq, reqSV, reqMethod,
