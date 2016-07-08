@@ -1,5 +1,8 @@
 package com.ai.opt.sdk.dubbo.filter;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -22,6 +25,7 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 
 @Activate(group = { Constants.PROVIDER })
 public class DubboRequestTrackFilter implements Filter {
@@ -34,6 +38,22 @@ public class DubboRequestTrackFilter implements Filter {
         String reqSV = invoker.getInterface().getName();
         String reqMethod = invocation.getMethodName();
         Object[] requestParams = invocation.getArguments();
+        List<Class> paramClazz=null; 
+        if(requestParams!=null){
+        	paramClazz=new ArrayList<Class>();
+        	for(Object param: requestParams){
+        		paramClazz.add(param.getClass());
+        	}        	
+        }
+        Class returnClazz=null;
+        try {
+			Method method=invoker.getInterface().getMethod(reqMethod, paramClazz==null?null:paramClazz.toArray(new Class[paramClazz.size()]));
+			returnClazz=method.getReturnType();
+        } catch (NoSuchMethodException | SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
         // 交易序列
         String tradeSeq = UUIDUtil.genId32();
         // 打印请求参数明细
@@ -63,10 +83,12 @@ public class DubboRequestTrackFilter implements Filter {
                 
                 //rest的情况下，不抛出异常
                 if (null != protocol && protocol.equalsIgnoreCase("rest")){
+                	
                 	BaseResponse response = new BaseResponse();
                     response.setResponseHeader(new ResponseHeader(false, "999999", e.getMessage(),e.getStackTrace()));
                     RpcResult r = new RpcResult();
-                    r.setValue(response);
+                    Gson gson=new Gson();
+                    r.setValue(gson.fromJson(gson.toJson(response), returnClazz));
                     return r;                	
                 }
                 //dubbo情况下，抛出异常
@@ -92,31 +114,22 @@ public class DubboRequestTrackFilter implements Filter {
                         JSON.toJSONString(result.getValue()));
             }
             return result;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             if (LOG.isErrorEnabled()) {
                 LOG.error("TRADE_SEQ:{},执行{}类中的{}方法发生异常:{}", tradeSeq, reqSV, reqMethod, ex);
             }
-            RpcResult r = new RpcResult();
-            if (ex.getCause() instanceof ConstraintViolationException) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("TRADE_SEQ:{},执行{}类中的{}方法发生参数约束性校验异常:{},将被转换成业务异常输出", tradeSeq,
-                            reqSV, reqMethod, ex);
-                }
-                ConstraintViolationException ve = (ConstraintViolationException) ex.getCause();
-                Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
-                if (violations != null && violations.size() > 0) {
-                    String error = null;
-                    for (ConstraintViolation<?> cv : violations) {
-                        error = cv.getMessage();
-                        break;
-                    }
-                    BaseResponse response = new BaseResponse();
-                    response.setResponseHeader(new ResponseHeader(false, "888888", error));
-                    r.setValue(response);
-                }
-            } else {
-                r.setException(ex);
+            if (null != protocol && protocol.equalsIgnoreCase("rest")){
+            	
+            	BaseResponse response = new BaseResponse();
+                response.setResponseHeader(new ResponseHeader(false, "999999", ex.getMessage(),ex.getStackTrace()));
+                RpcResult r = new RpcResult();
+                Gson gson=new Gson();
+                r.setValue(gson.fromJson(gson.toJson(response), returnClazz));
+                return r;                	
             }
+            RpcResult r = new RpcResult();
+         
+            r.setException(ex);
             return r;
         }
 
