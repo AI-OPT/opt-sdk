@@ -133,7 +133,7 @@ public class LoadConfServiceStart {
             Map.Entry<Object, Object> entry = it.next();
             String path = entry.getKey().toString();
             String value = entry.getValue().toString();
-            LOG.error("获取到【{}】模块的路径及值信息【{}={}】" ,appName, path, value);
+            LOG.error("设置【{}】模块的路径及值信息【{}={}】" ,appName, path, value);
             try {
 				if (client.exists(path)) {
 				    client.modify(path, value);
