@@ -3,10 +3,6 @@ package com.ai.opt.sdk.dubbo.filter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +46,7 @@ public class DubboRequestTrackFilter implements Filter {
 			Method method=invoker.getInterface().getMethod(reqMethod, paramClazz==null?null:paramClazz.toArray(new Class[paramClazz.size()]));
 			returnClazz=method.getReturnType();
         } catch (NoSuchMethodException | SecurityException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			LOG.error("获取方法的返回类型失败，具体原因："+e1.getMessage(),e1);
 		}
         
         // 交易序列
@@ -85,7 +80,17 @@ public class DubboRequestTrackFilter implements Filter {
                 if (null != protocol && protocol.equalsIgnoreCase("rest")){
                 	
                 	BaseResponse response = new BaseResponse();
-                    response.setResponseHeader(new ResponseHeader(false, "999999", e.getMessage(),e.getStackTrace()));
+                	ResponseHeader header=new ResponseHeader(false, "999999", e.getMessage(),e.getStackTrace());
+                	if (e instanceof BusinessException){
+                		BusinessException ex=(BusinessException)e;
+                		header.setResultCode(ex.getErrorCode());
+                	}
+                	else if (e instanceof SystemException){
+                		SystemException ex=(SystemException)e;
+                		header.setResultCode(ex.getErrorCode());
+                	}
+                	                	
+                    response.setResponseHeader(header);
                     RpcResult r = new RpcResult();
                     Gson gson=new Gson();
                     r.setValue(gson.fromJson(gson.toJson(response), returnClazz));
