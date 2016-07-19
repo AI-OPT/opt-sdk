@@ -151,17 +151,24 @@ public final class SDKConstants {
     public static final String PAAS_SERVICE_PWD_MAPPED_PATH = "/com/ai/opt/paas-service-pwd-mapped";
 
     /**
-     * db-conf的配置信息 /com/ai/opt/db-conf { "opt-uac-db": { "driverClassName":"com.mysql.jdbc.Driver",
-     * "jdbcUrl":
-     * "jdbc:mysql://10.1.228.222:39306/devibssgndb1?useUnicode=true&characterEncoding=UTF-8",
-     * "username":"devibssgnusr1", "password":"devibssgnusr1", "autoCommit":"true",
-     * "connectionTimeout":"30000", "idleTimeout":"600000", "maxLifetime":"1800000",
-     * "maximumPoolSize":"10" }, "opt-sys-db": { "driverClassName":"com.mysql.jdbc.Driver",
-     * "jdbcUrl"
-     * :"jdbc:mysql://10.1.228.222:39306/devibsscmdb1?useUnicode=true&characterEncoding=UTF-8",
-     * "username":"devibsscmusr1", "password":"devibsscmusr1", "autoCommit":"true",
-     * "connectionTimeout":"30000", "idleTimeout":"600000", "maxLifetime":"1800000",
-     * "maximumPoolSize":"10" } }
+     * db-conf的配置信息 /com/ai/opt/db-conf 
+     * { 
+     * 		"opt-uac-db": 
+     * 		{ 
+     * 			"driverClassName":"com.mysql.jdbc.Driver",
+     * 			"jdbcUrl":"jdbc:mysql://10.1.228.222:39306/devibssgndb1?useUnicode=true&characterEncoding=UTF-8",
+     * 			"username":"devibssgnusr1", "password":"devibssgnusr1", "autoCommit":"true",
+     * 			"connectionTimeout":"30000", "idleTimeout":"600000", "maxLifetime":"1800000",
+     * 			"maximumPoolSize":"10" },
+     * 		 "opt-sys-db": 
+     * 		{ 
+     * 			"driverClassName":"com.mysql.jdbc.Driver",
+     * 			"jdbcUrl" :"jdbc:mysql://10.1.228.222:39306/devibsscmdb1?useUnicode=true&characterEncoding=UTF-8",
+     * 			"username":"devibsscmusr1", "password":"devibsscmusr1", "autoCommit":"true",
+     * 			"connectionTimeout":"30000", "idleTimeout":"600000", "maxLifetime":"1800000",
+     * 			"maximumPoolSize":"10" 
+     * 		} 
+     * }
      */
     public static final String DB_CONF_PATH = "/com/ai/opt/db-conf";
 
