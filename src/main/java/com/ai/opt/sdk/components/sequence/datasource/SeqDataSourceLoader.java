@@ -1,20 +1,20 @@
 package com.ai.opt.sdk.components.sequence.datasource;
 
-import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
 
 public class SeqDataSourceLoader {
 
-    private HikariDataSource ds;
+    private DataSource ds;
 
     public void init() {
         SeqDataSourceLoaderFactory.init(this);
     }
 
-    public HikariDataSource getDs() {
+    public DataSource getDs() {
         return ds;
     }
 
-    public void setDs(HikariDataSource ds) {
+    public void setDs(DataSource ds) {
         this.ds = ds;
     }
 

@@ -130,6 +130,8 @@ dependencies {
 	
 	//mysql
 	compile 'mysql:mysql-connector-java:5.1.36'
+	
+	//compile 'com.ai:dubbo-ext:0.3'
 }
 
 jar {

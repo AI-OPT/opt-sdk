@@ -141,6 +141,7 @@ public class SdkModeCCSTest {
         String kafkaSendConf=sb_kafkaSend.toString();
         
         //kafkaSendConf 
+        //      /com/ai/opt/sdkmode-paas-mds-sender-mapped
         if (!client.exists(SDKConstants.SDK_MODE_PAAS_MDS_SENDER_MAPPED_PATH))
             client.add(SDKConstants.SDK_MODE_PAAS_MDS_SENDER_MAPPED_PATH,
             		kafkaSendConf);
@@ -166,6 +167,7 @@ public class SdkModeCCSTest {
         String kafkaConsumeConf=sb_kafkaConsume.toString();
         
         //kafkaConsumeConf 
+        //   /com/ai/opt/sdkmode-paas-mds-consumer-mapped
         if (!client.exists(SDKConstants.SDK_MODE_PAAS_MDS_CONSUMER_MAPPED_PATH))
             client.add(SDKConstants.SDK_MODE_PAAS_MDS_CONSUMER_MAPPED_PATH,
             		kafkaConsumeConf);
@@ -259,7 +261,7 @@ public class SdkModeCCSTest {
      * DB配置
      * @throws ConfigException 
      */
-    @Ignore
+    //@Ignore
     @Test
     public void addDbConfInfo() throws ConfigException {
         System.out.println("DBConf config ... start");

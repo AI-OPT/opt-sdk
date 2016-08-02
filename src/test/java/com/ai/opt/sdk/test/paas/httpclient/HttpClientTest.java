@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.ai.opt.sdk.dubbo.util.HttpClientUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public class HttpClientTest {
 
@@ -34,6 +35,8 @@ public class HttpClientTest {
         String url="http://10.1.245.9:10887/slp-order/orderlist/queryOrder";
         String param=JSON.toJSONString(params);
         String result=HttpClientUtil.sendPost(url, param);
+        JSONObject json=JSON.parseObject(result);
+        json.get("resultCode");
         System.out.println("param="+JSON.toJSONString(params));
         System.out.println("result="+result);
     }
