@@ -100,7 +100,7 @@ dependencies {
     
     //apache mail
     compile	'org.apache.commons:commons-email:1.4'
-    compile 'org.dom4j:dom4j:1.6.1'
+    compile 'org.dom4j:dom4j:2.0.0'
     
     //excel
     compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
@@ -333,7 +333,7 @@ publishing {
                         delegate.dependency {
                             delegate.groupId("org.dom4j")
                             delegate.artifactId("dom4j")
-                            delegate.version("1.6.1")
+                            delegate.version("2.0.0")
                         }
                         delegate.dependency {
                             delegate.groupId("javax.validation")
