@@ -26,12 +26,12 @@ ext {
     ipaasIdpsVersion="0.3";
 
     appName="opt-sdk"
-    moduleVersion='2.1-SNAPSHOT'
+    moduleVersion='2.1'
     builtBy="gradle 2.2"
     publishUserName = "runnerdev"
     publishUserPassword = "runnerdev"
-    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
-    //publishURL = "http://10.1.228.199:18081/nexus/content/repositories/releases/"
+    //publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/releases/"
 }
 
 repositories { maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" } }
