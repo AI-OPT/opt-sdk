@@ -60,8 +60,6 @@ dependencies {
     compile "org.aspectj:aspectjrt:1.8.5"
     compile "org.aspectj:aspectjweaver:1.8.5"
 
-    compile 'org.elasticsearch:elasticsearch:1.7.1'
-
     compile 'commons-lang:commons-lang:2.6'
     compile 'commons-io:commons-io:2.4'
     compile 'commons-beanutils:commons-beanutils:1.9.2'
