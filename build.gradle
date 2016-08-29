@@ -46,6 +46,7 @@ dependencies {
     compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
     compile "com.ai:ipaas-mds-comp:${ipaasMdsVersion}"
     compile "com.ai:ipaas-ses:${ipaasSesVersion}"
+    compile "com.ai:ipaas-ses-base:${ipaasSesVersion}"
     compile ("com.ai:ipaas-idps:${ipaasIdpsVersion}") {
         //exclude group: 'commons-httpclient', module: 'commons-httpclient'
     }
@@ -199,6 +200,11 @@ publishing {
                         delegate.dependency {
                             delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-ses")
+                            delegate.version("${ipaasSesVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-ses-base")
                             delegate.version("${ipaasSesVersion}")
                         }
                         delegate.dependency {
