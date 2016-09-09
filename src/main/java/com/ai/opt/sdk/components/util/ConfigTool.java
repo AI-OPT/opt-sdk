@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.dss.constants.DSSConsants;
+import com.ai.opt.sdk.components.idps.constants.IDPSConsants;
 import com.ai.opt.sdk.components.mcs.constants.MCSConstants;
 import com.ai.opt.sdk.components.mds.constants.MDSConsumerConstants;
 import com.ai.opt.sdk.components.mds.constants.MDSSenderConstants;
+import com.ai.opt.sdk.components.ses.constants.SESConsants;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.SDKException;
 import com.ai.paas.ipaas.ccs.IConfigClient;
@@ -466,5 +468,116 @@ public final class ConfigTool {
 		
 		return dssProperties;
 	}
+
+    public static Properties assembleIdpsProperties(String namespace) {
+		Properties idpsProperties=new Properties();
+		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
+        if (configClient == null) {
+            throw new SDKException("cann't get sdkmode dss conf because IConfigClient is null");
+        }
+        // 获取idps namespace映射信息
+        String idpsNSConfStr="";
+		try {
+			idpsNSConfStr = configClient.get(
+			        SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH);
+		} catch (ConfigException e) {
+			LOG.error("error！cann't get sdkmode idps idpsns conf from path["
+                    + SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH + "]",e);
+			throw new SDKException("error！cann't get sdkmode idps idpsns conf from path["
+                    + SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH + "]");
+		}
+        if (StringUtil.isBlank(idpsNSConfStr)) {
+            throw new SDKException("cann't get sdkmode idps idpsns conf from path["
+                    + SDKConstants.PAAS_IDPSNS_IDPS_MAPPED_PATH + "]");
+        }
+        // 转换为JSON对象
+        JSONObject dssNSJson = JSONObject.parseObject(idpsNSConfStr);
+        //namespace对应的redis服务标识，如IDPS001，IDPS002
+		String idpsId=dssNSJson.getString(namespace);
+		if(StringUtil.isBlank(idpsId)){
+			throw new SDKException("cann't get sdkmoe idpsId of namespace["
+                    + namespace + "]");
+		}
+		// 获取idps集群配置信息
+		String idpsConfStr="";
+		try {
+			idpsConfStr = configClient.get(SDKConstants.SDK_MODE_PAAS_IDPS_GM_MAPPED_PATH);
+		} catch (ConfigException e) {
+			LOG.error("error！cann't get sdkmode idps gm url info from path["
+                    + SDKConstants.SDK_MODE_PAAS_IDPS_GM_MAPPED_PATH + "]",e);
+			throw new SDKException("error！cann't get sdkmode idps gm url info from path["
+                    + SDKConstants.SDK_MODE_PAAS_IDPS_GM_MAPPED_PATH + "]");
+		}
+		
+		if(StringUtil.isBlank(idpsConfStr)){
+			throw new SDKException("cann't get sdkmode idps gm url conf of namespace["
+                    + namespace + "],idpsId["+idpsId+"]");
+		}
+		
+		JSONObject gmConfJson = JSONObject.parseObject(idpsConfStr);
+		JSONObject redisJson=(JSONObject) gmConfJson.get(idpsId);
+		idpsProperties.put(IDPSConsants.INTERURL, redisJson.get(IDPSConsants.INTERURL));
+		idpsProperties.put(IDPSConsants.INTRAURL, redisJson.get(IDPSConsants.INTRAURL));
+		
+		return idpsProperties;
+	}
+    
+    public static Properties assembleSesProperties(String namespace) {
+		Properties sesProperties=new Properties();
+		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
+        if (configClient == null) {
+            throw new SDKException("cann't get sdkmode ses conf because IConfigClient is null");
+        }
+        // 获取ses namespace映射信息
+        String sesNSConfStr="";
+		try {
+			sesNSConfStr = configClient.get(
+			        SDKConstants.PAAS_SESNS_SES_MAPPED_PATH);
+		} catch (ConfigException e) {
+			LOG.error("error！cann't get sdkmode ses sesns conf from path["
+                    + SDKConstants.PAAS_SESNS_SES_MAPPED_PATH + "]",e);
+			throw new SDKException("error！cann't get sdkmode ses sesns conf from path["
+                    + SDKConstants.PAAS_SESNS_SES_MAPPED_PATH + "]");
+		}
+        if (StringUtil.isBlank(sesNSConfStr)) {
+            throw new SDKException("cann't get sdkmode ses sesns conf from path["
+                    + SDKConstants.PAAS_SESNS_SES_MAPPED_PATH + "]");
+        }
+        // 转换为JSON对象
+        JSONObject sesNSJson = JSONObject.parseObject(sesNSConfStr);
+        //namespace对应的redis服务标识，如SES001，SES002
+		String sesId=sesNSJson.getString(namespace);
+		if(StringUtil.isBlank(sesId)){
+			throw new SDKException("cann't get sdkmode sesId of namespace["
+                    + namespace + "]");
+		}
+		// 获取dss集群配置信息
+		String sesConfStr="";
+		try {
+			sesConfStr = configClient.get(SDKConstants.SDK_MODE_PAAS_SES_ELASTICSEARCH_MAPPED_PATH);
+		} catch (ConfigException e) {
+			LOG.error("error！cann't get sdkmode ses elasticsearch info from path["
+                    + SDKConstants.SDK_MODE_PAAS_SES_ELASTICSEARCH_MAPPED_PATH + "]",e);
+			throw new SDKException("error！cann't get sdkmode ses elasticsearch info from path["
+                    + SDKConstants.SDK_MODE_PAAS_SES_ELASTICSEARCH_MAPPED_PATH + "]");
+		}
+		
+		if(StringUtil.isBlank(sesConfStr)){
+			throw new SDKException("cann't get sdkmode ses elasticsearch conf of namespace["
+                    + namespace + "],sesId["+sesId+"]");
+		}
+		
+		JSONObject confJson = JSONObject.parseObject(sesConfStr);
+		JSONObject json=(JSONObject) confJson.get(sesId);
+		sesProperties.put(SESConsants.ESHOSTS, json.get(SESConsants.ESHOSTS));
+		sesProperties.put(SESConsants.INDEXNAME, json.get(SESConsants.INDEXNAME));
+        sesProperties.put(SESConsants.MAPPINGID, json.get(SESConsants.MAPPINGID));
+        sesProperties.put(SESConsants.MAPPING, json.get(SESConsants.MAPPING));
+        sesProperties.put(SESConsants.SHARDS, json.get(SESConsants.SHARDS));
+        sesProperties.put(SESConsants.REPLICAS, json.get(SESConsants.REPLICAS));
+		
+		return sesProperties;
+	}
+
 
 }

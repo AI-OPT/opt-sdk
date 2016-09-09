@@ -138,6 +138,23 @@ public final class SDKConstants {
      * {"com.ai.opt.xxx.xxx":"IDPS001","com.ai.opt.xxx.yyy":"IDPS002","com.ai.opt.xxx.zzz":"IDPS003"}
      */
     public static final String PAAS_IDPSNS_IDPS_MAPPED_PATH = "/com/ai/opt/paas-idpsns-idps-mapped";
+    
+    /**
+     * sdk模式下，paas服务对应的真实elasticsearch信息
+     * {
+     *   "IDPS001":
+     *   {
+     *   	"interUrl":"http://www.xxx.com/iPaas-IDPS/",
+     *   	"intraUrl":"http://10.1.245.226:18000/iPaas-IDPS/"     
+     *   },
+     *   "IDPS002":
+     *   {
+     *   	"interUrl":"http://www.xxx.com/iPaas-IDPS/",
+     *   	"intraUrl":"http://10.1.245.226:18000/iPaas-IDPS/"  
+     *   }
+     * }
+     */
+    public static final String SDK_MODE_PAAS_IDPS_GM_MAPPED_PATH = "/com/ai/opt/sdkmode-paas-idps-gm-mapped";
 
     /**
      * 配置某种场景下用哪个搜索服务ID
@@ -145,6 +162,54 @@ public final class SDKConstants {
      */
     public static final String PAAS_SESNS_SES_MAPPED_PATH = "/com/ai/opt/paas-sesns-ses-mapped";
 
+    /**
+     * sdk模式下，paas服务对应的真实elasticsearch信息
+     * {
+     *   "SES001":
+     *   {
+     *   	"eshosts":"10.1.xxx.xxx:9300,10.1.xxx.xxx:9300",
+     *   	"indexname":"user-detail-index",
+     *   	"mappingid":"userid",
+     *   	"mapping":
+	 *    			{
+	 *					"userInfo" : {
+	 *						    "properties" : {
+	 *						     	"userId" :  {"type" : "string", "store" : "yes","index": "not_analyzed"},
+	 *						       	"name" : {"type" : "string", "store" : "yes","analyzer":"ik_max_word"},
+	 *						       	"age" : {"type" : "integer"},"
+	 *						       	"created" : {"type" : "date", "format" : "strict_date_optional_time||epoch_millis"}
+	 *						    }   
+	 *					}  
+	 *		},
+     *      "shards":"2",
+     *   	"replicas":"1"
+     *   },
+     *   "SES002":
+     *   {
+     *   	"eshosts":"10.1.xxx.xxx:9300,10.1.xxx.xxx:9300",
+     *   	"indexname":"order-detail-index",
+     *   	"mappingid":"orderid",
+     *   	"mapping":
+	 *    			{
+	 *					"userInfo" : {
+	 *						    "properties" : {
+	 *						     	"userId" :  {"type" : "string", "store" : "yes","index": "not_analyzed"},
+	 *						       	"name" : {"type" : "string", "store" : "yes","analyzer":"ik_max_word"},
+	 *						       	"age" : {"type" : "integer"},"
+	 *						       	"created" : {"type" : "date", "format" : "strict_date_optional_time||epoch_millis"}
+	 *						    }   
+	 *					}  
+	 *		},
+     *      "shards":"2",
+     *   	"replicas":"1"
+     *   }
+     * }
+     */
+    public static final String SDK_MODE_PAAS_SES_ELASTICSEARCH_MAPPED_PATH = "/com/ai/opt/sdkmode-paas-ses-elasticsearch-mapped";
+    
+    
+    
+    
     /**
      * 技术服务与密码的映射关系 {"MCS001":"password","DSS001":"password","MDS001":"password"}
      */
