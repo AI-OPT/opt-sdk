@@ -4,8 +4,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsRequest;
-import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +16,6 @@ import com.ai.opt.sdk.exception.SDKException;
 import com.ai.paas.ipaas.search.ISearchClient;
 import com.ai.paas.ipaas.search.SearchClientFactory;
 import com.ai.paas.ipaas.search.SearchCmpClientFactory;
-import com.ai.paas.ipaas.search.SearchRuntimeException;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
@@ -51,7 +48,7 @@ public final class SESClientFactory {
 		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
 		
     	String sesId = ConfigTool.getSESId(sesns);
-    	Properties sesProp=ConfigTool.assembleDssProperties(sesns);
+    	Properties sesProp=ConfigTool.assembleSesProperties(sesns);
     	
     	String eshosts=sesProp.getProperty(SESConsants.ESHOSTS);
     	String indexName=sesProp.getProperty(SESConsants.INDEXNAME);

@@ -47,7 +47,7 @@ public final class IDPSClientFactory {
 		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
 		
     	String idpsId = ConfigTool.getIDPSId(idpsns);
-    	Properties idpsProp=ConfigTool.assembleDssProperties(idpsns);
+    	Properties idpsProp=ConfigTool.assembleIdpsProperties(idpsns);
     	String keyId=appname+"."+idpsId;
     	IImageClient client;
     	try {

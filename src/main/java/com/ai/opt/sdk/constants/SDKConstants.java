@@ -167,7 +167,7 @@ public final class SDKConstants {
      * {
      *   "SES001":
      *   {
-     *   	"eshosts":"10.1.xxx.xxx:9300,10.1.xxx.xxx:9300",
+     *   	"eshosts":"127.0.0.1:9300,127.0.0.1:9300",
      *   	"indexname":"user-detail-index",
      *   	"mappingid":"userid",
      *   	"mapping":
@@ -176,7 +176,7 @@ public final class SDKConstants {
 	 *						    "properties" : {
 	 *						     	"userId" :  {"type" : "string", "store" : "yes","index": "not_analyzed"},
 	 *						       	"name" : {"type" : "string", "store" : "yes","analyzer":"ik_max_word"},
-	 *						       	"age" : {"type" : "integer"},"
+	 *						       	"age" : {"type" : "integer"},
 	 *						       	"created" : {"type" : "date", "format" : "strict_date_optional_time||epoch_millis"}
 	 *						    }   
 	 *					}  
@@ -186,7 +186,7 @@ public final class SDKConstants {
      *   },
      *   "SES002":
      *   {
-     *   	"eshosts":"10.1.xxx.xxx:9300,10.1.xxx.xxx:9300",
+     *   	"eshosts":"127.0.0.1:9300,127.0.0.1:9300",
      *   	"indexname":"order-detail-index",
      *   	"mappingid":"orderid",
      *   	"mapping":
@@ -195,7 +195,7 @@ public final class SDKConstants {
 	 *						    "properties" : {
 	 *						     	"userId" :  {"type" : "string", "store" : "yes","index": "not_analyzed"},
 	 *						       	"name" : {"type" : "string", "store" : "yes","analyzer":"ik_max_word"},
-	 *						       	"age" : {"type" : "integer"},"
+	 *						       	"age" : {"type" : "integer"},
 	 *						       	"created" : {"type" : "date", "format" : "strict_date_optional_time||epoch_millis"}
 	 *						    }   
 	 *					}  
