@@ -19,6 +19,7 @@ import com.ai.paas.ipaas.search.SearchCmpClientFactory;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public final class SESClientFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(SESClientFactory.class);
@@ -49,11 +50,12 @@ public final class SESClientFactory {
 		
     	String sesId = ConfigTool.getSESId(sesns);
     	Properties sesProp=ConfigTool.assembleSesProperties(sesns);
-    	
+    	//System.out.println("sesProp="+JSON.toJSONString(sesProp));
     	String eshosts=sesProp.getProperty(SESConsants.ESHOSTS);
     	String indexName=sesProp.getProperty(SESConsants.INDEXNAME);
     	String mappingid=sesProp.getProperty(SESConsants.MAPPINGID);
-    	String mapping=sesProp.getProperty(SESConsants.MAPPING);
+    	JSONObject mappingJson=(JSONObject) sesProp.get(SESConsants.MAPPING);
+    	String mapping=JSON.toJSONString(mappingJson);
     	String shards=sesProp.getProperty(SESConsants.SHARDS);
     	String replicas=sesProp.getProperty(SESConsants.REPLICAS);
     	
@@ -63,9 +65,7 @@ public final class SESClientFactory {
     		if (!baseMap_sdkMode.containsKey(keyId)) {
     			client = SearchCmpClientFactory.getSearchClient(eshosts,indexName,mappingid);
     			baseMap_sdkMode.put(keyId, client);
-    		} else {
-    			//获取客户端
-    			client = baseMap_sdkMode.get(keyId);
+    			
     			//判断是否存在索引，若不存在，则创建
     			if(!client.existIndex(indexName)){
     				client.createIndex(indexName, Integer.parseInt(shards), Integer.parseInt(replicas));
@@ -74,6 +74,9 @@ public final class SESClientFactory {
     			if(!client.existMapping(indexName, mapping)){
     				client.addMapping(indexName, indexName, mapping);
     			}
+    		} else {
+    			//获取客户端
+    			client = baseMap_sdkMode.get(keyId);
     			
     		}
     	} catch (Exception e) {
