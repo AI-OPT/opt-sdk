@@ -70,8 +70,10 @@ public final class SESClientFactory {
     			if(!client.existIndex(indexName)){
     				client.createIndex(indexName, Integer.parseInt(shards), Integer.parseInt(replicas));
     			}
-    			//TODO addmapping   需加一个判断，盘点mapping是否存在
-    			client.addMapping(indexName, indexName, mapping);
+    			// addmapping   需加一个判断，盘点mapping是否存在
+    			if(!client.existMapping(indexName, mapping)){
+    				client.addMapping(indexName, indexName, mapping);
+    			}
     			
     		}
     	} catch (Exception e) {
