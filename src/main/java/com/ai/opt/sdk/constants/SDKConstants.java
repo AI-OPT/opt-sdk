@@ -144,8 +144,8 @@ public final class SDKConstants {
      * {
      *   "IDPS001":
      *   {
-     *   	"interUrl":"http://www.xxx.com/iPaas-IDPS/",
-     *   	"intraUrl":"http://10.1.245.226:18000/iPaas-IDPS/"     
+     *   	"interUrl":"http://10.1.245.8:18030/iPaas-IDPS",
+     *   	"intraUrl":"http://10.1.245.8:18030/iPaas-IDPS"     
      *   },
      *   "IDPS002":
      *   {
