@@ -29,15 +29,14 @@ public class HttpClientUtil {
     /**
      * 发送Post请求
      * @param url 请求的url地址
-     * @param param 参数报文体
-     * @param header 请求头信息
-     * @return 处理结果报文
+     * @param param 参数报文体JSON格式
+     * @param header 请求头信息，Map类型
+     * @return 处理结果报文JSON格式
      * @throws IOException
      * @throws URISyntaxException
      * @author gucl
      */
-    public static String sendPost(String url, String param, Map<String, String> header) throws IOException,
-            URISyntaxException {
+    public static String sendPost(String url, String param, Map<String, String> header) throws IOException, URISyntaxException {
     	logger.info("restful request url:"+url);
     	logger.info("restful request param:"+param);
     	DubboRestResponse resp=new DubboRestResponse();
@@ -116,9 +115,9 @@ public class HttpClientUtil {
 
     /**
      * 发送Post请求
-     * @param url
-     * @param param
-     * @return
+     * @param url 请求的url地址
+     * @param param 参数报文体JSON格式
+     * @return 处理结果报文JSON格式
      * @author gucl
      */
     public static String sendPost(String url, String param) {
@@ -142,16 +141,22 @@ public class HttpClientUtil {
     /**
      * 发送GET请求
      * 
-     * @param url
-     *            目的地址
-     * @param parameters
-     *            请求参数，Map类型。
-     * @return 远程响应结果
+     * @param url 请求的url地址
+     * @param parameters 请求参数，Map类型。
+     * @return 处理结果报文JSON格式
      */
     public static String sendGet(String url, Map<String, String> parameters) {
     	return sendGet(url,parameters,null);
     }
     
+    /**
+     * 
+     * @param url 请求的url地址
+     * @param parameters 请求参数JSON格式
+     * @param header 请求头信息，Map类型
+     * @return 处理结果报文JSON格式
+     * @author gucl
+     */
     public static String sendGet(String url, Map<String, String> parameters, Map<String, String> header) {
     	DubboRestResponse resp=new DubboRestResponse();
     	StringBuffer buffer = new StringBuffer();// 返回的结果
