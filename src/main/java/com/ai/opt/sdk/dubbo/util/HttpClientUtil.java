@@ -40,6 +40,7 @@ public class HttpClientUtil {
             URISyntaxException {
     	logger.info("restful request url:"+url);
     	logger.info("restful request param:"+param);
+    	String charset = "utf-8";
     	DubboRestResponse resp=new DubboRestResponse();
     	StringBuffer buffer = new StringBuffer();
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -47,6 +48,9 @@ public class HttpClientUtil {
         if(header!=null){
         	for (Map.Entry<String, String> entry : header.entrySet()) {
         		httpPost.setHeader(entry.getKey(), entry.getValue());
+        		if("charset".equals(entry.getKey())){
+        		    charset = entry.getValue();
+        		}
         	}        	
         }
         StringEntity dataEntity = new StringEntity(param, ContentType.APPLICATION_JSON);
@@ -57,7 +61,7 @@ public class HttpClientUtil {
             if (response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entity = response.getEntity();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        entity.getContent()));
+                        entity.getContent(), charset));
                 String tempStr;
                 while ((tempStr = reader.readLine()) != null)
                     buffer.append(tempStr);
