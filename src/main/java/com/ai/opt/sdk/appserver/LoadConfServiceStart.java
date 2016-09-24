@@ -51,30 +51,35 @@ public class LoadConfServiceStart {
         LOG.error("开始将属性文件(properties)加载到配置中心");
         if (args == null || args.length == 0) {
             LOG.error("请输入配置文件路径");
-            System.exit(-1);
+            return;
+        	//System.exit(-1);
         }
         if (args.length > 1) {
             LOG.error("只允许有一个参数，实际有[" + args.length + "]个");
-            System.exit(-1);
+            return;
+        	//System.exit(-1);
         }
         String configPath = args[0];
         if (StringUtil.isBlank(configPath)) {
             LOG.error("请传入配置的路径，采用-DconfigPath");
-            System.exit(-1);
+            return;
+        	//System.exit(-1);
         }
         loadFiles(configPath);
         LOG.error("完成属性文件(properties)加载到配置中心");
     }
 
-    private static Map<String,Properties> loadFiles(String configDir) {
+    private static Map<String,Properties> loadFiles(String configPath) {
     	Map<String,Properties> propList=new HashMap<String,Properties>();
 
-        File configFileDir = new File(configDir);
-        if (!configFileDir.exists()) {
-            System.exit(-1);
+        File configPathDir = new File(configPath);
+        if (!configPathDir.exists()) {
+        	LOG.error("传入的配置路径【"+configPath+"】不存在，请重新检查configPath");
+            return null;
+        	//System.exit(-1);
         }
 
-        File[] configfiles = configFileDir.listFiles(new FileFilter() {
+        File[] configfiles = configPathDir.listFiles(new FileFilter() {
             private String extension = "properties";
 
             public boolean accept(File file) {
