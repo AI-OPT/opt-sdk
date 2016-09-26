@@ -1,6 +1,6 @@
 package com.ai.opt.sdk.util;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -15,7 +15,7 @@ public class ApplicationContextUtil {
     //约定 spring context的路径
     private static final String PATH = "classpath:context/core-context.xml";
 
-    private static ApplicationContext appContext;
+    private static AbstractApplicationContext appContext;
 
     private static ApplicationContextUtil instance;
 
@@ -34,7 +34,7 @@ public class ApplicationContextUtil {
      * @param ctx
      * @author gucl
      */
-    public synchronized static void loadApplicationContext(ApplicationContext ctx){
+    public synchronized static void loadApplicationContext(AbstractApplicationContext ctx){
     	appContext=ctx;
     	instance = new ApplicationContextUtil();
     }
@@ -113,4 +113,9 @@ public class ApplicationContextUtil {
         return (T) appContext.getBean(beanId);
     }
 
+    public static void closeAppContext() {
+        if(null != appContext) {
+            appContext.close();
+        }
+    }
 }
