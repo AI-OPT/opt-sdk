@@ -20,7 +20,6 @@ import com.ai.paas.ipaas.PaaSConstant;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.paas.ipaas.ccs.constants.AddMode;
 import com.ai.paas.ipaas.ccs.zookeeper.ConfigWatcher;
-import com.ai.paas.ipaas.ccs.zookeeper.MutexLock;
 import com.ai.paas.ipaas.ccs.zookeeper.ZKClient;
 import com.ai.paas.ipaas.ccs.zookeeper.impl.ZKPool;
 import com.ai.paas.ipaas.ccs.zookeeper.impl.ZKPoolFactory;
@@ -240,21 +239,6 @@ public class SdkModeConfigClient implements IConfigClient {
 			acls.add(userACL);
 			return acls;
 			
-		}
-	}
-
-	public MutexLock getMutexLock(String path)  {
-		if (!validatePath(path))
-			throw new SDKException("path[" + path + "]不合法,必须以'/'开头，且不能以'/'结尾");
-		ZKClient zkClient = null;
-		try {
-			zkClient = getZkClientFromPool();
-			return new MutexLock(zkClient.getInterProcessLock(appendAppname(path)));
-		} catch (Exception e) {
-			if ((e instanceof KeeperException.NoAuthException)) {
-				throw new SDKException("授权失败", e);
-			}
-			throw new SDKException("获取分布式锁失败", e);
 		}
 	}
 
