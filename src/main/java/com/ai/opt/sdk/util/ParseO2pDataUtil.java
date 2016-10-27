@@ -4,7 +4,7 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-public class parseO2pDataUtil {
+public class ParseO2pDataUtil {
 
 	public static JSONObject getData(String str){
 		
