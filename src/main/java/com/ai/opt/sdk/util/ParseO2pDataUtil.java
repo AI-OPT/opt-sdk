@@ -30,10 +30,4 @@ public class ParseO2pDataUtil {
 		}
 		return (JSONObject) JSON.parse("{resultCode:"+o2pResultCode+"}");
 	}
-	public static void main(String[] args) {
-		String data = "{data:{}}";
-		JSONObject str = (JSONObject)JSON.parse(data);
-		System.out.println(str.getString("data"));
-		
-	}
 }
