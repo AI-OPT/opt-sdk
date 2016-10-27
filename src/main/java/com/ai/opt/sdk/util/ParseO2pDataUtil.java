@@ -11,6 +11,13 @@ public class ParseO2pDataUtil {
 		JSONObject json = JSON.parseObject(str);
 		String o2pResultCode = json.getString("resultCode");
 		/**
+		 * 如果o2pResultCode为空代表没有查询到数据
+		 * 返回的数据是{'responseHeader':{'resultCode': '000000','resultMessage': 'success','success': true},'data':{}}
+		 */
+		if(o2pResultCode==null){
+			return null;
+		}
+		/**
 		 * 首先查看o2p的resultCode，000000代表成功
 		 */
 		if(o2pResultCode!=null&&ExceptCodeConstants.Special.SUCCESS.equals(o2pResultCode)){
@@ -30,4 +37,5 @@ public class ParseO2pDataUtil {
 		}
 		return (JSONObject) JSON.parse("{resultCode:"+o2pResultCode+"}");
 	}
+	
 }
