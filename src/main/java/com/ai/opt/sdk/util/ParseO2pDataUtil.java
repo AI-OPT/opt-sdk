@@ -35,7 +35,7 @@ public class ParseO2pDataUtil {
 				return o2pResultData;
 			}
 		}
-		return (JSONObject) JSON.parse("{resultCode:"+o2pResultCode+"}");
+		return (JSONObject) JSON.parse("{resultCode:\""+o2pResultCode+"\"}");
 	}
 	
 }
