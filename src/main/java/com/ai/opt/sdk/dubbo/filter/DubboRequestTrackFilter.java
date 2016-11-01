@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseInfo;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.CollectionUtil;
@@ -53,6 +55,19 @@ public class DubboRequestTrackFilter implements Filter {
         String tradeSeq = UUIDUtil.genId32();
         // 打印请求参数明细
         if (CollectionUtil.isEmpty(requestParams)) {
+        	// 这里需要设置下区域参数
+			for (Object obj : requestParams) {
+				if (null != obj && obj instanceof BaseInfo) {
+					BaseInfo baseInfo = (BaseInfo) obj;
+					if (null != baseInfo.getLocale()) {
+						//这里要测试
+						LocaleContextHolder.setLocale(baseInfo.getLocale());
+					}
+					if(null!=baseInfo.getTimeZone()) {
+						LocaleContextHolder.setTimeZone(baseInfo.getTimeZone());
+					}
+				}
+			}
             if (LOG.isInfoEnabled()) {
                 LOG.info("TRADE_SEQ:{},请求接口:{},请求方法:{},请求参数:{}", tradeSeq, reqSV, reqMethod, "");
             }
