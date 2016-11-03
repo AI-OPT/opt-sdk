@@ -13,7 +13,11 @@ public final class SeqClientFactory {
 
     public static ISeqClient getSeqClient() {
         if (sequenceClient == null) {
-                sequenceClient = new NormalSeqClientImpl();
+        	synchronized(SeqClientFactory.class){
+        		if(sequenceClient == null){
+        			sequenceClient = new NormalSeqClientImpl();
+        		}        		
+        	}
         }
         return sequenceClient;
     }
