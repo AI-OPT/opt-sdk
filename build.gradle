@@ -22,7 +22,7 @@ ext {
     ipaasMcsVersion="0.3";
     ipaasDssVersion="0.3";
     ipaasMdsVersion="0.3";
-    ipaasSesVersion="0.2.6.1";
+    ipaasSesVersion="0.3";
     ipaasIdpsVersion="0.3";
 
     appName="opt-sdk"
@@ -46,9 +46,9 @@ dependencies {
     compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
     compile "com.ai:ipaas-mds-comp:${ipaasMdsVersion}"
     compile "com.ai:ipaas-ses:${ipaasSesVersion}"
-    compile ("com.ai:ipaas-idps:${ipaasIdpsVersion}") {
-        //exclude group: 'commons-httpclient', module: 'commons-httpclient'
-    }
+    compile "com.ai:ipaas-ses-base:${ipaasSesVersion}"
+    compile "com.ai:ipaas-idps:${ipaasIdpsVersion}"
+    compile "com.ai:ipaas-idps-comp:${ipaasIdpsVersion}"
     
     compile "com.ai.opt:opt-base:${optBaseVersion}"
     compile "javax.validation:validation-api:1.0.0.GA"
