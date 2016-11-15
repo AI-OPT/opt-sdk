@@ -8,7 +8,7 @@ import com.ai.opt.sdk.components.mo.PaasConf;
 import com.ai.opt.sdk.components.util.ConfigTool;
 import com.ai.opt.sdk.exception.SDKException;
 import com.ai.paas.ipaas.image.IImageClient;
-import com.ai.paas.ipaas.image.ImageClientFactory;
+import com.ai.paas.ipaas.image.ImageFactory;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 
@@ -32,7 +32,7 @@ public final class IDPSClientFactory {
         IImageClient client;
         try {
         	if (!baseMap.containsKey(keyId)) {
-        		client = ImageClientFactory.getClient(authDescriptor);
+        		client = ImageFactory.getClient(authDescriptor);
     			baseMap.put(keyId, client);
     		}
         	else{

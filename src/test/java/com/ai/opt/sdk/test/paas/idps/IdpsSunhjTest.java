@@ -9,7 +9,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.ai.paas.ipaas.image.IImageClient;
-import com.ai.paas.ipaas.image.ImageClientFactory;
+import com.ai.paas.ipaas.image.ImageFactory;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 
 public class IdpsSunhjTest {
@@ -21,7 +21,7 @@ public class IdpsSunhjTest {
 		ad = new AuthDescriptor(AUTH_ADDR, "4BCEDD88820D4E5295568DA835C3FB6F",
 				"123456", "IDPS005");
 		try {
-			im = ImageClientFactory.getClient(ad);
+			im = ImageFactory.getClient(ad);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

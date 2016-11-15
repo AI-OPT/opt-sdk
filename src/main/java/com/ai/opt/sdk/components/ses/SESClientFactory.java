@@ -7,8 +7,8 @@ import com.ai.opt.sdk.components.base.ComponentConfigLoader;
 import com.ai.opt.sdk.components.mo.PaasConf;
 import com.ai.opt.sdk.components.util.ConfigTool;
 import com.ai.opt.sdk.exception.SDKException;
-import com.ai.paas.ipaas.search.service.ISearchClient;
-import com.ai.paas.ipaas.search.service.SearchClientFactory;
+import com.ai.paas.ipaas.search.ISearchClient;
+import com.ai.paas.ipaas.search.SearchClientFactory;
 import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 
