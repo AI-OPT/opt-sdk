@@ -205,6 +205,11 @@ publishing {
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-ses-base")
+                            delegate.version("${ipaasSesVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-idps")
                             delegate.version("${ipaasIdpsVersion}")
                             /*delegate.exclusions{
@@ -213,6 +218,11 @@ publishing {
                                     delegate.artifactId("commons-httpclient")
                                 }
                             }*/
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-idps-comp")
+                            delegate.version("${ipaasIdpsVersion}")
                         }
                         delegate.dependency {
                             delegate.groupId("org.springframework")
