@@ -24,7 +24,7 @@ ext {
     ipaasMdsVersion="0.3";
     ipaasSesVersion="0.3.1";
     ipaasIdpsVersion="0.3";
-    ipaasI18nVersion="0.3.1";
+    ipaasI18nVersion="0.3.2";
     ipaasCommonVersion="0.3.1";
 
     appName="opt-sdk"
