@@ -26,6 +26,8 @@ ext {
     ipaasIdpsVersion="0.3";
     ipaasI18nVersion="0.3.2";
     ipaasCommonVersion="0.3.1";
+    
+    elasticjobVersion="2.0.0-SNAPSHOT";
 
     appName="opt-sdk"
     moduleVersion='2.2.1-SNAPSHOT'
@@ -52,7 +54,23 @@ dependencies {
     compile "com.ai:ipaas-idps:${ipaasIdpsVersion}"
     compile "com.ai:ipaas-idps-comp:${ipaasIdpsVersion}"
     compile "com.ai:ipaas-i18n-spring:${ipaasI18nVersion}"  
-    compile "com.ai:ipaas-common:${ipaasCommonVersion}"  
+    compile "com.ai:ipaas-common:${ipaasCommonVersion}"
+    
+    //elasticjob  
+    compile ("com.dangdang:elastic-job-lite-core:${elasticjobVersion}"){
+    	exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+        
+        exclude group: 'org.eclipse.jetty.aggregate', module: 'jetty-all-server'
+    }  
+    compile ("com.dangdang:elastic-job-lite-spring:${elasticjobVersion}"){
+    	exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+        
+        exclude group: 'org.eclipse.jetty.aggregate', module: 'jetty-all-server'
+    }  
     
     
     compile "com.ai.opt:opt-base:${optBaseVersion}"
@@ -445,6 +463,53 @@ publishing {
                                 delegate.groupId("org.quartz-scheduler")
                                 delegate.artifactId("quartz")
                                 delegate.version("2.2.1")
+                        }
+                        //elasticjob
+                        delegate.dependency {
+                            delegate.groupId("com.dangdang")
+                            delegate.artifactId("elastic-job-lite-core")
+                            delegate.version("${elasticjobVersion}")
+                            delegate.exclusions{
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-core")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-json")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-server")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("org.eclipse.jetty.aggregate")
+                                    delegate.artifactId("jetty-all-server")
+                                }
+                            }
+                        } 
+                        delegate.dependency {
+                            delegate.groupId("com.dangdang")
+                            delegate.artifactId("elastic-job-lite-spring")
+                            delegate.version("${elasticjobVersion}")
+                            delegate.exclusions{
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-core")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-json")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-server")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("org.eclipse.jetty.aggregate")
+                                    delegate.artifactId("jetty-all-server")
+                                }
+                            }
                         }      
                     	                                                                                                       
  			

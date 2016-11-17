@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg" 
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context.xsd
+		   http://www.springframework.org/schema/aop
+		   http://www.springframework.org/schema/aop/spring-aop.xsd
+		   http://www.springframework.org/schema/tx
+		   http://www.springframework.org/schema/tx/spring-tx.xsd
+   		   http://www.dangdang.com/schema/ddframe/reg 
+           http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+           http://www.dangdang.com/schema/ddframe/job 
+           http://www.dangdang.com/schema/ddframe/job/job.xsd
+		   ">
+	 <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    </bean>
+    
+    <context:property-placeholder location="classpath:*/*.properties" />
+    <!--configure registry center -->
+    <reg:zookeeper id="regCenter" server-lists="${job.zkaddr}" namespace="dd-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
+
+    <!--configure job -->
+    <job:simple id="myElasticJob" class="com.ai.opt.sdk.test.paas.elasticjob.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?"   sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />
+</beans>
