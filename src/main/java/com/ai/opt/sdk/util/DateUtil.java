@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -78,6 +79,29 @@ public final class DateUtil {
         }
         Timestamp time = getSysDate();
         DateFormat dfmt = new SimpleDateFormat(pattern);
+        java.util.Date date = time;
+        return dfmt.format(date);
+    }
+    
+    /**
+     * 根据指定的格式和时区输出时间字符串
+     * 
+     * @param pattern
+     * @param timeZone
+     * @return
+     * @author zhangchao
+     * @throws SystemException 
+     */
+    public static String getDateString(String pattern,TimeZone timeZone) throws SystemException {
+        if (StringUtil.isBlank(pattern)) {
+            throw new SystemException("请指定日期格式");
+        }
+        if(timeZone ==null){
+            throw new SystemException("请指定时区");
+        }
+        Timestamp time = getSysDate();
+        DateFormat dfmt = new SimpleDateFormat(pattern);
+        dfmt.setTimeZone(timeZone);
         java.util.Date date = time;
         return dfmt.format(date);
     }
@@ -644,7 +668,15 @@ public final class DateUtil {
         calender.add(Calendar.SECOND, 1);
         return new Timestamp(calender.getTimeInMillis());
     }
-
+    
+    /**
+     * 获取格式为yyyy-MM-dd的字符串对应的时间
+     * 
+     * @param time
+     * @return
+     * @author jackieliu
+     * @ApiDocMethod
+     */
     public static Timestamp getTimestamp(String time) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         format.setLenient(false);
@@ -683,6 +715,38 @@ public final class DateUtil {
             throw new SystemException("请指定日期格式");
         }
         DateFormat format = new SimpleDateFormat(pattern);
+        format.setLenient(false);
+        Timestamp ts = null;
+        try {
+            ts = new Timestamp(format.parse(time).getTime());
+        } catch (ParseException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return ts;
+    }
+    
+    /**
+     * 将指定格式并指定时区的日期字符串转成指Timestamp
+     * 
+     * @param time
+     * @param pattern
+     * @param timeZone
+     * @return
+     * @author liutong
+     * @throws SystemException 
+     */
+    public static Timestamp getTimestamp(String time, String pattern,TimeZone timeZone) throws SystemException {
+        if (StringUtil.isBlank(time)) {
+            throw new SystemException("请指定字符串时间");
+        }
+        if (StringUtil.isBlank(pattern)) {
+            throw new SystemException("请指定日期格式");
+        }
+        if(timeZone==null){
+            throw new SystemException("请指定时区");
+        }
+        DateFormat format = new SimpleDateFormat(pattern);
+        format.setTimeZone(timeZone);
         format.setLenient(false);
         Timestamp ts = null;
         try {
