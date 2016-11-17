@@ -58,16 +58,18 @@ dependencies {
     
     //elasticjob  
     compile ("com.dangdang:elastic-job-lite-core:${elasticjobVersion}"){
-    	//exclude group: 'com.sun.jersey', module: 'jersey-core'
-        //exclude group: 'com.sun.jersey', module: 'jersey-json'
-        //exclude group: 'com.sun.jersey', module: 'jersey-server'
+    	exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+        exclude group: 'com.sun.jersey', module: 'jersey-servlet'
         
         exclude group: 'org.eclipse.jetty.aggregate', module: 'jetty-all-server'
     }  
     compile ("com.dangdang:elastic-job-lite-spring:${elasticjobVersion}"){
-    	//exclude group: 'com.sun.jersey', module: 'jersey-core'
-        //exclude group: 'com.sun.jersey', module: 'jersey-json'
-        //exclude group: 'com.sun.jersey', module: 'jersey-server'
+    	exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+        exclude group: 'com.sun.jersey', module: 'jersey-servlet'
         
         exclude group: 'org.eclipse.jetty.aggregate', module: 'jetty-all-server'
     }  
@@ -470,7 +472,7 @@ publishing {
                             delegate.artifactId("elastic-job-lite-core")
                             delegate.version("${elasticjobVersion}")
                             delegate.exclusions{
-                                /*delegate.exclusion{
+                                delegate.exclusion{
                                     delegate.groupId("com.sun.jersey")
                                     delegate.artifactId("jersey-core")
                                 }
@@ -483,7 +485,11 @@ publishing {
                                     delegate.groupId("com.sun.jersey")
                                     delegate.artifactId("jersey-server")
                                 }
-                                */
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-servlet")
+                                }
+                                
                                 delegate.exclusion{
                                     delegate.groupId("org.eclipse.jetty.aggregate")
                                     delegate.artifactId("jetty-all-server")
@@ -495,7 +501,7 @@ publishing {
                             delegate.artifactId("elastic-job-lite-spring")
                             delegate.version("${elasticjobVersion}")
                             delegate.exclusions{
-                                /*delegate.exclusion{
+                                delegate.exclusion{
                                     delegate.groupId("com.sun.jersey")
                                     delegate.artifactId("jersey-core")
                                 }
@@ -503,12 +509,15 @@ publishing {
                                     delegate.groupId("com.sun.jersey")
                                     delegate.artifactId("jersey-json")
                                 }
-                                
+                                 
                                 delegate.exclusion{
                                     delegate.groupId("com.sun.jersey")
                                     delegate.artifactId("jersey-server")
                                 }
-                                */
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-servlet")
+                                }
                                 delegate.exclusion{
                                     delegate.groupId("org.eclipse.jetty.aggregate")
                                     delegate.artifactId("jetty-all-server")
