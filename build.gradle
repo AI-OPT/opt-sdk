@@ -19,7 +19,7 @@ ext {
     
     ipaasUacVersion="0.3";
     ipaasCcsVersion="0.3";
-    ipaasMcsVersion="0.3";
+    ipaasMcsVersion="0.3.1";
     ipaasDssVersion="0.3";
     ipaasMdsVersion="0.3";
     ipaasSesVersion="0.3";
