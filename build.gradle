@@ -44,6 +44,7 @@ dependencies {
 
 	compile "com.ai:ipaas-uac:${ipaasUacVersion}"
     compile "com.ai:ipaas-ccs:${ipaasCcsVersion}"
+    compile "com.ai:ipaas-mcs-base:${ipaasMcsVersion}"
     compile "com.ai:ipaas-mcs:${ipaasMcsVersion}"
     compile "com.ai:ipaas-mcs-comp:${ipaasMcsVersion}"
     compile "com.ai:ipaas-dss:${ipaasDssVersion}"
@@ -194,6 +195,11 @@ publishing {
                             delegate.groupId("com.ai")
                             delegate.artifactId("ipaas-ccs")
                             delegate.version("${ipaasCcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mcs-base")
+                            delegate.version("${ipaasMcsVersion}")
                         }
                         delegate.dependency {
                             delegate.groupId("com.ai")
