@@ -20,6 +20,8 @@ public class ZKLockTestTread extends Thread{
         boolean lockflag=false;
         try{
         	lock=ZKMutexLockFactory.getZKMutexLock(ZKLOCK_NODE_PATH);
+        	//指定zk的方式
+        	//lock=ZKMutexLockFactory.getZKMutexLock("127.0.0.1:8080", ZKLOCK_NODE_PATH);
         	//lock.acquire();//争锁，无限等待
         	lockflag=lock.acquire(10, TimeUnit.SECONDS);//争锁，超时时间10秒。
         	if(lockflag){
