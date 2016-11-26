@@ -27,29 +27,30 @@ public class ZKLockTestTread extends Thread{
         	if(lockflag){
         		//获取到分布式锁，执行任务
         		logger.info("SUCESS线程【"+Thread.currentThread().getName()+"】获取到分布式锁，执行任务");
-        		Thread.sleep(1000);
+        		Thread.sleep(1000000000);
         	}
         	else{
         		//未获取到分布式锁，不执行任务
         		logger.info("FAILURE线程【"+Thread.currentThread().getName()+"】未获取到分布式锁，不执行任务");
         	}
         } catch (PaasException e) {
-        	logger.error("获取分布式锁出错："+e.getMessage(),e);
-			e.printStackTrace();
+        	logger.error("线程【"+Thread.currentThread().getName()+"】获取分布式锁出错："+e.getMessage(),e);
+			//e.printStackTrace();
 		}
         catch(Exception e)
         {
-        	logger.error("运行出错："+e.getMessage(),e);
-			e.printStackTrace();
+        	logger.error("线程【"+Thread.currentThread().getName()+"】运行出错："+e.getMessage(),e);
+			//e.printStackTrace();
 
         }
         finally{
         	if(lock!=null&&lockflag){
         		try {
 					lock.release();
+					logger.error("线程【"+Thread.currentThread().getName()+"】释放分布式锁OK");
 				} catch (Exception e) {
-					logger.error("释放分布式锁出错："+e.getMessage(),e);
-					e.printStackTrace();
+					logger.error("线程【"+Thread.currentThread().getName()+"】释放分布式锁出错："+e.getMessage(),e);
+					//e.printStackTrace();
 				}
         	}
         }
