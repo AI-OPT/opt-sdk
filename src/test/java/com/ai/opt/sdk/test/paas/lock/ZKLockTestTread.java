@@ -27,7 +27,7 @@ public class ZKLockTestTread extends Thread{
         	if(lockflag){
         		//获取到分布式锁，执行任务
         		logger.info("SUCESS线程【"+Thread.currentThread().getName()+"】获取到分布式锁，执行任务");
-        		Thread.sleep(1000);
+        		Thread.sleep(1000000000);
         	}
         	else{
         		//未获取到分布式锁，不执行任务
