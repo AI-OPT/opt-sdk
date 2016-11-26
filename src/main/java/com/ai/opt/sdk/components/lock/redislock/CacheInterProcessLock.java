@@ -18,9 +18,9 @@ public class CacheInterProcessLock {
 
 		private static final Logger LOGGER = LoggerFactory.getLogger(CacheInterProcessLock.class);
 
-		private static final int DEFAULT_SINGLE_EXPIRE_TIME = 3;
+		private static final int DEFAULT_SINGLE_EXPIRE_TIME = Integer.MAX_VALUE;
 		
-		private static final int DEFAULT_BATCH_EXPIRE_TIME = 6;
+		private static final int DEFAULT_BATCH_EXPIRE_TIME = Integer.MAX_VALUE;
 
 		private final ICacheClient cacheClient;
 		
@@ -76,18 +76,18 @@ public class CacheInterProcessLock {
 			try {
 				long nano = System.nanoTime();
 				do {
-					LOGGER.debug("try lock key: " + key);
+					LOGGER.info("try lock key: " + key);
 					Long i = cacheClient.setnx(key, key);
 					if (i == 1) { 
 						cacheClient.expire(key, DEFAULT_SINGLE_EXPIRE_TIME);
-						LOGGER.debug("get lock, key: " + key + " , expire in " + DEFAULT_SINGLE_EXPIRE_TIME + " seconds.");
+						LOGGER.info("get lock, key: " + key + " , expire in " + DEFAULT_SINGLE_EXPIRE_TIME + " seconds.");
 						LockData newLockData = new LockData(currentThread, key);
 				        threadData.put(currentThread, newLockData);
 						return Boolean.TRUE;
 					} else { // 存在锁
 						if (LOGGER.isDebugEnabled()) {
 							String desc = cacheClient.get(key);
-							LOGGER.debug("key: " + key + " locked by another business：" + desc);
+							LOGGER.info("key: " + key + " locked by another business：" + desc);
 						}
 					}
 					if (timeout == 0) {
