@@ -18,9 +18,9 @@ public class CacheInterProcessLock {
 
 		private static final Logger LOGGER = LoggerFactory.getLogger(CacheInterProcessLock.class);
 
-		private static final int DEFAULT_SINGLE_EXPIRE_TIME = Integer.MAX_VALUE;
+		private static final int DEFAULT_SINGLE_EXPIRE_TIME = 30;
 		
-		private static final int DEFAULT_BATCH_EXPIRE_TIME = Integer.MAX_VALUE;
+		private static final int DEFAULT_BATCH_EXPIRE_TIME = 60;
 
 		private final ICacheClient cacheClient;
 		
