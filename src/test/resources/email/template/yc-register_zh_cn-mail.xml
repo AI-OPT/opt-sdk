@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-body>
+<html>
+<head>
+    
+</head>
+<style type="text/css">
+/*************************初始化*************************/
+*'{'font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing:grayscale; box-sizing: border-box; border:0; padding:0; margin:0;'}'
+body'{'font-size:14px; color:#6a6c6f; background:#fff;'}'
+ul'{' list-style:none;'}'
+a'{'text-decoration:none;font-size:12px;'}'
+a:link'{' text-decoration:none;'}'
+a:active'{' text-decoration:none;'}'
+var,em '{'font-style:normal;'}'
+table'{'border-collapse:collapse;'}'
+.left'{' float:left'}'
+.right'{' float:right;'}'
+.center'{'text-align: center;'}'
+input'{'outline:none;'}'
+button'{'outline:none; cursor:pointer;'}'
+html,body '{'height:100%; '}'
+img'{'vertical-align:middle'}'
+/****/
+.mail-conter'{'width:760px;margin:0 auto;'}'
+.mail-logo'{'width:100%;float:left;margin-top:22px;'}'
+.mail-title'{'width:100%;float:left;text-align: center;margin-top:35px;font-size:22px;color:#2c3e50;font-weight:bold;'}'
+.mail-title span'{'color:#2965e6'}'
+.mail-main'{'width:100%;height: auto;border:1px solid #dbdfe5;border-top:3px solid #0a67f0;float:left;margin-top:40px;padding:35px 35px;'}'
+.word-title'{'width:100%;display:inline-block;'}'
+.word-title p'{'font-size:14px;margin-bottom:20px;'}'
+.word-title .word'{'font-size:16px;color:#2c3e50'}'
+.word-title p span'{'color:#2965e6'}'
+.word-list'{'width:100%;float:left'}'
+.word-list-title'{'height:30px;background:#f0f3fa;border-top:1px solid #0a67f0;line-height:30px; padding-left:20px;font-size:14px;color:#2c3e50;font-weight: bold;'}'
+.word-list-text'{'width:100%;float:left;padding:30px 20px;'}'
+.word-list-text ul li'{'line-height:25px;color:#6a6c6f'}'
+.word-list-text ul li a'{'color:#2965e6'}'
+.word-foot'{'width:100%;float:left;'}'
+.word-foot p'{'margin:20px 0;'}'
+.word-foot p a'{'color:#2965e6'}'
+.word-foot p span'{'color:#2965e6;font-size:18px;'}'
+.mail-footer-conter'{'width:100%;height:122px;background:#092e51;float:left;margin-top:20px;'}'
+.footer-main'{'width:760px;margin:0 auto;'}'
+.footer-main ul'{'width:100%;float:left;margin-top:20px;'}'
+.footer-main ul li'{'float:left'}'
+.footer-main ul .left p'{'float:left;color:#fff'}'
+.footer-main ul .left .word'{'margin:22px 0 0 18px;font-size:12px;'}'
+.footer-main ul .right'{'float:right;font-size:12px;text-align: right;color:#3f76aa;margin-top:20px;'}'
+</style>
+<body>	
+	<div class="mail-conter">
+		<div class="mail-logo">
+		<img src="" />
+		</div>
+		<div class="mail-title"></div>
+		<div class="mail-main">
+			<div class="word-title">
+				<p class="word">尊敬的<span>{0}</span>：</p>
+				<p></p>
+			</div>
+			<div class="word-list">
+				<div class="word-list-title"></div>
+				<div class="word-list-text">
+					<ul>
+						<li>
+						 您好，感谢您注册译云平台，请点击下面的链接完成注册（24小时内有效），译云伴您步入语言沟通无障碍的世界
+						<br></br>
+						<a href="{1}">{1}</a>
+						<br></br>
+						（如上述链接点击无效，可以将此链接复制到浏览器地址栏中打开）
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="word-foot">
+				<p>本邮件由系统自动发送，请勿直接回复！</p>
+				<p class="right">
+					<span><img src="" /></span>
+					<span>400-119-8080</span>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="mail-footer-conter">
+		<div class="footer-main">
+			<ul>
+				<li class="left">
+					<p><img src=""/></p>
+					<p class="word">扫描左侧二维码，关注译云平台官方微信，
+                    <br></br>获得优惠活动和翻译资讯信息。</p>
+				</li>
+				<li class="right">
+					<p>中译语通科技（北京）有限公司  版权所有</p>
+					<p>Copyright © 2014 www.yeecloud.com All rights reserved.
+</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+</body>
+</html>
+
+</xml-body>
