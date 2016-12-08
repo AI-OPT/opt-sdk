@@ -51,54 +51,54 @@ public final class CCSClientFactory {
     	}
     }
     private static IConfigClient getDefaultConfigClientBySDkMode() {
-		LOG.debug("getDefaultConfigClientBySDkMode开始");
+		LOG.info("getDefaultConfigClientBySDkMode开始");
     	IConfigClient client = null;
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         String appname = authInfo.getCcsAppName();
 		String zkAddr = authInfo.getCcsZkAddress();
-        LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+        LOG.info("authInfo="+JSON.toJSONString(authInfo));
         try {
         	if (!baseMap_sdkMode.containsKey(appname)) {
         		client = getConfigClientBySdkMode(appname, zkAddr);
         		baseMap_sdkMode.put(appname, client);
-    			LOG.debug("从baseMap直接取数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
+    			LOG.info("从baseMap直接取数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
     		}
         	else{
         		client=baseMap_sdkMode.get(appname);
-        		LOG.debug("baseMap无数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
+        		LOG.info("baseMap无数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
         	}
             
         } catch (Exception e) {
             LOG.error("get paas config sdk mode center error", e);
             throw new SDKException(e);
         }
-        LOG.debug("getDefaultConfigClientBySDkMode结束");
+        LOG.info("getDefaultConfigClientBySDkMode结束");
         return client;
 	}
 	private static IConfigClient getDefaultConfigClientByServiceMode() {
-		LOG.debug("getDefaultConfigClient开始");
+		LOG.info("getDefaultConfigClient开始");
     	IConfigClient client = null;
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         AuthDescriptor authDescriptor = new AuthDescriptor(authInfo.getAuthUrl(),
                 authInfo.getPid(), authInfo.getCcsPassword(), authInfo.getCcsServiceId());
         String keyId=authInfo.getPid()+"."+authInfo.getCcsServiceId();
-        LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+        LOG.info("authInfo="+JSON.toJSONString(authInfo));
         try {
         	if (!baseMap_serviceMode.containsKey(keyId)) {
         		client = ConfigFactory.getConfigClient(authDescriptor);
     			baseMap_serviceMode.put(keyId, client);
-    			LOG.debug("从baseMap直接取数据["+keyId+"]"+JSON.toJSONString(baseMap_serviceMode));
+    			LOG.info("从baseMap直接取数据["+keyId+"]"+JSON.toJSONString(baseMap_serviceMode));
     		}
         	else{
         		client=baseMap_serviceMode.get(keyId);
-        		LOG.debug("baseMap无数据["+keyId+"]"+JSON.toJSONString(baseMap_serviceMode));
+        		LOG.info("baseMap无数据["+keyId+"]"+JSON.toJSONString(baseMap_serviceMode));
         	}
             
         } catch (Exception e) {
             LOG.error("get paas config center error", e);
             throw new SDKException(e);
         }
-        LOG.debug("getDefaultConfigClient结束");
+        LOG.info("getDefaultConfigClient结束");
         return client;
 	}
 
@@ -139,24 +139,24 @@ public final class CCSClientFactory {
      * @RestRelativeURL
      */
 	public static IConfigClient getConfigClientBySdkMode(String appname, String zkAddr) {
-		LOG.debug("getConfigClientBySdkMode开始");
+		LOG.info("getConfigClientBySdkMode开始");
     	IConfigClient client = null;
         try {
         	if (!baseMap_sdkMode.containsKey(appname)) {
         		client = new SdkModeConfigClient(appname, zkAddr);
         		baseMap_sdkMode.put(appname, client);
-    			LOG.debug("从baseMap直接取数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
+    			LOG.info("从baseMap直接取数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
     		}
         	else{
         		client=baseMap_sdkMode.get(appname);
-        		LOG.debug("baseMap无数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
+        		LOG.info("baseMap无数据["+appname+"]"+JSON.toJSONString(baseMap_sdkMode));
         	}
             
         } catch (Exception e) {
             LOG.error("get paas config sdk mode center error", e);
             throw new SDKException(e);
         }
-        LOG.debug("getConfigClientBySdkMode结束");
+        LOG.info("getConfigClientBySdkMode结束");
         return client;
 	}
 }

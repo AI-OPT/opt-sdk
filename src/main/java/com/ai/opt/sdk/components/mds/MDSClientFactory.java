@@ -70,7 +70,7 @@ public final class MDSClientFactory {
 		String mdsId = ConfigTool.getMDSId(mdsns);
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         String appname = authInfo.getCcsAppName();
-		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		LOG.info("authInfo="+JSON.toJSONString(authInfo));
 		Properties kafkaConsumerProp=ConfigTool.assembleMdsConsumerProperties(mdsns);
 		String topicId=kafkaConsumerProp.getProperty(MDSConsumerConstants.MDS_TOPIC);
         String keyId=appname+"."+mdsId+"."+consumerId;
@@ -169,7 +169,7 @@ public final class MDSClientFactory {
         String mdsId = ConfigTool.getMDSId(mdsns);
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         String appname = authInfo.getCcsAppName();
-		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		LOG.info("authInfo="+JSON.toJSONString(authInfo));
 		Properties kafkaSenderProp=ConfigTool.assembleMdsSenderProperties(mdsns);
 		String topicId=kafkaSenderProp.getProperty(MDSSenderConstants.MDS_TOPIC);
         String keyId=appname+"."+mdsId;

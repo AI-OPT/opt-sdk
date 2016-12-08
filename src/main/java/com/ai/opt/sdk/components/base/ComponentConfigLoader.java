@@ -29,11 +29,11 @@ public final class ComponentConfigLoader {
 	static{
 		INSTANCE=new ComponentConfigLoader();
 		InputStream is = ComponentConfigLoader.class.getClassLoader().getResourceAsStream(SDKConstants.PAAS_CONFIG_FILE);
-        LOG.debug("【加载的属性文件流】:"+JSON.toJSONString(is));
+        LOG.info("【加载的属性文件流】:"+JSON.toJSONString(is));
         try {
             prop = new Properties();
             prop.load(is);
-            LOG.debug("【加载的属性文件prop】:"+JSON.toJSONString(prop));
+            LOG.info("【加载的属性文件prop】:"+JSON.toJSONString(prop));
         } catch (IOException e) {
             throw new SDKException("loding paas config file failed", e);
         }

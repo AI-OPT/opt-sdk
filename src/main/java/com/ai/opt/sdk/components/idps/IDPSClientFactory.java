@@ -44,7 +44,7 @@ public final class IDPSClientFactory {
     	}
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         String appname = authInfo.getCcsAppName();
-		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		LOG.info("authInfo="+JSON.toJSONString(authInfo));
 		
     	String idpsId = ConfigTool.getIDPSId(idpsns);
     	Properties idpsProp=ConfigTool.assembleIdpsProperties(idpsns);

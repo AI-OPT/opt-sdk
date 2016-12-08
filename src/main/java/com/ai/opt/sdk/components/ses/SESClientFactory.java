@@ -46,7 +46,7 @@ public final class SESClientFactory {
     	}
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         String appname = authInfo.getCcsAppName();
-		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		LOG.info("authInfo="+JSON.toJSONString(authInfo));
 		
     	String sesId = ConfigTool.getSESId(sesns);
     	Properties sesProp=ConfigTool.assembleSesProperties(sesns);

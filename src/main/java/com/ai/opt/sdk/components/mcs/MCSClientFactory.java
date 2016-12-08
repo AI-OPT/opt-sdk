@@ -70,7 +70,7 @@ public final class MCSClientFactory {
 		PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
 		String appname = authInfo.getCcsAppName();
 		Properties redisProp=ConfigTool.assembleMcsProperties(cachens);
-		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		LOG.info("authInfo="+JSON.toJSONString(authInfo));
 		
 		String keyId=appname+"."+mcsId;
 		ICacheClient client;

@@ -44,7 +44,7 @@ public final class DSSClientFactory {
         }
         PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
         String appname = authInfo.getCcsAppName();
-		LOG.debug("authInfo="+JSON.toJSONString(authInfo));
+		LOG.info("authInfo="+JSON.toJSONString(authInfo));
 		
         String dssId = ConfigTool.getDSSId(dssns);
         Properties dssProp=ConfigTool.assembleDssProperties(dssns);
