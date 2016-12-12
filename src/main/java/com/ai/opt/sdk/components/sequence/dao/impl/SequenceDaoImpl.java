@@ -24,7 +24,7 @@ public class SequenceDaoImpl implements ISequenceDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(SequenceDaoImpl.class);
 
-    private static final String sqlUpdate = "update sys_sequences set LAST_NUMBER=? where SEQUENCE_NAME = ?";
+    private static final String sqlUpdate = "update sys_sequences set LAST_NUMBER=? where SEQUENCE_NAME = ? and LAST_NUMBER=?";
 
     private static final String queryAllSequenceSql = "select SEQUENCE_NAME,LAST_NUMBER from sys_sequences";
 
@@ -99,26 +99,38 @@ public class SequenceDaoImpl implements ISequenceDao {
         try {
             conn = db.getConnection();
             conn.setAutoCommit(false);
-            ps = conn.prepareStatement(sqlSelect);
-            ps.setString(1, sequenceName);
-            rs = ps.executeQuery();
-            if (rs != null && rs.next()) {
-                long currVal = rs.getLong("LAST_NUMBER");
-                long jvmStepBy = rs.getLong("JVM_STEP_BY");
-                rs.close();
-                ps.close();
-                ps = conn.prepareStatement(sqlUpdate);
-                ps.setLong(1, currVal + jvmStepBy);
-                ps.setString(2, sequenceName);
-                int ret = ps.executeUpdate();
-                conn.commit();
-                if (ret == 1) {
-                    SequenceCache cache = new SequenceCache(currVal + 1, currVal + jvmStepBy);
-
-                    LOG.debug("get sequence cache:" + JSONObject.fromObject(cache).toString());
-                    return cache;
-                }
+            for(int i=0;i<10;i++){
+            	ps = conn.prepareStatement(sqlSelect);
+            	ps.setString(1, sequenceName);
+            	rs = ps.executeQuery();
+            	if (rs != null && rs.next()) {
+            		long currVal = rs.getLong("LAST_NUMBER");
+            		long jvmStepBy = rs.getLong("JVM_STEP_BY");
+            		rs.close();
+            		ps.close();
+            		ps = conn.prepareStatement(sqlUpdate);
+            		ps.setLong(1, currVal + jvmStepBy);
+            		ps.setString(2, sequenceName);
+            		ps.setLong(3, currVal);
+            		int ret = ps.executeUpdate();
+            		conn.commit();
+            		if (ret == 1) {
+            			SequenceCache cache = new SequenceCache(currVal + 1, currVal + jvmStepBy);
+            			
+            			LOG.debug("get sequence cache:" + JSONObject.fromObject(cache).toString());
+            			return cache;
+            		}
+            		else{
+            			try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							LOG.error("get sequence cache error:" + e.getMessage(),e);
+						}
+            		}
+            	}
+            	
             }
+            
         } catch (SQLException e) {
             LOG.error("get sequence cache failed", e);
             throw new SDKException("get sequence cache failed", e);
