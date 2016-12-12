@@ -120,6 +120,13 @@ public class SequenceDaoImpl implements ISequenceDao {
             			LOG.debug("get sequence cache:" + JSONObject.fromObject(cache).toString());
             			return cache;
             		}
+            		else{
+            			try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							LOG.error("get sequence cache error:" + e.getMessage(),e);
+						}
+            		}
             	}
             	
             }
