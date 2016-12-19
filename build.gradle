@@ -24,7 +24,7 @@ ext {
     ipaasMdsVersion="0.3";
     ipaasSesVersion="0.3.1";
     ipaasIdpsVersion="0.3";
-    hikariCPVersion="2.4.0";
+    hikariCPVersion="2.4.9";
 
     appName="opt-sdk"
     moduleVersion='2.2-SNAPSHOT'
@@ -92,7 +92,7 @@ dependencies {
     compile 'junit:junit:4.12'
     compile 'log4j:log4j:1.2.17'
 
-    compile "com.zaxxer:HikariCP:${hikariCPVersion}"
+    compile "com.zaxxer:HikariCP-java7:${hikariCPVersion}"
     compile 'org.apache.curator:curator-framework:2.9.0'
 
 
@@ -160,7 +160,7 @@ publishing {
                         }
                         delegate.dependency {
                             delegate.groupId("com.zaxxer")
-                            delegate.artifactId("HikariCP")
+                            delegate.artifactId("HikariCP-java7")
                             delegate.version("${hikariCPVersion}")
                         }
                         delegate.dependency {
