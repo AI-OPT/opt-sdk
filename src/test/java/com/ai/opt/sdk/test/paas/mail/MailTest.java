@@ -11,8 +11,8 @@ public class MailTest {
 
 	@Test
 	public void testSendBindEmail() {
-		String[] tomails = new String[] { "gucl@asiainfo.com" };
-		String[] ccmails = new String[] { "guchuanlong@126.com" };
+		String[] tomails = new String[] { "zhouxh7@asiainfo.com" };
+		String[] ccmails = new String[] { "meteor_soft@sina.cn" };
 		String subject = "亚信云计费邮件测试";
 		String[] data = new String[] { "云计费nickname", "587434" ,"30"};
 		String htmlcontext = EmailTemplateUtil.buildHtmlTextFromTemplate(BIND_EMAIL, data);
