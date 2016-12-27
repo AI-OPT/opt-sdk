@@ -9,6 +9,7 @@ import org.apache.commons.mail.HtmlEmail;
 
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.CryptUtils;
 
 public class EmailUtil {
 
@@ -31,7 +32,7 @@ public class EmailUtil {
     private static HtmlEmail getHtmlEmail() throws EmailException {
         String hostName = prop.getProperty("email.hostname");
         String user = prop.getProperty("email.from.user");
-        String password = prop.getProperty("email.from.password");
+        String password = CryptUtils.decrypt(prop.getProperty("email.from.password"));
         String mail = prop.getProperty("email.from.mail");
         String name = prop.getProperty("email.from.name");
         HtmlEmail email = new HtmlEmail();
