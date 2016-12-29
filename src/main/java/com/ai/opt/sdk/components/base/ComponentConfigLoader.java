@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.ai.opt.sdk.components.mo.PaasConf;
 import com.ai.opt.sdk.constants.SDKConstants;
 import com.ai.opt.sdk.exception.SDKException;
+import com.ai.opt.sdk.util.CryptUtils;
 import com.alibaba.fastjson.JSON;
 
 /**
@@ -79,7 +80,7 @@ public final class ComponentConfigLoader {
         String authUrl = prop.getProperty("paas.auth.url");
         String pid = prop.getProperty("paas.auth.pid");
         String ccsServiceId = prop.getProperty("paas.ccs.serviceid");
-        String ccsServicePwd = prop.getProperty("paas.ccs.servicepassword");
+        String ccsServicePwd =CryptUtils.decrypt(prop.getProperty("paas.ccs.servicepassword"));
         String paasSdkMode = prop.getProperty("paas.sdk.mode");
         String ccsAppName = prop.getProperty("ccs.appname");
         String zkAddress = prop.getProperty("ccs.zk_address");
