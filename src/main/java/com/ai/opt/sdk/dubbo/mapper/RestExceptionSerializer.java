@@ -8,6 +8,13 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+/**
+ * RestException
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class RestExceptionSerializer implements JsonSerializer<Throwable> {
 	@Override
 	public JsonElement serialize(Throwable src, Type typeOfSrc,

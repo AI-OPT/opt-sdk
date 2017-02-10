@@ -25,6 +25,13 @@ import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 
+/**
+ * MDS客户端工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class MDSClientFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(MDSClientFactory.class);
 	private static Map<String, IMessageSender> sendMap_serviceMode = new ConcurrentHashMap<String, IMessageSender>();
@@ -36,6 +43,12 @@ public final class MDSClientFactory {
 
     }
 
+    /**
+     * 获取发送者客户端
+     * @param mdsns
+     * @return
+     * @author
+     */
     public static IMessageSender getSenderClient(String mdsns) {
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
     	if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
@@ -45,9 +58,24 @@ public final class MDSClientFactory {
     		return getSenderClientBySdkMode(mdsns);
     	}
     }
+    /**
+     * 获取消费者客户端
+     * @param mdsns
+     * @param msgProcessorHandler
+     * @return
+     * @author
+     */
     public static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler){
     		return getConsumerClient(mdsns, msgProcessorHandler,null);
     }
+    /**
+     * 获取消费者客户端
+     * @param mdsns
+     * @param msgProcessorHandler
+     * @param consumerId
+     * @return
+     * @author
+     */
     public static IMessageConsumer getConsumerClient(String mdsns, IMsgProcessorHandler msgProcessorHandler,String consumerId){
 		PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
 		if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
@@ -59,6 +87,14 @@ public final class MDSClientFactory {
     		
     }
     
+    /**
+     * 由SDK模式获取客户端
+     * @param mdsns
+     * @param msgProcessorHandler
+     * @param consumerId
+     * @return
+     * @author
+     */
     private static IMessageConsumer getConsumerClientBySdkMode(String mdsns, IMsgProcessorHandler msgProcessorHandler,
 			String consumerId) {
     	if(StringUtil.isBlank(consumerId)){
@@ -100,6 +136,14 @@ public final class MDSClientFactory {
 		return client;
 	}
 
+    /**
+     * 由服务模式获取客户端
+     * @param mdsns
+     * @param msgProcessorHandler
+     * @param consumerId
+     * @return
+     * @author
+     */
 	private static IMessageConsumer getConsumerClientByServiceMode(String mdsns,
 			IMsgProcessorHandler msgProcessorHandler, String consumerId) {
 		if (StringUtil.isBlank(mdsns)) {
@@ -137,6 +181,12 @@ public final class MDSClientFactory {
         return client;
 	}
 
+	/**
+	 * 由服务模式获取发送者客户端
+	 * @param mdsns
+	 * @return
+	 * @author
+	 */
 	private static IMessageSender getSenderClientByServiceMode(String mdsns) {
 		if (StringUtil.isBlank(mdsns)) {
             throw new SDKException("请输入消息服务配置映射的常量标识");
@@ -162,6 +212,12 @@ public final class MDSClientFactory {
         return client;
 	}
     
+	/**
+	 * 由SDK模式获取发送者客户端
+	 * @param mdsns
+	 * @return
+	 * @author
+	 */
 	private static IMessageSender getSenderClientBySdkMode(String mdsns) {
 		if (StringUtil.isBlank(mdsns)) {
             throw new SDKException("请输入消息服务配置映射的常量标识");

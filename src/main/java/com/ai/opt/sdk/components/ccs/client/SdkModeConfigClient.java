@@ -24,23 +24,46 @@ import com.ai.paas.ipaas.ccs.zookeeper.ZKClient;
 import com.ai.paas.ipaas.ccs.zookeeper.impl.ZKPool;
 import com.ai.paas.ipaas.ccs.zookeeper.impl.ZKPoolFactory;
 
+/**
+ * sdk模式配置client
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class SdkModeConfigClient implements IConfigClient {
 	private static final Logger LOG = LoggerFactory.getLogger(SdkModeConfigClient.class);
-	//无授权信息
+	/**
+	 * 无授权信息
+	 */
 	private static final String NO_AUTHINFO=":";
-	// 应用程序标识
+	/**
+	 *  应用程序标识
+	 */
 	private String appname;
-	// Zookeeper授权信息
+	/**
+	 *  Zookeeper授权信息
+	 */
 	private String authInfo;
-	// Zookeeper用户
+	/**
+	 *  Zookeeper用户
+	 */
 	private String zkUser="";
-	// Zookeeper用户
+	/**
+	 *  Zookeeper用户
+	 */
 	private String zkPassword="";
-	// Zookeeper客户端连接池
+	/**
+	 *  Zookeeper客户端连接池
+	 */
 	private ZKPool zkPool;
-	// Zookeeper地址
+	/**
+	 *  Zookeeper地址
+	 */
 	private String zkAddr;
-	// Zookeeper授权方式
+	/**
+	 *  Zookeeper授权方式
+	 */
 	private String zkAuthSchema="digest";
 
 	public SdkModeConfigClient(String appname, String zkAddr)  {
@@ -107,6 +130,9 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 * 添加
+	 */
 	@Override
 	public void add(String path, String config)  {
 		byte[] data = null;
@@ -122,6 +148,9 @@ public class SdkModeConfigClient implements IConfigClient {
 
 	}
 
+	/**
+	 * 修改
+	 */
 	@Override
 	public void modify(String path, String config)  {
 		try {
@@ -143,6 +172,9 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 * 修改
+	 */
 	@Override
 	public void modify(String path, byte[] value)  {
 		if (!exists(path)) {
@@ -166,6 +198,9 @@ public class SdkModeConfigClient implements IConfigClient {
 		return exists(path, null);
 	}
 
+	/**
+	 * exists
+	 */
 	@Override
 	public boolean exists(String path, ConfigWatcher configWatcher)  {
 		ZKClient client = null;
@@ -184,6 +219,9 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 *获取
+	 */
 	@Override
 	public String get(String path, ConfigWatcher watcher)  {
 		ZKClient client = null;
@@ -198,6 +236,12 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 * 从pool获取ZkClient
+	 * @return
+	 * @throws Exception
+	 * @author
+	 */
 	private ZKClient getZkClientFromPool() throws Exception {
 		ZKClient zkClient = this.zkPool.getZkClient(this.zkAddr, this.zkUser);
 
@@ -207,6 +251,13 @@ public class SdkModeConfigClient implements IConfigClient {
 		return zkClient;
 	}
 
+	/**
+	 * 添加
+	 * @param path
+	 * @param bytes
+	 * @param mode
+	 * @author
+	 */
 	private void add(String path, byte[] bytes, AddMode mode)  {
 		if (exists(path)) {
 			throw new SDKException("节点[" + path + "]已存在，不能重复添加");
@@ -242,11 +293,17 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 * 读取字节
+	 */
 	@Override
 	public byte[] readBytes(String path)  {
 		return readBytes(path, null);
 	}
 
+	/**
+	 * 读取字节
+	 */
 	@Override
 	public byte[] readBytes(String path, ConfigWatcher configWatcher)  {
 		if (!exists(path)) {
@@ -265,6 +322,13 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 * 添加
+	 * @param path
+	 * @param config
+	 * @param AddMode
+	 * @author
+	 */
 	public void add(String path, String config, AddMode AddMode)  {
 		byte[] bytes = null;
 		if (!StringUtil.isBlank(config)) {
@@ -279,16 +343,25 @@ public class SdkModeConfigClient implements IConfigClient {
 
 	}
 
+	/**
+	 * 添加
+	 */
 	@Override
 	public void add(String path, byte[] bytes)  {
 		add(path, bytes, AddMode.PERSISTENT);
 	}
 
+	/**
+	 * 列举子路径
+	 */
 	@Override
 	public List<String> listSubPath(String path)  {
 		return listSubPath(path, null);
 	}
 
+	/**
+	 * 列举子路径
+	 */
 	@Override
 	public List<String> listSubPath(String path, ConfigWatcher configWatcher)  {
 
@@ -307,6 +380,9 @@ public class SdkModeConfigClient implements IConfigClient {
 		}
 	}
 
+	/**
+	 * 移除
+	 */
 	@Override
 	public void remove(String path)  {
 		if (!validatePath(path))

@@ -8,6 +8,13 @@ import com.ai.opt.sdk.dts.constants.DTSConstants;
 import com.ai.opt.sdk.dts.factory.DTSSchedulerFactory;
 import com.ai.paas.ipaas.util.StringUtil;
 
+/**
+ * DTS调度任务
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class DTSMain {
 
     private static final Logger LOG = LoggerFactory.getLogger(DTSMain.class);

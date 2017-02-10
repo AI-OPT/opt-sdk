@@ -76,6 +76,11 @@ public final class ComponentConfigLoader {
     	prop=p;
     }
 
+    /**
+     * 获取认证信息
+     * @return
+     * @author
+     */
     public PaasConf getPaasAuthInfo() {
         String authUrl = prop.getProperty("paas.auth.url");
         String pid = prop.getProperty("paas.auth.pid");

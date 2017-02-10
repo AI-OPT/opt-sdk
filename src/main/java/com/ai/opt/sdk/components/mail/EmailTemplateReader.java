@@ -9,6 +9,13 @@ import org.dom4j.io.SAXReader;
 
 import com.ai.opt.base.exception.SystemException;
 
+/**
+ * Email模版
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class EmailTemplateReader {
 
     public static String read(String path) {
@@ -16,6 +23,12 @@ public class EmailTemplateReader {
         return str;
     }
 
+    /**
+     * 读取模版
+     * @param path
+     * @return
+     * @author
+     */
     private static String reader(String path) {
         SAXReader reader = new SAXReader();
         String str = null;

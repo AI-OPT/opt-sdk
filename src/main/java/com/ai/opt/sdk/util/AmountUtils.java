@@ -4,6 +4,13 @@ import java.math.BigDecimal;
 
 import com.ai.opt.base.exception.SystemException;
 
+/**
+ * 金额工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class AmountUtils {
 
     /** 金额为分的格式 */

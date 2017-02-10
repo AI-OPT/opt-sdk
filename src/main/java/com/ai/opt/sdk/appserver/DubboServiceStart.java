@@ -10,6 +10,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.ai.opt.sdk.components.mds.base.AbstractMdsConsumer;
 import com.ai.opt.sdk.util.ApplicationContextUtil;
 
+/**
+ * 启动dubbo服务类
+ * Date: 2017年2月9日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class DubboServiceStart {
 
 	private static final Logger LOG = LoggerFactory
@@ -20,6 +27,11 @@ public final class DubboServiceStart {
 	private DubboServiceStart() {
 	}
 
+	/**
+	 * 启动dubbo
+	 * 
+	 * @author
+	 */
 	private static void startDubbo() {
 		LOG.error("开始启动 Dubbo 服务---------------------------");
 		// 从配置中心加载DUBBO的核心配置
@@ -54,7 +66,11 @@ public final class DubboServiceStart {
 		startDubbo();
 	}
 	
-	
+	/**
+	 * 启动mds消费者
+	 * @param context
+	 * @author
+	 */
 	private static void startMdsConsumer(ApplicationContext context){
 		 Map<String, AbstractMdsConsumer> mdses = context
 	                .getBeansOfType(AbstractMdsConsumer.class);

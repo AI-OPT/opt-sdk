@@ -3,6 +3,13 @@ package com.ai.opt.sdk.components.sequence.model;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * SequenceCache
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class SequenceCache {
     private final Lock lock = new ReentrantLock();
 

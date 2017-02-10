@@ -4,6 +4,13 @@ package com.ai.opt.sdk.components.mo;
 import com.ai.opt.sdk.exception.SDKException;
 import com.ai.opt.sdk.util.StringUtil;
 
+/**
+ * paas服务配置
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class PaasConf {
 	
 	//========ipaas 服务使用模式 参数  start==========

@@ -5,6 +5,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 集合工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class CollectionUtil {
 	private CollectionUtil(){}
     public static boolean isEmpty(Collection<?> collection) {

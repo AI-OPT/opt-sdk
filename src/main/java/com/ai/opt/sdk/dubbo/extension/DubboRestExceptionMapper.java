@@ -15,6 +15,13 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.alibaba.fastjson.JSON;
 
+/**
+ * dubboRest异常封装类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class DubboRestExceptionMapper implements ExceptionMapper<Exception> {
 
     private static final String HTTP = "HTTP";

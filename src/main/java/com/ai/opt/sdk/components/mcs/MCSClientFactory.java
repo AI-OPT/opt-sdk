@@ -19,6 +19,13 @@ import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 
+/**
+ * MCS客户端工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class MCSClientFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(MCSClientFactory.class);
 	private static Map<String, ICacheClient> baseMap_serviceMode = new ConcurrentHashMap<String, ICacheClient>();
@@ -28,6 +35,12 @@ public final class MCSClientFactory {
 
     }
 
+    /**
+     * 获取缓存客户端
+     * @param cachens
+     * @return
+     * @author
+     */
     public static ICacheClient getCacheClient(String cachens) {
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
     	if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
@@ -38,6 +51,12 @@ public final class MCSClientFactory {
     	}
     }
 
+    /**
+     * 由服务模式获取缓存客户端
+     * @param cachens
+     * @return
+     * @author
+     */
 	private static ICacheClient getCacheClientByServiceMode(String cachens) {
 		if (StringUtil.isBlank(cachens)) {
             throw new SDKException("请输入缓存服务配置映射的常量标识");
@@ -62,6 +81,12 @@ public final class MCSClientFactory {
         }
         return client;
 	}
+	/**
+	 * 由sdk模式获取缓存客户端
+	 * @param cachens
+	 * @return
+	 * @author
+	 */
 	private static ICacheClient getCacheClientBySdkMode(String cachens) {
 		if (StringUtil.isBlank(cachens)) {
 			throw new SDKException("请输入缓存服务配置映射的常量标识");

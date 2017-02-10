@@ -50,6 +50,11 @@ public final class CCSClientFactory {
     		return getDefaultConfigClientBySDkMode();
     	}
     }
+    /**
+     * 从sdk模式获取默认配置信息
+     * @return
+     * @author
+     */
     private static IConfigClient getDefaultConfigClientBySDkMode() {
 		LOG.info("getDefaultConfigClientBySDkMode开始");
     	IConfigClient client = null;
@@ -75,6 +80,11 @@ public final class CCSClientFactory {
         LOG.info("getDefaultConfigClientBySDkMode结束");
         return client;
 	}
+    /**
+     * 从服务模式获取默认配置Client
+     * @return
+     * @author
+     */
 	private static IConfigClient getDefaultConfigClientByServiceMode() {
 		LOG.info("getDefaultConfigClient开始");
     	IConfigClient client = null;

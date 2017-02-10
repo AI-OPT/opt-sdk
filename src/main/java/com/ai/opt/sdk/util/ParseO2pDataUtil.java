@@ -4,6 +4,13 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ * 解析o2p数据工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class ParseO2pDataUtil {
 
 	public static JSONObject getData(String str){

@@ -12,6 +12,13 @@ import com.alibaba.dubbo.rpc.protocol.rest.ViolationReport;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * RpcExceptionMapper
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class RpcExceptionMapper implements ExceptionMapper<RpcException> {
 	public Response toResponse(RpcException e) {
 		RestResponse error = null;

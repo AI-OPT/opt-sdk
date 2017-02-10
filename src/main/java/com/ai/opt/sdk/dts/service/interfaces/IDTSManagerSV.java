@@ -15,6 +15,13 @@ import com.ai.opt.sdk.dts.service.param.TaskCond;
 import com.ai.opt.sdk.dts.service.param.TaskData;
 
 
+/**
+ * DTS调度任务
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 @Path("/dtsmng")
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })

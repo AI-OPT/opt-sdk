@@ -6,6 +6,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * TaskCond
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class TaskCond implements Serializable {
 
 	private static final long serialVersionUID = 1L;

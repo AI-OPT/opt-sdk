@@ -20,6 +20,13 @@ import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 
+/**
+ * IDPS客户端工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class IDPSClientFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(IDPSClientFactory.class);
 	private static Map<String, IImageClient> baseMap = new ConcurrentHashMap<String, IImageClient>();
@@ -29,6 +36,12 @@ public final class IDPSClientFactory {
 
     }
 
+    /**
+     * 获取图片服务客户端
+     * @param idpsns
+     * @return
+     * @author
+     */
     public static IImageClient getImageClient(String idpsns) {
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
     	if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
@@ -38,6 +51,12 @@ public final class IDPSClientFactory {
     		return getImageClientBySdkMode(idpsns);
     	}
     }
+    /**
+     * 由sdk模式获取图片服务客户端
+     * @param idpsns
+     * @return
+     * @author
+     */
     private static IImageClient getImageClientBySdkMode(String idpsns) {
     	if (StringUtil.isBlank(idpsns)) {
     		throw new SDKException("请输入图片服务配置映射的常量标识");
@@ -63,6 +82,12 @@ public final class IDPSClientFactory {
     	}
     	return client;
     }
+    /**
+     * 由服务模式获取图片服务客户端
+     * @param idpsns
+     * @return
+     * @author
+     */
     private static IImageClient getImageClientByServiceMode(String idpsns) {
     	if (StringUtil.isBlank(idpsns)) {
     		throw new SDKException("请输入图片服务配置映射的常量标识");

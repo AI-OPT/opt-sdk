@@ -11,6 +11,13 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 
 import net.sf.json.JSONObject;
 
+/**
+ * Dubbo Rest 返回过滤器
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class DubboRestResponseFilter implements ContainerResponseFilter {
 
     @Override

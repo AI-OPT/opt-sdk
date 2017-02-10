@@ -10,6 +10,13 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 身份证校验工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class CertValidateUtil {
 	private static final Logger LOG = LoggerFactory.getLogger(CertValidateUtil.class);
 	private CertValidateUtil(){}
@@ -57,7 +64,12 @@ public final class CertValidateUtil {
         }
     }
 
-    // 获取新身份证的最后一位:检验位
+    /**
+     * 获取新身份证的最后一位:检验位
+     * @param idCard
+     * @return
+     * @author
+     */
     private static String getCheckFlag(String idCard) {
 
         int sum = 0;
@@ -76,13 +88,24 @@ public final class CertValidateUtil {
 
     }
 
-    // 判断串长度的合法性
+    /**
+     * 判断串长度的合法性
+     * @param idCard
+     * @return
+     * @author
+     */
     private static boolean checkLength(String idCard) {
         return (idCard.length() == OLDIDLEN) || (idCard.length() == NEWIDLEN);
 
     }
 
-    // 获取时间串
+    /**
+     *  获取时间串
+     * @param idCard
+     * @param newIDFlag
+     * @return
+     * @author
+     */
     private static String getIDDate(String idCard, boolean newIDFlag) {
         String dateStr = "";
         if (newIDFlag) {
@@ -94,7 +117,12 @@ public final class CertValidateUtil {
 
     }
 
-    // 判断时间合法性
+    /**
+     *  判断时间合法性
+     * @param dateSource
+     * @return
+     * @author
+     */
     private static boolean checkDate(final String dateSource) {
 
         String dateStr = dateSource.substring(0, 4) + "-" + dateSource.substring(4, 6) + "-"
@@ -114,7 +142,12 @@ public final class CertValidateUtil {
 
     }
 
-    // 旧身份证转换成新身份证号码
+    /**
+     *  旧身份证转换成新身份证号码
+     * @param oldIDCard
+     * @return
+     * @author
+     */
     public static String getNewIDCard(final String oldIDCard) {
         // 初始化方法
         CertValidateUtil.setWiBuffer();
@@ -129,7 +162,12 @@ public final class CertValidateUtil {
         return newIDCard;
     }
 
-    // 新身份证转换成旧身份证号码
+    /**
+     *  新身份证转换成旧身份证号码
+     * @param newIDCard
+     * @return
+     * @author
+     */
     public static String getOldIDCard(final String newIDCard) {
         // 初始化方法
         CertValidateUtil.setWiBuffer();
@@ -141,7 +179,12 @@ public final class CertValidateUtil {
         return oldIDCard;
     }
 
-    // 判断身份证号码的合法性
+    /**
+     *  判断身份证号码的合法性
+     * @param idCard
+     * @return
+     * @author
+     */
     public static boolean checkIDCard(String idCard) {
         // 初始化方法
         CertValidateUtil.setWiBuffer();
@@ -164,7 +207,12 @@ public final class CertValidateUtil {
         return true;
     }
 
-    // 获取一个随机的"伪"身份证号码
+    /**
+     *  获取一个随机的"伪"身份证号码
+     * @param idNewID
+     * @return
+     * @author
+     */
     public static String getRandomIDCard(final boolean idNewID) {
         // 初始化方法
         CertValidateUtil.setWiBuffer();
@@ -178,7 +226,12 @@ public final class CertValidateUtil {
         return idCard;
     }
 
-    // 产生随机的地区编码
+    /**
+     *  产生随机的地区编码
+     * @param ran
+     * @return
+     * @author
+     */
     private static String getAddressCode(Random ran) {
         if (ran == null) {
             return "";
@@ -189,7 +242,13 @@ public final class CertValidateUtil {
 
     }
 
-    // 产生随机的出生日期
+    /**
+     *  产生随机的出生日期
+     * @param ran
+     * @param idNewID
+     * @return
+     * @author
+     */
     private static String getRandomDate(Random ran, boolean idNewID) {
         if (ran == null) {
             return "";
@@ -216,7 +275,12 @@ public final class CertValidateUtil {
         return Integer.toString(year) + nf.format(month) + nf.format(day);
     }
 
-    // 产生随机的序列号
+    /**
+     *  产生随机的序列号
+     * @param ran
+     * @return
+     * @author
+     */
     private static String getIDOrder(Random ran) {
         NumberFormat nf = NumberFormat.getIntegerInstance();
         nf.setMaximumIntegerDigits(3);

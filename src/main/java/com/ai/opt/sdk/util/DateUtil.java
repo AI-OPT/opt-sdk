@@ -15,6 +15,13 @@ import org.slf4j.LoggerFactory;
 
 import com.ai.opt.base.exception.SystemException;
 
+/**
+ * 数据工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class DateUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(DateUtil.class);

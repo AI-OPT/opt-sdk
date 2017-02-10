@@ -69,6 +69,12 @@ public class LoadConfServiceStart {
         LOG.error("完成属性文件(properties)加载到配置中心");
     }
 
+    /**
+     * 加载配置文件
+     * @param configPath
+     * @return
+     * @author
+     */
     private static Map<String,Properties> loadFiles(String configPath) {
     	Map<String,Properties> propList=new HashMap<String,Properties>();
 
@@ -128,6 +134,12 @@ public class LoadConfServiceStart {
         return propList;
     }
 
+    /**
+     * 加载properties配置
+     * @param appName
+     * @param p
+     * @author
+     */
     private static void loadProp2ccs(String appName,Properties p) {
     	LOG.error("开始加载【{}】模块的配置信息到zk",appName);
         Iterator<Map.Entry<Object, Object>> it = p.entrySet().iterator();

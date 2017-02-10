@@ -4,6 +4,13 @@ import java.util.Arrays;
 
 import com.ai.opt.base.exception.SystemException;
 
+/**
+ * HexTransferUtil
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class HexTransferUtil {
 
     private HexTransferUtil() {
@@ -25,7 +32,12 @@ public final class HexTransferUtil {
     // 结束字符
     public final static String ENDSTR = "z";
 
-    // 创建固定长度SEQ
+    /**
+     * 创建固定长度SEQ
+     * @param len
+     * @return
+     * @author
+     */
     public static String createSeq(int len) {
         StringBuilder newSeq = new StringBuilder();
         for (int i = 0; i < len; i++) {
@@ -34,7 +46,12 @@ public final class HexTransferUtil {
         return newSeq.toString();
     }
 
-    // 获取最大SEQ
+    /**
+     *  获取最大SEQ
+     * @param seq
+     * @return
+     * @author
+     */
     public static String getMaxSeq(String seq) {
         StringBuilder maxSeq = new StringBuilder();
         for (int i = 0; i < seq.length(); i++) {
@@ -43,7 +60,12 @@ public final class HexTransferUtil {
         return maxSeq.toString();
     }
 
-    // 获取下一个SEQ的值
+    /**
+     * 获取下一个SEQ的值
+     * @param currSeq
+     * @return
+     * @author
+     */
     public static String getNextSeq(String currSeq) {
         String nextSeq = "";
         int seqLength = currSeq.length();
@@ -74,7 +96,14 @@ public final class HexTransferUtil {
         return nextSeq;
     }
 
-    // 十进制转二进制
+    /**
+     *  十进制转二进制
+     * @param decimal
+     * @param intLenght
+     * @return
+     * @throws SystemException
+     * @author
+     */
     public static String decimalToBinary(String decimal, int intLenght) throws SystemException {
         if (StringUtil.isBlank(decimal)) {
             throw new SystemException("SEQ十进制转二进制时传入参数为空");
@@ -82,7 +111,14 @@ public final class HexTransferUtil {
         return Long.toBinaryString(Long.valueOf(decimal));
     }
 
-    // 十进制转八进制
+    /**
+     * 十进制转八进制
+     * @param decimal
+     * @param intLenght
+     * @return
+     * @throws SystemException
+     * @author
+     */
     public static String decimalToOctal(String decimal, int intLenght) throws SystemException {
         if (StringUtil.isBlank(decimal)) {
             throw new SystemException("SEQ十进制转八进制时传入参数为空");
@@ -90,7 +126,14 @@ public final class HexTransferUtil {
         return Long.toOctalString(Long.valueOf(decimal));
     }
 
-    // 十进制转十六进制
+    /**
+     * 十进制转十六进制
+     * @param decimal
+     * @param intLenght
+     * @return
+     * @throws SystemException
+     * @author
+     */
     public static String decimalToHex(String decimal, int intLenght) throws SystemException {
         if (StringUtil.isBlank(decimal)) {
             throw new SystemException("SEQ十进制转十六进制时传入参数为空");
@@ -98,7 +141,14 @@ public final class HexTransferUtil {
         return Long.toHexString(Long.valueOf(decimal));
     }
 
-    // 十进制转三十六进制
+    /**
+     * 十进制转三十六进制
+     * @param decimal
+     * @param intLenght
+     * @return
+     * @throws SystemException
+     * @author
+     */
     public static String decimalTo36(String decimal, int intLenght) throws SystemException {
         if (StringUtil.isBlank(decimal)) {
             throw new SystemException("SEQ十进制转三十六进制时传入参数为空");
@@ -144,6 +194,14 @@ public final class HexTransferUtil {
         return ts.substring(ts.length() - intLenght);
     }
 
+    /**
+     * Dec_2_36
+     * @param decimal
+     * @param intLenght
+     * @return
+     * @throws SystemException
+     * @author
+     */
     public static String Dec_2_36(String decimal, int intLenght) throws SystemException {
         if (StringUtil.isBlank(decimal)) {
             throw new SystemException("SEQ十进制转三十六进制时传入参数为空");

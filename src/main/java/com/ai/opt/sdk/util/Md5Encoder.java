@@ -7,6 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+/**
+ * MD5编码
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class Md5Encoder {
 	private static final Logger LOG = LoggerFactory.getLogger(Md5Encoder.class);
     private Md5Encoder() {
@@ -30,6 +37,12 @@ public final class Md5Encoder {
         return out;
     }
 
+    /**
+     * 密码md5加密
+     * @param rawPass
+     * @return
+     * @author
+     */
     public static String encodePassword(String rawPass) {
 
         MessageDigest messageDigest = getMessageDigest();
@@ -39,6 +52,11 @@ public final class Md5Encoder {
         return new String(encodeHex(digest));
     }
 
+    /**
+     * 获取信息
+     * @return
+     * @author
+     */
     protected final static MessageDigest getMessageDigest()  {
         try {
             return MessageDigest.getInstance("MD5");
@@ -48,6 +66,13 @@ public final class Md5Encoder {
         }
     }
 
+    /**
+     * 校验密码
+     * @param encPass
+     * @param rawPass
+     * @return
+     * @author
+     */
     public static boolean isPasswordValid(String encPass, String rawPass) {
         String pass1 = "" + encPass;
         String pass2 = encodePassword(rawPass);

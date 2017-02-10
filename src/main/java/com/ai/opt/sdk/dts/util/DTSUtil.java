@@ -20,12 +20,24 @@ import com.alibaba.dubbo.config.utils.ReferenceConfigCache;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ * DTS工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class DTSUtil {
 
     private DTSUtil() {
 
     }
 
+    /**
+     * 添加或更新任务
+     * @param task
+     * @author
+     */
     public static void addOrUpdateTask(TaskData task) {
         if (task == null) {
             throw new SystemException("任务信息不能为空");
@@ -38,6 +50,11 @@ public class DTSUtil {
         DTSUtil.getIDTSManagerSV(registryURL, group).addOrUpdateTask(task);
     }
 
+    /**
+     * 删除任务
+     * @param task
+     * @author
+     */
     public static void deleteTask(TaskData task) {
         if (task == null) {
             throw new SystemException("任务信息不能为空");
@@ -50,6 +67,12 @@ public class DTSUtil {
         DTSUtil.getIDTSManagerSV(registryURL, group).deleteTask(task);
     }
 
+    /**
+     * 获取所有的任务
+     * @param schedulerName
+     * @return
+     * @author
+     */
     public static List<TaskData> getAllTasks(String schedulerName) {
         if (StringUtil.isBlank(schedulerName)) {
             throw new SystemException("调度器名称不能为空");
@@ -61,6 +84,14 @@ public class DTSUtil {
         return list;
     }
 
+    /**
+     * 获取任务数据
+     * @param schedulerName
+     * @param jobName
+     * @param jobGroup
+     * @return
+     * @author
+     */
     public static TaskData getTaskData(String schedulerName, String jobName, String jobGroup) {
         if (StringUtil.isBlank(schedulerName)) {
             throw new SystemException("调度器名称不能为空");
@@ -75,6 +106,11 @@ public class DTSUtil {
         return data;
     }
 
+    /**
+     * getDTSSchedulerDefs
+     * @return
+     * @author
+     */
     public static List<SchedulerDef> getDTSSchedulerDefs() {
         String conf="";
 		try {
@@ -108,22 +144,48 @@ public class DTSUtil {
         return list;
     }
 
+    /**
+     * 停止任务
+     * @param task
+     * @author
+     */
     public static void pauseTask(TaskData task) {
         DTSSchedulerFactory.pauseTask(task);
     }
 
+    /**
+     * 停止所有
+     * @param schedulerName
+     * @author
+     */
     public static void pauseAll(String schedulerName) {
         DTSSchedulerFactory.pauseAll(schedulerName);
     }
 
+    /**
+     * 重启任务
+     * @param task
+     * @author
+     */
     public static void resumeJob(TaskData task) {
         DTSSchedulerFactory.resumeJob(task);
     }
 
+    /**
+     * 重启所有
+     * @param schedulerName
+     * @author
+     */
     public static void resumeAll(String schedulerName) {
         DTSSchedulerFactory.resumeAll(schedulerName);
     }
 
+    /**
+     * 获取zk地址
+     * @param schedulerName
+     * @return
+     * @author
+     */
     private static String getZKAddress(String schedulerName) {
         List<SchedulerDef> list = getDTSSchedulerDefs();
         String zkAddress = null;
@@ -141,6 +203,12 @@ public class DTSUtil {
         return zkAddress;
     }
 
+    /**
+     * getIDTSManagerGroup
+     * @param schedulerName
+     * @return
+     * @author
+     */
     private static String getIDTSManagerGroup(String schedulerName) {
         String conf="";
 		try {
@@ -162,6 +230,13 @@ public class DTSUtil {
 
     }
 
+    /**
+     * 获取IDTSManager
+     * @param registryURL
+     * @param group
+     * @return
+     * @author
+     */
     private static IDTSManagerSV getIDTSManagerSV(String registryURL, String group) {
         if (StringUtil.isBlank(registryURL)) {
             throw new SystemException("注册中心地址为空");

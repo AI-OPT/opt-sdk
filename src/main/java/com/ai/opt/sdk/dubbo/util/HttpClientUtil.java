@@ -23,6 +23,13 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.dubbo.extension.DubboRestResponse;
 import com.alibaba.fastjson.JSON;
 
+/**
+ * Http客户端工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class HttpClientUtil {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
 

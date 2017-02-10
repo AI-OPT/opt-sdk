@@ -14,6 +14,13 @@ import com.ai.paas.ipaas.PaasRuntimeException;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.google.common.collect.Maps;
 
+/**
+ * CacheInterProcessLock
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class CacheInterProcessLock {
 
 		private static final Logger LOGGER = LoggerFactory.getLogger(CacheInterProcessLock.class);

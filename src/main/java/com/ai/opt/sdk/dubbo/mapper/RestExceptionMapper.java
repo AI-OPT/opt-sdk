@@ -17,6 +17,13 @@ import com.alibaba.dubbo.rpc.protocol.rest.ViolationReport;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * RestExceptionMapper
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class RestExceptionMapper implements ExceptionMapper<Exception> {
 
 	private static final String HTTP = "HTTP";

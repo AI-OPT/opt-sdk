@@ -39,6 +39,11 @@ public class ApplicationContextUtil {
     	instance = new ApplicationContextUtil();
     }
 
+    /**
+     * 初始化上下文
+     * 
+     * @author
+     */
     private synchronized static void initApplicationContext() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 new String[] { PATH });
@@ -46,18 +51,44 @@ public class ApplicationContextUtil {
         appContext = context;
     }
 
+    /**
+     * 获取服务
+     * @param beanId
+     * @param clazz
+     * @return
+     * @author
+     */
     public static <T> T getService(String beanId, Class<T> clazz) {
         return ApplicationContextUtil.getInstance().getServiceId(beanId, clazz);
     }
 
+    /**
+     * 获取服务
+     * @param clazz
+     * @return
+     * @author
+     */
     public static <T> T getService(Class<T> clazz) {
         return ApplicationContextUtil.getInstance().getServiceId(clazz);
     }
 
+    /**
+     * 获取服务
+     * @param beanId
+     * @return
+     * @author
+     */
     public static <T> T getService(String beanId) {
         return ApplicationContextUtil.getInstance().getServiceId(beanId);
     }
 
+    /**
+     * 获取服务Id
+     * @param beanId
+     * @param clazz
+     * @return
+     * @author
+     */
     private <T> T getServiceId(String beanId, Class<T> clazz) {
         if (appContext == null) {
             synchronized (this) {
@@ -76,6 +107,12 @@ public class ApplicationContextUtil {
         return (T) appContext.getBean(beanId, clazz);
     }
 
+    /**
+     * 获取服务Id
+     * @param clazz
+     * @return
+     * @author
+     */
     private <T> T getServiceId(Class<T> clazz) {
         if (appContext == null) {
             synchronized (this) {
@@ -94,6 +131,12 @@ public class ApplicationContextUtil {
         return (T) appContext.getBean(clazz);
     }
 
+    /**
+     * 获取服务Id
+     * @param beanId
+     * @return
+     * @author
+     */
     @SuppressWarnings("unchecked")
     private <T> T getServiceId(String beanId) {
         if (appContext == null) {
@@ -113,6 +156,11 @@ public class ApplicationContextUtil {
         return (T) appContext.getBean(beanId);
     }
 
+    /**
+     * 关闭AppContext
+     * 
+     * @author
+     */
     public static void closeAppContext() {
         if(null != appContext) {
             appContext.close();

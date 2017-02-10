@@ -1,5 +1,12 @@
 package com.ai.opt.sdk.dts.vo;
 
+/**
+ * 调度器对象
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class SchedulerDef {
 
     /**

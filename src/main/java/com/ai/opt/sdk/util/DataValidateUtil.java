@@ -3,6 +3,13 @@ package com.ai.opt.sdk.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 校验数据工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class DataValidateUtil {
 
     private DataValidateUtil() {

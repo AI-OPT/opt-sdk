@@ -4,6 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * 启动Rest服务
+ * Date: 2017年2月9日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class RestServiceStart {
 
     private static final Logger LOG = LoggerFactory.getLogger(RestServiceStart.class.getName());
@@ -13,6 +20,11 @@ public final class RestServiceStart {
     private RestServiceStart() {
     }
 
+    /**
+     * 启动Rest服务
+     * 
+     * @author
+     */
     @SuppressWarnings("resource")
     private static void startRest() {
         LOG.info("开始启动 REST 服务---------------------------");
@@ -36,7 +48,11 @@ public final class RestServiceStart {
             }
         }
     }
-
+/**
+ * 主程序
+ * @param args
+ * @author
+ */
     public static void main(String[] args) {
         startRest();
     }

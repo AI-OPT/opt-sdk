@@ -7,6 +7,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
+/**
+ * RestResponse
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RestResponse implements Serializable {

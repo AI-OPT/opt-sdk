@@ -11,6 +11,13 @@ import javax.crypto.spec.IvParameterSpec;
 import org.apache.log4j.Logger;
 import org.springframework.util.DigestUtils;
 
+/**
+ * 加密工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class CryptUtils {
 	private static final Logger LOG = Logger.getLogger(CryptUtils.class);
 	private static String CRYPT_KEY = "asiainfo";
@@ -41,6 +48,12 @@ public class CryptUtils {
 		}
 	}
 
+	/**
+	 * 加密
+	 * @param content
+	 * @return
+	 * @author
+	 */
 	public static String encrypt(String content) {
 		try {
 			byte[] bytes = ecip.doFinal(content.getBytes("ascii"));
@@ -51,6 +64,12 @@ public class CryptUtils {
 		return null;
 	}
 
+	/**
+	 * 解密
+	 * @param content
+	 * @return
+	 * @author
+	 */
 	public static String decrypt(String content) {
 		try {
 			if (Pattern.matches(regString, content)) {
@@ -80,6 +99,12 @@ public class CryptUtils {
 		return hs.toString();
 	}
 
+	/**
+	 * 十六进制转二进制
+	 * @param content
+	 * @return
+	 * @author
+	 */
 	private static byte[] hex2byte(String content) {
 		int l = content.length() >> 1;
 		byte[] result = new byte[l];
@@ -92,7 +117,12 @@ public class CryptUtils {
 	}
 
 
-	// test
+	/**
+	 * test
+	 * @param args
+	 * @throws Exception
+	 * @author
+	 */
 	public static void main(String[] args) throws Exception {
 		String password = "123qwe";
 		String en = encrypt(password);

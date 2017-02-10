@@ -22,12 +22,25 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.zaxxer.hikari.HikariConfig;
 
+/**
+ * 配置工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class ConfigTool {
 	private static final Logger LOG = LoggerFactory.getLogger(ConfigTool.class);
 
     private ConfigTool() {
 
     }
+    /**
+     * 获取服务密码
+     * @param serviceId
+     * @return
+     * @author
+     */
 
     public static final String getServicePwd(String serviceId) {
         try {
@@ -50,6 +63,12 @@ public final class ConfigTool {
         }
     }
 
+    /**
+     * 获取MCSId
+     * @param cachens
+     * @return
+     * @author
+     */
     public static final String getMCSId(String cachens) {
         try {
             if (StringUtil.isBlank(cachens)) {
@@ -71,6 +90,12 @@ public final class ConfigTool {
         }
     }
 
+    /**
+     * 获取DSSId
+     * @param dssns
+     * @return
+     * @author
+     */
     public static final String getDSSId(String dssns) {
         try {
             if (StringUtil.isBlank(dssns)) {
@@ -92,6 +117,12 @@ public final class ConfigTool {
         }
     }
 
+    /**
+     * 获取SESId
+     * @param sesns
+     * @return
+     * @author
+     */
     public static final String getSESId(String sesns) {
         try {
             if (StringUtil.isBlank(sesns)) {
@@ -143,6 +174,12 @@ public final class ConfigTool {
         }
     }
     
+    /**
+     * 获取IDPSId
+     * @param idpsns
+     * @return
+     * @author
+     */
     public static final String getIDPSId(String idpsns) {
         try {
             if (StringUtil.isBlank(idpsns)) {
@@ -164,6 +201,13 @@ public final class ConfigTool {
         }
     }
 
+    /**
+     * 获取MDSTopic
+     * 
+     * @param mdsId
+     * @return
+     * @author
+     */
     public static final String getMDSTopic(String mdsId) {
         try {
             if (StringUtil.isBlank(mdsId)) {
@@ -185,6 +229,12 @@ public final class ConfigTool {
         }
     }
 
+    /**
+     * 获取数据库配置信息
+     * @param dataSourceName
+     * @return
+     * @author
+     */
     public static HikariConfig getDBConf(String dataSourceName) {
         String data;
         try {
@@ -209,6 +259,11 @@ public final class ConfigTool {
     
     
     
+    /**
+     * 获取定时任务信息
+     * @return
+     * @author
+     */
     public static Properties getDTSQuartzProperties() {
         String conf="";
 		try {
@@ -234,6 +289,12 @@ public final class ConfigTool {
     }
     
     
+    /**
+     * 获取MCS配置
+     * @param namespace
+     * @return
+     * @author
+     */
     public static Properties assembleMcsProperties(String namespace) {
 		Properties mcsProperties=new Properties();
 		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
@@ -291,6 +352,12 @@ public final class ConfigTool {
 		return mcsProperties;
 	}
     
+    /**
+     * 获取Mds配置
+     * @param namespace
+     * @return
+     * @author
+     */
     public static Properties assembleMdsSenderProperties(String namespace) {
 		Properties mdsSenderProperties=new Properties();
 		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
@@ -355,6 +422,12 @@ public final class ConfigTool {
 		
 		return mdsSenderProperties;
 	}
+    /**
+     * 获取MDS消费者配置
+     * @param namespace
+     * @return
+     * @author
+     */
     public static Properties assembleMdsConsumerProperties(String namespace) {
     	Properties mdsConsumerProperties=new Properties();
     	IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
@@ -413,6 +486,12 @@ public final class ConfigTool {
     	return mdsConsumerProperties;
     }
     
+    /**
+     * 获取dss配置
+     * @param namespace
+     * @return
+     * @author
+     */
     public static Properties assembleDssProperties(String namespace) {
 		Properties dssProperties=new Properties();
 		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
@@ -469,6 +548,12 @@ public final class ConfigTool {
 		return dssProperties;
 	}
 
+    /**
+     * 获取IDPS配置
+     * @param namespace
+     * @return
+     * @author
+     */
     public static Properties assembleIdpsProperties(String namespace) {
 		Properties idpsProperties=new Properties();
 		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
@@ -522,6 +607,12 @@ public final class ConfigTool {
 		return idpsProperties;
 	}
     
+    /**
+     * 获取SES配置
+     * @param namespace
+     * @return
+     * @author
+     */
     public static Properties assembleSesProperties(String namespace) {
 		Properties sesProperties=new Properties();
 		IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();

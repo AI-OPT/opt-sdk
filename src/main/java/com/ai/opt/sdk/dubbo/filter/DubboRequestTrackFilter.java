@@ -23,6 +23,13 @@ import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 
+/**
+ * Dubbo请求过滤器
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 @Activate(group = { Constants.PROVIDER })
 public class DubboRequestTrackFilter implements Filter {
 

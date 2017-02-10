@@ -1,5 +1,12 @@
 package com.ai.opt.sdk.components.lock.redislock;
 
+/**
+ * Redis锁常量
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class RedisLockConstants {
 
     private RedisLockConstants() {

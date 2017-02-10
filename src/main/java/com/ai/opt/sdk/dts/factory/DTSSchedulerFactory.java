@@ -30,6 +30,13 @@ import com.ai.opt.sdk.dts.base.ITask;
 import com.ai.opt.sdk.dts.service.param.TaskData;
 import com.ai.paas.ipaas.util.StringUtil;
 
+/**
+ * 定时任务工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class DTSSchedulerFactory {
 
     private static final Logger LOG = LoggerFactory.getLogger(DTSSchedulerFactory.class);
@@ -164,6 +171,14 @@ public final class DTSSchedulerFactory {
         return list;
     }
 
+    /**
+     * 获取任务数据
+     * @param schedulerName
+     * @param jobName
+     * @param jobGroup
+     * @return
+     * @author
+     */
     public static TaskData getTaskData(String schedulerName, String jobName, String jobGroup) {
         if (StringUtil.isBlank(schedulerName)) {
             throw new SystemException("没有指定调度器名称");
@@ -204,6 +219,12 @@ public final class DTSSchedulerFactory {
         }
     }
 
+    /**
+     * 获取任务数量
+     * @param schedulerName
+     * @return
+     * @author
+     */
     public static int getTaskCount(String schedulerName) {
         if (StringUtil.isBlank(schedulerName)) {
             throw new SystemException("没有指定调度器名称");
@@ -409,6 +430,12 @@ public final class DTSSchedulerFactory {
         }
     }
 
+    /**
+     * 获取定时任务实例
+     * @param className
+     * @return
+     * @author
+     */
     private static ITask getTaskInstance(String className) {
         ITask task;
         try {
@@ -423,6 +450,12 @@ public final class DTSSchedulerFactory {
         return task;
     }
 
+    /**
+     * 获取定时配置
+     * @return
+     * @throws Exception
+     * @author
+     */
     public static Properties getDtsConf() throws Exception {
         Properties p = new Properties();
         p.load(DTSSchedulerFactory.class.getResourceAsStream(DTS_QUARTZ_CONF_FILE));

@@ -1,5 +1,12 @@
 package com.ai.opt.sdk.components.mds.constants;
 
+/**
+ * MDS消费者常量
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class MDSConsumerConstants {
 	/**
 	 * kafka.zookeeper.hosts=127.0.0.1:2181

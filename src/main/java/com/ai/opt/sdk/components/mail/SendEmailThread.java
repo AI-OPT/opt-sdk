@@ -3,6 +3,13 @@ package com.ai.opt.sdk.components.mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 发送Email线程
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class SendEmailThread implements Runnable {
 	private static final Logger LOG = LoggerFactory.getLogger(SendEmailThread.class);
 

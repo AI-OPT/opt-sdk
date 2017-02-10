@@ -6,6 +6,13 @@ import java.util.concurrent.CountDownLatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 任务线程
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public abstract class AbstractTaskThread<T> implements Runnable {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractTaskThread.class);

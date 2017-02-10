@@ -9,6 +9,13 @@ import com.ai.opt.sdk.util.StringUtil;
 import com.ai.paas.ipaas.PaasException;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 
+/**
+ * Redis分布式锁工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class RedisMutexLockFactory {
 	
 	public static AbstractMutexLock getRedisMutexLock(String namespace,String redisKey) throws PaasException{

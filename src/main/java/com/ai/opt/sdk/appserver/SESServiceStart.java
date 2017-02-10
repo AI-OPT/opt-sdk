@@ -8,12 +8,24 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ai.opt.sdk.components.ses.base.AbstractSES;
 
+/**
+ * 启动SESS服务
+ * Date: 2017年2月9日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class SESServiceStart {
 
     private static final Logger LOG = LogManager.getLogger(SESServiceStart.class);
 
     private static final String PATH = "classpath:context/core-context.xml";
     private SESServiceStart(){}
+    /**
+     * 主程序
+     * @param args
+     * @author
+     */
     public static void main(String[] args) {
         LOG.info("开始刷新SES索引......");
         @SuppressWarnings("resource")

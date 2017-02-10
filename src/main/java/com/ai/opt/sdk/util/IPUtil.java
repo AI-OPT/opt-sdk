@@ -5,8 +5,20 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * IP工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class IPUtil {
-	// 将127.0.0.1形式的IP地址转换成十进制整数，这里没有进行任何错误处理
+	/**
+	 * 将127.0.0.1形式的IP地址转换成十进制整数，这里没有进行任何错误处理
+	 * @param strIp
+	 * @return
+	 * @author
+	 */
 		public static long ipToLong(String strIp) {
 			long[] ip = new long[4];
 			// 先找到IP地址字符串中.的位置
@@ -21,7 +33,12 @@ public class IPUtil {
 			return (ip[0] << 24) + (ip[1] << 16) + (ip[2] << 8) + ip[3];
 		}
 
-		// 将十进制整数形式转换成127.0.0.1形式的ip地址
+		/**
+		 * 将十进制整数形式转换成127.0.0.1形式的ip地址
+		 * @param longIp
+		 * @return
+		 * @author
+		 */
 		public static String longToIP(long longIp) {
 			StringBuffer sb = new StringBuffer("");
 			// 直接右移24位

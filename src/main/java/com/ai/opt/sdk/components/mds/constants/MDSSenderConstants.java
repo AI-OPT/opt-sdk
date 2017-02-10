@@ -1,5 +1,12 @@
 package com.ai.opt.sdk.components.mds.constants;
 
+/**
+ * 发送MDS常量
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class MDSSenderConstants {
 	/**
 	 * metadata.broker.list=10.1.130.84:39091

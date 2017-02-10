@@ -19,6 +19,13 @@ import com.ai.paas.ipaas.uac.vo.AuthDescriptor;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 
+/**
+ * Dss客户端工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class DSSClientFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(DSSClientFactory.class);
 	private static Map<String, IDSSClient> baseMap_serviceMode = new ConcurrentHashMap<String, IDSSClient>();
@@ -28,6 +35,12 @@ public final class DSSClientFactory {
 
     }
 
+    /**
+     * 获取Dss客户端
+     * @param dssns
+     * @return
+     * @author
+     */
     public static IDSSClient getDSSClient(String dssns) {
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
     	if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
@@ -38,6 +51,12 @@ public final class DSSClientFactory {
     	}
     }
 
+    /**
+     * 由sdk模式获取Dssclient
+     * @param dssns
+     * @return
+     * @author
+     */
     private static IDSSClient getDssClientBySdkMode(String dssns) {
 		if (StringUtil.isBlank(dssns)) {
             throw new SDKException("请输入文档存储服务配置映射的常量标识");
@@ -64,6 +83,12 @@ public final class DSSClientFactory {
         }
         return client;
 	}
+    /**
+     * 由服务模式获取Dss客户端
+     * @param dssns
+     * @return
+     * @author
+     */
 	private static IDSSClient getDssClientByServiceMode(String dssns) {
 		if (StringUtil.isBlank(dssns)) {
             throw new SDKException("请输入文档存储服务配置映射的常量标识");

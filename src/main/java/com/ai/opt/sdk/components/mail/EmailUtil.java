@@ -11,6 +11,13 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.CryptUtils;
 
+/**
+ * Email工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class EmailUtil {
 
     private static Properties prop = new Properties();
@@ -29,6 +36,12 @@ public class EmailUtil {
         }
     }
 
+    /**
+     * 获取html Email
+     * @return
+     * @throws EmailException
+     * @author
+     */
     private static HtmlEmail getHtmlEmail() throws EmailException {
         String hostName = prop.getProperty("email.hostname");
         String user = prop.getProperty("email.from.user");
@@ -43,6 +56,15 @@ public class EmailUtil {
         return email;
     }
 
+    /**
+     * 发送html Email
+     * @param tomails
+     * @param ccmails
+     * @param subject
+     * @param htmlcontext
+     * @throws Exception
+     * @author
+     */
     public static void SendHtmlEmail(String[] tomails, String[] ccmails, String subject,
             String htmlcontext) throws Exception {
         HtmlEmail email = getHtmlEmail();

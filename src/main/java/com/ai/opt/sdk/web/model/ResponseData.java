@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 import com.ai.opt.base.vo.BaseResponse;
 
+/**
+ * 返回数据封装
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class ResponseData<T> extends BaseResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;

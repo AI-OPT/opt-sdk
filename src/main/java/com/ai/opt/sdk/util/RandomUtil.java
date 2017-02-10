@@ -18,6 +18,12 @@ public class RandomUtil {
 	}
 	
 	
+	/**
+	 * 随机字符串
+	 * @param length
+	 * @return
+	 * @author
+	 */
 	public static final String randomString(int length) {
 		char[] charArry = new char[length];
 		int i = 0;

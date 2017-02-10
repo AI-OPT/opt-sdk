@@ -3,6 +3,13 @@ package com.ai.opt.sdk.dts.thread;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 线程池
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class ThreadPool {
 
     private ExecutorService executor;

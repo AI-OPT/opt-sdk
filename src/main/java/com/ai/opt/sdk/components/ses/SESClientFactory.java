@@ -21,6 +21,13 @@ import com.ai.paas.ipaas.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ * SES客户端工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class SESClientFactory {
 	private static final Logger LOG = LoggerFactory.getLogger(SESClientFactory.class);
     private static Map<String, ISearchClient> baseMap = new ConcurrentHashMap<String, ISearchClient>();
@@ -30,6 +37,12 @@ public final class SESClientFactory {
 
     }
 
+    /**
+     * 获取查询客户端
+     * @param sesns
+     * @return
+     * @author
+     */
     public static ISearchClient getSearchClient(String sesns) {
     	PaasConf authInfo = ComponentConfigLoader.getInstance().getPaasAuthInfo();
     	if(StringUtil.isBlank(authInfo.getPaasSdkMode())||SDKConstants.PAASMODE.PAAS_SERVICE_MODE.equals(authInfo.getPaasSdkMode())){
@@ -40,6 +53,12 @@ public final class SESClientFactory {
     	}
     }
 
+    /**
+     * 由sdk模式获取搜索客户端
+     * @param sesns
+     * @return
+     * @author
+     */
     private static ISearchClient getSearchClientBySdkMode(String sesns) {
     	if (StringUtil.isBlank(sesns)) {
     		throw new SDKException("请输入搜索服务配置映射的常量标识");
@@ -84,6 +103,12 @@ public final class SESClientFactory {
     	}
     	return client;
     }
+    /***
+     * 由服务模式获取搜索客户端
+     * @param sesns
+     * @return
+     * @author
+     */
 	private static ISearchClient getSearchClientByServiceMode(String sesns) {
 		if (StringUtil.isBlank(sesns)) {
             throw new SDKException("请输入搜索服务配置映射的常量标识");

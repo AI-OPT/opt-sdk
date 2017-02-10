@@ -8,8 +8,20 @@ import java.io.IOException;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.FileImageOutputStream;
 
+/**
+ * 图片字节工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class ImageByteUtil {
-	//图片到byte数组
+	/**
+	 * 图片到byte数组
+	 * @param path
+	 * @return
+	 * @author
+	 */
 	  public static byte[] image2byte(String path){
 	    byte[] data = null;
 	    FileImageInputStream input = null;
@@ -33,7 +45,12 @@ public class ImageByteUtil {
 	    }
 	    return data;
 	  }
-	  //byte数组到图片
+	  /**
+	   * byte数组到图片
+	   * @param data
+	   * @param path
+	   * @author
+	   */
 	  public static void byte2image(byte[] data,String path){
 	    if(data.length<3||path.equals("")) return;
 	    try{
@@ -46,7 +63,12 @@ public class ImageByteUtil {
 	      ex.printStackTrace();
 	    }
 	  }
-	  //byte数组到16进制字符串
+	  /**
+	   * byte数组到16进制字符串
+	   * @param data
+	   * @return
+	   * @author
+	   */
 	  public static String byte2string(byte[] data){
 	    if(data==null||data.length<=1) return "0x";
 	    if(data.length>200000) return "0x";

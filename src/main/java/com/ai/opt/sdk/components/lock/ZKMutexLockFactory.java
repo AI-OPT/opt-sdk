@@ -8,6 +8,13 @@ import com.ai.paas.ipaas.PaasException;
 import com.ai.paas.ipaas.ccs.zookeeper.ZKClient;
 import com.ai.paas.ipaas.ccs.zookeeper.impl.ZKPoolFactory;
 
+/**
+ * Zk分布式锁工厂
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class ZKMutexLockFactory {
 
 	public static AbstractMutexLock getZKMutexLock(String zkAddr,int zkTimeoutMillSecs,String zkLockNodePath) throws PaasException{

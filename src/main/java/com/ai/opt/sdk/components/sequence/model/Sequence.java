@@ -1,5 +1,12 @@
 package com.ai.opt.sdk.components.sequence.model;
 
+/**
+ * Sequence常量
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class Sequence {
 
     private String sequenceName;

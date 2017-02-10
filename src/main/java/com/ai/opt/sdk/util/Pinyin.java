@@ -4,6 +4,13 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 拼音工具类
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public final class Pinyin {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(Pinyin.class);
@@ -89,6 +96,12 @@ public final class Pinyin {
         return name[ind];
     }
     
+    /**
+     * 获取AScII码
+     * @param cn
+     * @return
+     * @author
+     */
     private static int getCnAscii(char cn) {
 
         byte[] bytes = null;
@@ -109,6 +122,12 @@ public final class Pinyin {
         }
     }
     
+    /**
+     * 获取拼音
+     * @param gb2312
+     * @return
+     * @author
+     */
     public static String getPinyin(String gb2312) {
         if (null == gb2312 || "".equals(gb2312.trim())) {
             return gb2312;
@@ -121,6 +140,12 @@ public final class Pinyin {
         return retuBuil.toString();
     }
 
+    /**
+     * 获取拼音
+     * @param gb2312
+     * @return
+     * @author
+     */
     public static String getPinyin(char gb2312) {
         int ascii = getCnAscii(gb2312);
         if (ascii == 0) {
@@ -136,6 +161,12 @@ public final class Pinyin {
         }
     }
 
+    /**
+     * 获取第一个拼音
+     * @param gb2312
+     * @return
+     * @author
+     */
     public static String getFirstPinyin(String gb2312) {
         StringBuilder result = new StringBuilder(10);
         if (StringUtils.isNotEmpty(gb2312)) {

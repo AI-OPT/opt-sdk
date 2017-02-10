@@ -10,6 +10,13 @@ import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.dts.base.ITask;
 
+/**
+ * 任务
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 @DisallowConcurrentExecution
 @PersistJobDataAfterExecution
 public class TestTask implements ITask {

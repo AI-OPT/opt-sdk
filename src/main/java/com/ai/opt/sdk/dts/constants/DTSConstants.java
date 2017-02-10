@@ -1,6 +1,13 @@
 package com.ai.opt.sdk.dts.constants;
 
 
+/**
+ * DTS常量
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class DTSConstants {
 
     private DTSConstants() {
@@ -15,11 +22,17 @@ public class DTSConstants {
     
     
     
-    // (用户web页面操作)调度器配置信息
-    // [{"schedulerName":"opt-dts-test","systemName":"SLP产品dts测试","zkAddress":"zookeeper://10.1.245.9:29181"}]
+    /**
+     * (用户web页面操作)调度器配置信息
+     */
+    /**
+     * [{"schedulerName":"opt-dts-test","systemName":"SLP产品dts测试","zkAddress":"zookeeper://10.1.245.9:29181"}]
+     */
     public static final String OP_DTS_SCHEDULER_DEF_PATH = "/com/ai/opt/op/dtsweb/scheduler-def";
 
-    // (用户web页面操作)调度器与其dubbo服务分组的映射关系 {"opt-dts-test":"opt.slp.xxx"}
+    /**
+     * (用户web页面操作)调度器与其dubbo服务分组的映射关系 {"opt-dts-test":"opt.slp.xxx"}
+     */
     public static final String OP_DTS_MANAGERSV_GROUP_PATH = "/com/ai/opt/op/dtsweb/dtsmanagersv-group";
 
 }

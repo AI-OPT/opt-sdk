@@ -1,5 +1,12 @@
 package com.ai.opt.sdk.components.mcs.constants;
 
+/**
+ * MCS常量
+ * Date: 2017年2月10日 <br>
+ * Copyright (c) 2017 asiainfo.com <br>
+ * 
+ * @author
+ */
 public class MCSConstants {
 	/**
 	 * mcs对应的redis主机
