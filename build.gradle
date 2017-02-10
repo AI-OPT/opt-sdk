@@ -24,7 +24,7 @@ ext {
     ipaasMdsVersion="0.3";
     ipaasSesVersion="0.3.3";
     ipaasIdpsVersion="0.3";
-    ipaasI18nVersion="0.3.2";
+    ipaasI18nVersion="0.3.3";
     ipaasCommonVersion="0.3.1";
     hikariCPVersion="2.4.9";
     
