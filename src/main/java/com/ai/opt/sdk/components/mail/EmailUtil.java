@@ -10,6 +10,7 @@ import org.apache.commons.mail.HtmlEmail;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.CryptUtils;
+import com.ai.opt.sdk.util.StringUtil;
 
 /**
  * Email工具类
@@ -48,11 +49,17 @@ public class EmailUtil {
         String password = CryptUtils.decrypt(prop.getProperty("email.from.password"));
         String mail = prop.getProperty("email.from.mail");
         String name = prop.getProperty("email.from.name");
+        String smtpportStr=prop.getProperty("email.smtpport");
+        int smtpport=25;
+        if(!StringUtil.isBlank(smtpportStr)){
+        	smtpport=Integer.parseInt(smtpportStr);
+        }
         HtmlEmail email = new HtmlEmail();
         email.setHostName(hostName);
         email.setAuthentication(user, password);
         email.setFrom(mail, name);
         email.setCharset("utf-8");
+        email.setSmtpPort(smtpport);
         return email;
     }
 
