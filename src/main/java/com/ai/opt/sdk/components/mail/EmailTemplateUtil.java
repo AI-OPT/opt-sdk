@@ -18,7 +18,7 @@ public class EmailTemplateUtil {
      * 生产html邮件内容
      * @param templateClassPath  邮件模板classpath路径，如"email/template/upgrade-notify-public.xml"
      * @param data 数据对象
-     * @return
+     * @return  邮件内容
      * @author gucl
      * @ApiDocMethod
      * @ApiCode

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class IPUtil {
 	/**
 	 * 将127.0.0.1形式的IP地址转换成十进制整数，这里没有进行任何错误处理
-	 * @param strIp
+	 * @param strIp ip地址
 	 * @return
 	 * @author
 	 */
@@ -35,8 +35,8 @@ public class IPUtil {
 
 		/**
 		 * 将十进制整数形式转换成127.0.0.1形式的ip地址
-		 * @param longIp
-		 * @return
+		 * @param longIp 十进制整数
+		 * @return ip
 		 * @author
 		 */
 		public static String longToIP(long longIp) {

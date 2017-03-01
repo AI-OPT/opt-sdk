@@ -15,10 +15,10 @@ public class EmailFactory {
 
     /**
      * 发送邮件
-     * @param tomails
-     * @param ccmails
-     * @param subject
-     * @param htmlcontext
+     * @param tomails 接受方邮件
+     * @param ccmails 抄送方邮件
+     * @param subject 特定说明,如:运营管理平台密码重置通知
+     * @param htmlcontext 邮件内容
      * @throws Exception
      * @author
      */

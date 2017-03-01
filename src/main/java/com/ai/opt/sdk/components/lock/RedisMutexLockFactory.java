@@ -18,6 +18,17 @@ import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
  */
 public class RedisMutexLockFactory {
 	
+	/**
+	 * 获取分布式锁 
+	 * @param namespace 缓存命名空间
+	 * @param redisKey  命名空间
+	 * @return
+	 * @throws PaasException
+	 * @author caofz
+	 * @ApiDocMethod
+	 * @ApiCode 
+	 * @RestRelativeURL
+	 */
 	public static AbstractMutexLock getRedisMutexLock(String namespace,String redisKey) throws PaasException{
 		if(StringUtil.isBlank(namespace)){
 			throw new SDKException("分布式锁对应的缓存命名空间不能为空");
@@ -31,6 +42,15 @@ public class RedisMutexLockFactory {
 		}
 	}
 	
+	/**
+	 * 获取分布式锁 
+	 * @param redisKey 命名空间
+	 * @return
+	 * @throws PaasException
+	 * @ApiDocMethod
+	 * @ApiCode 
+	 * @RestRelativeURL
+	 */
 	public static AbstractMutexLock getRedisMutexLock(String redisKey) throws PaasException{
 		return getRedisMutexLock(RedisLockConstants.REDIS_LOCK_NAMESPACE,redisKey);
 	}

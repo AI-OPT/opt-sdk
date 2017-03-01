@@ -38,7 +38,7 @@ public final class IDPSClientFactory {
 
     /**
      * 获取图片服务客户端
-     * @param idpsns
+     * @param idpsns 命名控件
      * @return
      * @author
      */

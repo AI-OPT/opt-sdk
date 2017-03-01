@@ -24,7 +24,7 @@ public final class UUIDUtil {
 
     /**
      * 获取短Id
-     * @return
+     * @return id
      * @author
      */
     public static int genShortId() {

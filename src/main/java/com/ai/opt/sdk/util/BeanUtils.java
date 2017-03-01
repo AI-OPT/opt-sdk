@@ -192,10 +192,10 @@ public final class BeanUtils {
     /**
      * 深度拷贝
      * 
-     * @param destSVO
-     * @param orignSVO
+     * @param destSVO  目标对象
+     * @param orignSVO 源对象
      * @author choaryzhang
-     * @throws SystemException 
+     * @throws SystemException 系统异常
      */
     public static void copyProperties(Object destSVO, Object orignSVO) throws SystemException {
         /* 1.源对象与目标对象都不能为空 */

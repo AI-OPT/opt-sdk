@@ -39,8 +39,8 @@ public final class SESClientFactory {
 
     /**
      * 获取查询客户端
-     * @param sesns
-     * @return
+     * @param sesns 搜索命名空间
+     * @return 搜索查询客户端
      * @author
      */
     public static ISearchClient getSearchClient(String sesns) {

@@ -38,7 +38,7 @@ public final class CCSClientFactory {
 
     /**
      * 获取配置中心客户端
-     * @return
+     * @return 配置中心客户端
      * @author gucl
      */
     public static IConfigClient getDefaultConfigClient() {

@@ -18,8 +18,8 @@ public final class SeqUtil {
 
     /**
      * 获取下一个Id
-     * @param seqName
-     * @return
+     * @param seqName 属性定义标识序列
+     * @return id
      * @author
      */
     public static Long getNewId(String seqName) {
@@ -28,9 +28,9 @@ public final class SeqUtil {
 
     /**
      * 获取新的sequence
-     * @param seqName
-     * @param seqLen
-     * @return
+     * @param seqName 属性定义标识序列
+     * @param seqLen 长度
+     * @return 
      * @author
      */
     public static String getNewId(String seqName, int seqLen) {

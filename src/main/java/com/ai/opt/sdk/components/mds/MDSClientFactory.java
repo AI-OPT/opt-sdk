@@ -45,8 +45,8 @@ public final class MDSClientFactory {
 
     /**
      * 获取发送者客户端
-     * @param mdsns
-     * @return
+     * @param mdsns 消息队列命名空间
+     * @return 发送者客户端信息
      * @author
      */
     public static IMessageSender getSenderClient(String mdsns) {
@@ -60,8 +60,8 @@ public final class MDSClientFactory {
     }
     /**
      * 获取消费者客户端
-     * @param mdsns
-     * @param msgProcessorHandler
+     * @param mdsns 消息队列命名空间
+     * @param msgProcessorHandler 消费者客户端信息
      * @return
      * @author
      */
@@ -71,7 +71,7 @@ public final class MDSClientFactory {
     /**
      * 获取消费者客户端
      * @param mdsns
-     * @param msgProcessorHandler
+     * @param msgProcessorHandler 消费者客户端信息
      * @param consumerId
      * @return
      * @author

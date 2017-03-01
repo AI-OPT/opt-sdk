@@ -37,7 +37,7 @@ public final class DSSClientFactory {
 
     /**
      * 获取Dss客户端
-     * @param dssns
+     * @param dssns 命名空间
      * @return
      * @author
      */
@@ -53,7 +53,7 @@ public final class DSSClientFactory {
 
     /**
      * 由sdk模式获取Dssclient
-     * @param dssns
+     * @param dssns 命名空间名称
      * @return
      * @author
      */
@@ -85,7 +85,7 @@ public final class DSSClientFactory {
 	}
     /**
      * 由服务模式获取Dss客户端
-     * @param dssns
+     * @param dssns 命名空间名称
      * @return
      * @author
      */

@@ -39,7 +39,7 @@ public final class Md5Encoder {
 
     /**
      * 密码md5加密
-     * @param rawPass
+     * @param rawPass 密码信息
      * @return
      * @author
      */

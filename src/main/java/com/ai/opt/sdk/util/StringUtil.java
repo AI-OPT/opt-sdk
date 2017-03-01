@@ -18,9 +18,9 @@ public final class StringUtil {
     }
 
     /**
-     * 判断是否为空
+     * 判断字符串是否为空
      * @param str
-     * @return
+     * @returnR
      * @author
      */
     public static boolean isBlank(String str) {

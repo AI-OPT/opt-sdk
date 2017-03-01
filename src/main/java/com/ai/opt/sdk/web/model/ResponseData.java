@@ -19,11 +19,11 @@ public class ResponseData<T> extends BaseResponse implements Serializable {
 
     public static final String AJAX_STATUS_FAILURE = "0";
 
-    private String statusCode;
+    private String statusCode;//状态编码
 
-    private String statusInfo;
+    private String statusInfo;//状态信息
 
-    private T data;
+    private T data;//返回数据
 
     public ResponseData(String statusCode, String statusInfo) {
         this.statusCode = statusCode;

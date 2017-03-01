@@ -37,8 +37,8 @@ public final class MCSClientFactory {
 
     /**
      * 获取缓存客户端
-     * @param cachens
-     * @return
+     * @param cachens 缓存命名空间名称
+     * @return 缓存客户端
      * @author
      */
     public static ICacheClient getCacheClient(String cachens) {
@@ -53,8 +53,8 @@ public final class MCSClientFactory {
 
     /**
      * 由服务模式获取缓存客户端
-     * @param cachens
-     * @return
+     * @param cachens 缓存命名空间名称
+     * @return 缓存客户端
      * @author
      */
 	private static ICacheClient getCacheClientByServiceMode(String cachens) {

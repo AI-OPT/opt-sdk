@@ -8,5 +8,12 @@ package com.ai.opt.sdk.components.mds.base;
  * @author
  */
 public abstract class AbstractMdsConsumer {
+	/**
+	 * 启动消费者
+	 * @throws Exception
+	 * @ApiDocMethod
+	 * @ApiCode 
+	 * @RestRelativeURL
+	 */
 	public abstract void startMdsConsumer() throws Exception;
 }

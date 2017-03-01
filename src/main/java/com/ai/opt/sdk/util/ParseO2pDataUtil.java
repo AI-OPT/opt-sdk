@@ -12,7 +12,15 @@ import com.alibaba.fastjson.JSONObject;
  * @author
  */
 public class ParseO2pDataUtil {
-
+	
+	/**
+	 * 解析o2p数据
+	 * @param str
+	 * @return
+	 * @ApiDocMethod
+	 * @ApiCode 
+	 * @RestRelativeURL
+	 */
 	public static JSONObject getData(String str){
 		
 		JSONObject json = JSON.parseObject(str);

@@ -66,8 +66,8 @@ public class CryptUtils {
 
 	/**
 	 * 解密
-	 * @param content
-	 * @return
+	 * @param content 密文信息
+	 * @return 明文信息
 	 * @author
 	 */
 	public static String decrypt(String content) {
