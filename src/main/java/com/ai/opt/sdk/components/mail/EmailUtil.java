@@ -29,7 +29,7 @@ public class EmailUtil {
         }
     }
 
-    private static HtmlEmail getHtmlEmail() throws EmailException {
+    public static HtmlEmail getHtmlEmail() throws EmailException {
         String hostName = prop.getProperty("email.hostname");
         String user = prop.getProperty("email.from.user");
         String password = prop.getProperty("email.from.password");
