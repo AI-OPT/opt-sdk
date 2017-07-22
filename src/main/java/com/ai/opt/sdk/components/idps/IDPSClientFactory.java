@@ -38,6 +38,80 @@ public final class IDPSClientFactory {
     		return getImageClientBySdkMode(idpsns);
     	}
     }
+
+	/**
+	 * 获取图片的外网地址
+	 * @param idpsns
+	 * @param imageId
+	 * @param imageType
+	 * @return
+	 */
+	public static String getImageInterUrl(String idpsns,String imageId, String imageType) {
+		IImageClient imageClient = getImageClient(idpsns);
+		return getImageInterUrl(imageClient,imageId,imageType);
+	}
+
+	/**
+	 * 获取图片的外网地址
+	 * @param imageClient
+	 * @param imageId
+	 * @param imageType
+	 * @return
+	 */
+	public static String getImageInterUrl(IImageClient imageClient,String imageId, String imageType) {
+		String interUrl = imageClient.getImgServerIntraAddr();
+		imageType = imageTypeFormat(imageType);
+		return interUrl + "/image/" + imageId + imageType;
+	}
+
+	/**
+	 * 获取图片（指定比例）的外网地址
+	 * @param idpsns
+	 * @param imageId
+	 * @param imageType
+	 * @param imageScale
+	 * @return
+	 */
+	public static String getImageInterUrl(String idpsns,String imageId, String imageType,String imageScale) {
+		IImageClient imageClient = getImageClient(idpsns);
+		return getImageInterUrl(imageClient,imageId,imageType,imageScale);
+	}
+
+	/**
+	 * 获取图片（指定比例）的外网地址
+	 * @param imageClient
+	 * @param imageId
+	 * @param imageType
+	 * @param imageScale
+	 * @return
+	 */
+	public static String getImageInterUrl(IImageClient imageClient,String imageId, String imageType,String imageScale) {
+		imageType = imageTypeFormat(imageType);
+		if (imageScale != null && imageScale.contains("X")) {
+			imageScale = imageScale.replace("X", "x");
+		}
+		String interUrl = imageClient.getImgServerIntraAddr();
+		return interUrl + "/image/" + imageId + "_" + imageScale
+				+ imageType;
+	}
+
+
+	private static String imageTypeFormat(String imageType) {
+		if (imageType != null && imageType.startsWith(".") == false) {
+			imageType = "." + imageType;
+		}
+		switch (imageType) {
+			case ".JPG":
+				imageType = ".jpg";
+				break;
+			case ".PNG":
+				imageType = ".png";
+				break;
+			default:
+		}
+
+		return imageType;
+	}
     private static IImageClient getImageClientBySdkMode(String idpsns) {
     	if (StringUtil.isBlank(idpsns)) {
     		throw new SDKException("请输入图片服务配置映射的常量标识");
